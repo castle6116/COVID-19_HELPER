@@ -7,23 +7,36 @@
 
 import UIKit
 
-class SideMenuController: UIViewController {
-
+class SideMenuController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+    
+    var items = ["어플 버전"]
+    @IBOutlet var tableView: UITableView!
+    let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.items.count
     }
-    */
-
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "SideMenuTableViewCell", for: indexPath) as! SideMenuTableViewCell
+        cell.versionLabel?.text = version
+        
+        return cell
+    }
 }
+
+//    extension SideMenuController: UITableViewDataSource {
+//        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//            return items.count
+//        }
+//
+//        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "SideMenuTableViewCell", for: indexPath) as! SideMenuTableViewCell
+//            cell.menuLabel?.text = items[indexPath.row]
+//            cell.versionLabel?.text = version
+//            return cell
+//        }
+//
+//    }

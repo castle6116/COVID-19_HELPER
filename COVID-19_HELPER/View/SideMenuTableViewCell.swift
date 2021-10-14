@@ -8,7 +8,9 @@
 import UIKit
 
 class SideMenuTableViewCell: UITableViewCell {
-
+    @IBOutlet var menuLabel: UILabel!
+    @IBOutlet var versionLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
