@@ -8,7 +8,8 @@
 import UIKit
 import Alamofire
 
-class MainViewController: UIViewController, XMLParserDelegate{
+class MainViewController: UIViewController, XMLParserDelegate, UICollectionViewDataSource{
+    
     @IBOutlet var rlwns: UILabel! //기준일
     @IBOutlet var ghkrwls: UILabel! // 일일 확진자
     @IBOutlet var clfy: UILabel! // 격리중 ( 치료자 )
@@ -155,7 +156,29 @@ class MainViewController: UIViewController, XMLParserDelegate{
             }
             elementValue = nil
         }
-
+        
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3 // 여기에 배열 크기 반환
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "left_cell", for: indexPath) as? CollectionViewCell else {
+                    return UICollectionViewCell()
+                }
+        cell.backgroundColor = .white
+        cell.collection_subject?.text = "테스트"
+        cell.collection_view.layer.borderWidth = 1
+        cell.collection_view.layer.borderColor = CGColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 1.0)
+        cell.collection_view.layer.cornerRadius = 5
+//                let img = UIImage(named: "\(nameList[indexPath.row]).jpg")
+//                cell.imgView?.image = img
+//                cell.nameLabel?.text = nameList[indexPath.row]
+        return cell
+    }
 }
 
-
+class CollectionViewCell: UICollectionViewCell{
+    @IBOutlet var collection_subject: UILabel!
+    @IBOutlet var collection_view: UIView!
+    
+}
