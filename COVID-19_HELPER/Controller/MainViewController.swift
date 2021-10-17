@@ -8,7 +8,7 @@
 import UIKit
 import Alamofire
 
-class MainViewController: UIViewController, XMLParserDelegate, UICollectionViewDataSource{
+class MainViewController: UIViewController, XMLParserDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     @IBOutlet var rlwns: UILabel! //기준일
     @IBOutlet var ghkrwls: UILabel! // 일일 확진자
@@ -29,11 +29,15 @@ class MainViewController: UIViewController, XMLParserDelegate, UICollectionViewD
     @IBOutlet var rufrhkdmatjd_today: UILabel!  // 결과음성 금일 증가수
     
     var result : Covid!
+    var desult : City!
     var Covidresult : [Covid] = []
+    var Coviddesult : [City] = []
     var elementValue:String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         COVID_CONNECT(day: -1)
+        COVID_Desult_CONNECT()
         // Do any additional setup after loading the view.
     }
     
@@ -93,23 +97,47 @@ class MainViewController: UIViewController, XMLParserDelegate, UICollectionViewD
         }else{
             print("파싱 실패")
         }
-
+    }
+    
+    func COVID_Desult_CONNECT (){
+        let url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19SidoInfStateJson?serviceKey=2ruJcuSknJSbxInurJjb5i2sTGvCPW8QkHSBqOMUWvGyim3ASZFwWUGssNAQ8Ga9qCtqJQgX2Hnlwgz%2F1j863w%3D%3D"
+        let request = XMLParser(contentsOf: URL(string: url)!)
+        request!.delegate = self
+        let success = request!.parse()
+        if success == true{
+            print("파싱 성공")
+            Coviddesult.sort{Int($0.defCnt!)! > Int($1.defCnt!)!}
+            print(Coviddesult[0].defCnt!)
+        }else{
+            print("파싱 실패")
+        }
     }
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
             if elementName == "item"{
                 var dic = attributeDict as Dictionary
                 result = Covid()
-                result.accDefRate = dic["accDefRate"]
-                result.accExamCnt = dic["accExamCnt"]
-                result.accExamCompCnt = dic["accExamCompCnt"]
-                result.careCnt = dic["careCnt"]
-                result.clearCnt = dic["clearCnt"]
-                result.createDt = dic["createDt"]
-                result.deathCnt = dic["deathCnt"]
-                result.decideCnt = dic["decideCnt"]
-                result.examCnt = dic["examCnt"]
-                result.stateDt = dic["stateDt"]
-                result.resutlNegCnt = dic["resutlNegCnt"]
+                desult = City()
+                if dic["gubun"] == nil{
+                    result.accDefRate = dic["accDefRate"]
+                    result.accExamCnt = dic["accExamCnt"]
+                    result.accExamCompCnt = dic["accExamCompCnt"]
+                    result.careCnt = dic["careCnt"]
+                    result.clearCnt = dic["clearCnt"]
+                    result.createDt = dic["createDt"]
+                    result.deathCnt = dic["deathCnt"]
+                    result.decideCnt = dic["decideCnt"]
+                    result.examCnt = dic["examCnt"]
+                    result.stateDt = dic["stateDt"]
+                    result.resutlNegCnt = dic["resutlNegCnt"]
+                }else{
+                    desult.deathCnt = dic["deathCnt"]
+                    desult.defCnt = dic["defCnt"]
+                    desult.gubun = dic["gubun"]
+                    desult.incDec = dic["incDec"]
+                    desult.isoClearCnt = dic["isolClearCnt"]
+                    desult.isoIngCnt = dic["isolIngCnt"]
+                    desult.stdDay = dic["stdDay"]
+                }
             }
         }
         
@@ -129,6 +157,12 @@ class MainViewController: UIViewController, XMLParserDelegate, UICollectionViewD
                     return
                 }
                 Covidresult.append(result)
+                guard let desult = desult else {
+                    return
+                }
+                if desult.defCnt != nil{
+                    Coviddesult.append(desult)
+                }
             }else if elementName == "accDefRate"{
                 result.accDefRate = elementValue!
             }else if elementName == "accExamCnt"{
@@ -143,6 +177,7 @@ class MainViewController: UIViewController, XMLParserDelegate, UICollectionViewD
                 result.createDt = elementValue!
             }else if elementName == "deathCnt"{
                 result.deathCnt = elementValue!
+                desult.deathCnt = elementValue!
             }else if elementName == "decideCnt"{
                 result.decideCnt = elementValue!
             }else if elementName == "examCnt"{
@@ -153,12 +188,38 @@ class MainViewController: UIViewController, XMLParserDelegate, UICollectionViewD
                 result.stateTime = elementValue!
             }else if elementName == "resutlNegCnt"{
                 result.resutlNegCnt = elementValue!
+            }else if elementName == "defCnt"{
+                desult.defCnt = elementValue!
+            }
+            else if elementName == "gubun"{
+                desult.gubun = elementValue!
+            }
+            else if elementName == "incDec"{
+                desult.incDec = elementValue!
+            }
+            else if elementName == "isolClearCnt"{
+                desult.isoClearCnt = elementValue!
+            }
+            else if elementName == "isolIngCnt"{
+                desult.isoIngCnt = elementValue!
+            }
+            else if elementName == "stdDay"{
+                desult.stdDay = elementValue!
             }
             elementValue = nil
         }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
+        let itemSpacing: CGFloat = 10 // 가로에서 cell과 cell 사이의 거리
+        let width: CGFloat = (collectionView.frame.width - itemSpacing) / 2 // 셀 하나의 너비
+        let height: CGFloat = width + 20 //셀 하나의 높이
+        print(width)
+
+        return CGSize(width: width, height: height)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3 // 여기에 배열 크기 반환
+        return Coviddesult.count // 여기에 배열 크기 반환
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -166,19 +227,33 @@ class MainViewController: UIViewController, XMLParserDelegate, UICollectionViewD
                     return UICollectionViewCell()
                 }
         cell.backgroundColor = .white
-        cell.collection_subject?.text = "테스트"
+        cell.collection_subject?.text = Coviddesult[indexPath.row].gubun
+        cell.iso_ingCnt.text = Coviddesult[indexPath.row].isoIngCnt // 격리중
+        cell.Def_cnt.text = Coviddesult[indexPath.row].defCnt // 확진 환자
+        if Coviddesult[indexPath.row].incDec != nil{
+            cell.Inc_dec.text = "+\(Coviddesult[indexPath.row].incDec!)" // 전일 대비
+        }
+        cell.iso_ClearCnt.text = Coviddesult[indexPath.row].isoClearCnt //격리 해제
+        cell.death_cnt.text = Coviddesult[indexPath.row].deathCnt // 사망자
         cell.collection_view.layer.borderWidth = 1
         cell.collection_view.layer.borderColor = CGColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 1.0)
-        cell.collection_view.layer.cornerRadius = 5
+        cell.collection_view.layer.cornerRadius = 15
+        cell.layer.cornerRadius = 10
 //                let img = UIImage(named: "\(nameList[indexPath.row]).jpg")
 //                cell.imgView?.image = img
 //                cell.nameLabel?.text = nameList[indexPath.row]
         return cell
     }
+    
+    
 }
 
 class CollectionViewCell: UICollectionViewCell{
     @IBOutlet var collection_subject: UILabel!
     @IBOutlet var collection_view: UIView!
-    
+    @IBOutlet var iso_ingCnt: UILabel!
+    @IBOutlet var Def_cnt: UILabel!
+    @IBOutlet var Inc_dec: UILabel!
+    @IBOutlet var iso_ClearCnt: UILabel!
+    @IBOutlet var death_cnt: UILabel!
 }
