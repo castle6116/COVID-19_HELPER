@@ -8,5 +8,5 @@ target 'COVID-19_HELPER' do
   # Pods for COVID-19_HELPER
   pod 'SideMenu'
   pod 'Alamofire', '~> 5.4.3'
-
+  pod 'KeychainSwift', '~> 19.0'
 end

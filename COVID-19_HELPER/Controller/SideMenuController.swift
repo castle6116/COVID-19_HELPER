@@ -22,7 +22,7 @@ class SideMenuController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "SideMenuTableViewCell", for: indexPath) as! SideMenuTableViewCell
         cell.versionLabel?.text = version
-        
+        cell
         return cell
     }
 }
