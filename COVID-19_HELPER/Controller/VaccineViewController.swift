@@ -47,6 +47,7 @@ class VaccineViewController: UIViewController {
         if CLLocationManager.locationServicesEnabled() {
             print("위치 서비스 On 상태")
             locationManager.startUpdatingLocation() //위치 정보 받아오기 시작
+            currentLocation = locationManager.location
             textSet()
         } else {
             print("위치 서비스 Off 상태")
@@ -100,32 +101,35 @@ class VaccineViewController: UIViewController {
         VaccineHttp(day : 0){
             vaccine in
             if let vaccine = vaccine{
-                self.yesterday_1st.text = self.DecimalWon(value: vaccine.data[0].accumulatedFirstCnt) // 어제 1차 접종
-                self.yesterday_ok.text = self.DecimalWon(value: vaccine.data[0].accumulatedSecondCnt) // 어제 접종완료
-                self.yesterday_add.text = self.DecimalWon(value: vaccine.data[0].accumulatedThirdCnt) // 어제 추가접종
-                self.today_sil_1st.text = "+\(self.DecimalWon(value: vaccine.data[0].firstCnt))" // 오늘 1차접종 인원 추가 수
-                self.today_sil_ok.text = "+\(self.DecimalWon(value: vaccine.data[0].secondCnt))" // 오늘 접종완료 인원 추가 수
-                self.today_sil_add.text = "+\(self.DecimalWon(value: vaccine.data[0].thirdCnt))" // 부스터샷 인원 추가 수
-                self.today_1st.text = self.DecimalWon(value: vaccine.data[0].totalFirstCnt) // 오늘 1차 접종
-                self.today_ok.text = self.DecimalWon(value: vaccine.data[0].totalSecondCnt) // 오늘 2차 접종
-                self.today_add.text = self.DecimalWon(value: vaccine.data[0].totalThirdCnt) // 오늘 3차 접종
-            }
-            if vaccine?.data[0].sido == nil{
-                VaccineHttp(day: -1){
-                    vaccine in
-                    if let vaccine = vaccine{
-                        self.yesterday_1st.text = self.DecimalWon(value: vaccine.data[0].accumulatedFirstCnt) // 어제 1차 접종
-                        self.yesterday_ok.text = self.DecimalWon(value: vaccine.data[0].accumulatedSecondCnt) // 어제 접종완료
-                        self.yesterday_add.text = self.DecimalWon(value: vaccine.data[0].accumulatedThirdCnt) // 어제 추가접종
-                        self.today_sil_1st.text = "+\(self.DecimalWon(value: vaccine.data[0].firstCnt))" // 오늘 1차접종 인원 추가 수
-                        self.today_sil_ok.text = "+\(self.DecimalWon(value: vaccine.data[0].secondCnt))" // 오늘 접종완료 인원 추가 수
-                        self.today_sil_add.text = "+\(self.DecimalWon(value: vaccine.data[0].thirdCnt))" // 부스터샷 인원 추가 수
-                        self.today_1st.text = self.DecimalWon(value: vaccine.data[0].totalFirstCnt) // 오늘 1차 접종
-                        self.today_ok.text = self.DecimalWon(value: vaccine.data[0].totalSecondCnt) // 오늘 2차 접종
-                        self.today_add.text = self.DecimalWon(value: vaccine.data[0].totalThirdCnt) // 오늘 3차 접종
+                if vaccine.currentCount == 0{
+                    VaccineHttp(day: -1){
+                        vaccine in
+                        if let vaccine = vaccine{
+                            self.yesterday_1st.text = self.DecimalWon(value: vaccine.data[0].accumulatedFirstCnt) // 어제 1차 접종
+                            self.yesterday_ok.text = self.DecimalWon(value: vaccine.data[0].accumulatedSecondCnt) // 어제 접종완료
+                            self.yesterday_add.text = self.DecimalWon(value: vaccine.data[0].accumulatedThirdCnt) // 어제 추가접종
+                            self.today_sil_1st.text = "+\(self.DecimalWon(value: vaccine.data[0].firstCnt))" // 오늘 1차접종 인원 추가 수
+                            self.today_sil_ok.text = "+\(self.DecimalWon(value: vaccine.data[0].secondCnt))" // 오늘 접종완료 인원 추가 수
+                            self.today_sil_add.text = "+\(self.DecimalWon(value: vaccine.data[0].thirdCnt))" // 부스터샷 인원 추가 수
+                            self.today_1st.text = self.DecimalWon(value: vaccine.data[0].totalFirstCnt) // 오늘 1차 접종
+                            self.today_ok.text = self.DecimalWon(value: vaccine.data[0].totalSecondCnt) // 오늘 2차 접종
+                            self.today_add.text = self.DecimalWon(value: vaccine.data[0].totalThirdCnt) // 오늘 3차 접종
+                        }
                     }
+                }else{
+                    self.yesterday_1st.text = self.DecimalWon(value: vaccine.data[0].accumulatedFirstCnt) // 어제 1차 접종
+                    self.yesterday_ok.text = self.DecimalWon(value: vaccine.data[0].accumulatedSecondCnt) // 어제 접종완료
+                    self.yesterday_add.text = self.DecimalWon(value: vaccine.data[0].accumulatedThirdCnt) // 어제 추가접종
+                    self.today_sil_1st.text = "+\(self.DecimalWon(value: vaccine.data[0].firstCnt))" // 오늘 1차접종 인원 추가 수
+                    self.today_sil_ok.text = "+\(self.DecimalWon(value: vaccine.data[0].secondCnt))" // 오늘 접종완료 인원 추가 수
+                    self.today_sil_add.text = "+\(self.DecimalWon(value: vaccine.data[0].thirdCnt))" // 부스터샷 인원 추가 수
+                    self.today_1st.text = self.DecimalWon(value: vaccine.data[0].totalFirstCnt) // 오늘 1차 접종
+                    self.today_ok.text = self.DecimalWon(value: vaccine.data[0].totalSecondCnt) // 오늘 2차 접종
+                    self.today_add.text = self.DecimalWon(value: vaccine.data[0].totalThirdCnt) // 오늘 3차 접종
                 }
+                
             }
+            
         }
         VaccineCenterHttp(){
             center in
@@ -142,18 +146,24 @@ class VaccineViewController: UIViewController {
                         } //도시 확인
                     }
                     for sido in center.data{
-                        if sido.sido.contains(self.city){
+                        let first = CLLocationCoordinate2D(latitude: Double(sido.lat)! , longitude: Double(sido.lng)!)
+                        let base = CLLocationCoordinate2D(latitude: (self.locationManager.location?.coordinate.latitude) ?? self.Locationset.coordinate.latitude, longitude: (self.locationManager.location?.coordinate.longitude) ?? self.Locationset.coordinate.longitude)
+                        let one = first.distance(from: base)
+                        
+                        if one < 15000{
                             self.vaccineCenter.append(sido)
                         }
                     }
-                    self.vaccineCenter.sorted(by:{
-                        let first = CLLocationCoordinate2D(latitude: Double($0.lat)! , longitude: Double($0.lng)!)
-                        let second = CLLocationCoordinate2D(latitude: Double($1.lat)!, longitude: Double($1.lng)!)
-                        let base = CLLocationCoordinate2D(latitude: (self.currentLocation?.coordinate.latitude) ?? self.Locationset.coordinate.latitude, longitude: (self.currentLocation?.coordinate.latitude) ?? self.Locationset.coordinate.longitude)
+                    
+                    self.vaccineCenter.sort{
+                        (first , second) -> Bool in
+                        let first = CLLocationCoordinate2D(latitude: Double(first.lat)! , longitude: Double(first.lng)!)
+                        let second = CLLocationCoordinate2D(latitude: Double(second.lat)!, longitude: Double(second.lng)!)
+                        let base = CLLocationCoordinate2D(latitude: (self.locationManager.location?.coordinate.latitude) ?? self.Locationset.coordinate.latitude, longitude: (self.locationManager.location?.coordinate.longitude) ?? self.Locationset.coordinate.longitude)
                         let one = first.distance(from: base)
                         let two = second.distance(from: base)
-                        return one > two
-                    })
+                        return one < two
+                    }
                     DispatchQueue.main.async {
                         self.VaccineCollection.reloadData()
                     }
@@ -289,11 +299,9 @@ extension VaccineViewController : UICollectionViewDataSource, UICollectionViewDe
         cell.HospitalName.text = vaccineCenter[indexPath.row].facilityName
         cell.HospitalNum.text = vaccineCenter[indexPath.row].phoneNumber
         cell.HospitalAddress.text = vaccineCenter[indexPath.row].address
-        cell.HospitalDistance.text = String(centerLocation.distance(from: Location))
-        print(centerLocation.distance(from: Location), centerLocation)
+        cell.HospitalDistance.text = "\(String(format : "%.3f",centerLocation.distance(from: Location)/1000))km"
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.black.cgColor
-        
         return cell
     }
     
@@ -331,9 +339,10 @@ extension VaccineViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLocation = locationManager.location
-//        DispatchQueue.main.async {
-//            self.VaccineCollection.reloadData()
-//        }
+        
+        DispatchQueue.main.async {
+            self.VaccineCollection.reloadData()
+        }
     }
         
     // 위도 경도 받아오기 에러

@@ -1002,6 +1002,8 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Gk2-O1-oZY">
                                 <rect key="frame" x="20" y="353" width="374" height="411"/>
                                 <color key="backgroundColor" red="0.94499999999999995" green="0.960704267" blue="0.96491473910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="S3B-8Q-YZv"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="32Y-JA-9yb"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="7bX-lL-SOJ">
                                     <size key="itemSize" width="330" height="110"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -1067,6 +1069,30 @@
                                             <outlet property="HospitalName" destination="xdd-DV-qLh" id="ZOZ-Ao-666"/>
                                             <outlet property="HospitalNum" destination="nq4-zg-SHx" id="YLy-1d-oaa"/>
                                         </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="3Yg-8C-7y1">
+                                        <rect key="frame" x="22" y="111" width="330" height="110"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Yhc-8d-b9n">
+                                            <rect key="frame" x="0.0" y="0.0" width="330" height="110"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="iug-AB-o5m">
+                                        <rect key="frame" x="22" y="222" width="330" height="110"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EJa-za-laK">
+                                            <rect key="frame" x="0.0" y="0.0" width="330" height="110"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="RhO-Mc-Uh9">
+                                        <rect key="frame" x="22" y="333" width="330" height="110"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hg3-vz-brb">
+                                            <rect key="frame" x="0.0" y="0.0" width="330" height="110"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
