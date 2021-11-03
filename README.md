@@ -4,8 +4,11 @@
 
 ## 제작된 플랫폼
 > iOS : 김진우 / [iOS](https://github.com/castle6116/COVID-19_HELPER)
+
 > Android : 구태호 / [Android](https://github.com/GuTaeHo/CovidSituation)
+
 > Web : 권수형 /  [BackEnd](https://github.com/Byeong-gook/cosiguk/tree/master)
+
 > BackEnd : 기병국 / [BackEnd](https://github.com/Byeong-gook/cosiguk/tree/master)
 
 - 목차
