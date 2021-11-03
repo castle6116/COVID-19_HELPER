@@ -476,10 +476,6 @@ A permissive license whose main conditions require preservation of copyright and
 
 ---
 
-BackEnd License
-
----
-
 #### Lombok
 
 ````
@@ -502,7 +498,9 @@ BackEnd License
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
-
+    
+    
+````
 
 
 #### JSON
@@ -526,6 +524,7 @@ BackEnd License
      OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
      SOFTWARE.
 
+````
 
 
 #### JSON-SIMPLE
@@ -734,6 +733,8 @@ BackEnd License
        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
        See the License for the specific language governing permissions and
        limitations under the License.
+       
+       ````
 
 
 
