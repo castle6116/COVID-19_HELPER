@@ -9,4 +9,5 @@ target 'COVID-19_HELPER' do
   pod 'SideMenu'
   pod 'Alamofire', '~> 5.4.3'
   pod 'KeychainSwift', '~> 19.0'
+  pod 'NMapsMap'
 end

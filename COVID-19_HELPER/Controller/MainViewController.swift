@@ -168,6 +168,7 @@ class MainViewController: UIViewController, XMLParserDelegate, UICollectionViewD
                 Covidresult = []
                 Covid_day -= 1
                 COVID_CONNECT(day: Covid_day)
+                print(Covid_day)
             }
             textinput()
         }else{
@@ -191,9 +192,11 @@ class MainViewController: UIViewController, XMLParserDelegate, UICollectionViewD
         if success == true{
             print("지역 감염현황 파싱 성공")
             Coviddesult.sort{Int($0.defCnt!)! > Int($1.defCnt!)!}
-            if Coviddesult.count < 2{
+            if Coviddesult.count != 19{
                 Coviddesult = []
+                Covid_day -= 1
                 COVID_Desult_CONNECT(day: Covid_day)
+                print(Covid_day)
             }
             city_daily.text = "\(Coviddesult[0].stdDay!) 업데이트"
         }else{

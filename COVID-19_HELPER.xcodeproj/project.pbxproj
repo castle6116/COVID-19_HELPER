@@ -18,6 +18,7 @@
 		DE6B92DC271417A3004B94D3 /* Covid.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6B92DB271417A3004B94D3 /* Covid.swift */; };
 		DE7ABA0327292DD300AC4F83 /* Vaccine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7ABA0227292DD300AC4F83 /* Vaccine.swift */; };
 		DE7C0E602727F45900DE0401 /* VaccineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7C0E5F2727F45900DE0401 /* VaccineViewController.swift */; };
+		DE8B756E2730DB5D004ACED8 /* SwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8B756D2730DB5D004ACED8 /* SwitchButton.swift */; };
 		DEA2F4C5271C28C200261A19 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA2F4C4271C28C200261A19 /* City.swift */; };
 		DED1E5AF27118742006EA09D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED1E5AE27118742006EA09D /* AppDelegate.swift */; };
 		DED1E5B127118742006EA09D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED1E5B027118742006EA09D /* SceneDelegate.swift */; };
@@ -44,6 +45,7 @@
 		DE6B92DB271417A3004B94D3 /* Covid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Covid.swift; sourceTree = "<group>"; };
 		DE7ABA0227292DD300AC4F83 /* Vaccine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vaccine.swift; sourceTree = "<group>"; };
 		DE7C0E5F2727F45900DE0401 /* VaccineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccineViewController.swift; sourceTree = "<group>"; };
+		DE8B756D2730DB5D004ACED8 /* SwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchButton.swift; sourceTree = "<group>"; };
 		DEA2F4C4271C28C200261A19 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		DED1E5AB27118742006EA09D /* COVID-19_HELPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "COVID-19_HELPER.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DED1E5AE27118742006EA09D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				DE6B92D7271406D4004B94D3 /* SideMenuTableViewCell.swift */,
 				DE46BE5F271D84CF005EA932 /* NewsTableViewCell.swift */,
+				DE8B756D2730DB5D004ACED8 /* SwitchButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -237,7 +240,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		5ED3791C11E48C7370066269 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -290,6 +293,7 @@
 				DEA2F4C5271C28C200261A19 /* City.swift in Sources */,
 				DE7C0E602727F45900DE0401 /* VaccineViewController.swift in Sources */,
 				DE46BE5E271D845F005EA932 /* NewsViewController.swift in Sources */,
+				DE8B756E2730DB5D004ACED8 /* SwitchButton.swift in Sources */,
 				DE7ABA0327292DD300AC4F83 /* Vaccine.swift in Sources */,
 				DED28005271D8936001DC2E7 /* News.swift in Sources */,
 				DE46BE60271D84CF005EA932 /* NewsTableViewCell.swift in Sources */,
@@ -439,10 +443,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BEF412341FC8EEA00AB155D7 /* Pods-COVID-19_HELPER.debug.xcconfig */;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					x86_64,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 882B4FP598;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 x86_64";
 				INFOPLIST_FILE = "COVID-19_HELPER/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -450,6 +459,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "kimjinwoo.COVID-19-HELPER";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -459,10 +469,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 36075972A01DB1DA3EA675AE /* Pods-COVID-19_HELPER.release.xcconfig */;
 			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					x86_64,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 882B4FP598;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 x86_64";
 				INFOPLIST_FILE = "COVID-19_HELPER/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -470,6 +485,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "kimjinwoo.COVID-19-HELPER";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

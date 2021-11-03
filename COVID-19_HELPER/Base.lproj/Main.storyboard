@@ -1110,6 +1110,21 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="지도" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvV-re-rHN">
+                                <rect key="frame" x="301" y="320" width="29.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ifP-rh-heN" customClass="NMFMapView">
+                                <rect key="frame" x="0.0" y="349" width="414" height="415"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N6S-ik-4xr" customClass="SwitchButton" customModule="COVID_19_HELPER" customModuleProvider="target">
+                                <rect key="frame" x="335.5" y="315" width="58.5" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="         "/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GzW-9M-Gk7"/>
                         <color key="backgroundColor" red="0.94509803921568625" green="0.96078431372549022" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1117,18 +1132,26 @@
                             <constraint firstItem="iXo-jN-iyU" firstAttribute="centerX" secondItem="iH2-hh-OMS" secondAttribute="centerX" multiplier="0.2" id="58s-aQ-zb2"/>
                             <constraint firstItem="p8d-mg-lI4" firstAttribute="leading" secondItem="iXo-jN-iyU" secondAttribute="leading" constant="-3" id="5c8-0x-E6E"/>
                             <constraint firstItem="WyE-5e-UOQ" firstAttribute="leading" secondItem="iXo-jN-iyU" secondAttribute="trailing" constant="3" id="5nC-bI-zOO"/>
+                            <constraint firstItem="N6S-ik-4xr" firstAttribute="trailing" secondItem="vGt-b8-dyy" secondAttribute="trailing" id="96l-ha-5Fo"/>
+                            <constraint firstItem="GzW-9M-Gk7" firstAttribute="trailing" secondItem="ifP-rh-heN" secondAttribute="trailing" id="G3P-2T-EYG"/>
                             <constraint firstItem="Gk2-O1-oZY" firstAttribute="leading" secondItem="GzW-9M-Gk7" secondAttribute="leading" constant="20" id="HIM-Qc-YNT"/>
+                            <constraint firstItem="N6S-ik-4xr" firstAttribute="centerY" secondItem="gvV-re-rHN" secondAttribute="centerY" id="KEp-kr-vQG"/>
                             <constraint firstItem="GOh-uU-1gW" firstAttribute="leading" secondItem="p8d-mg-lI4" secondAttribute="trailing" constant="5" id="N2O-se-tt4"/>
                             <constraint firstItem="GOh-uU-1gW" firstAttribute="centerY" secondItem="p8d-mg-lI4" secondAttribute="centerY" id="NgE-9p-DWU"/>
                             <constraint firstItem="GzW-9M-Gk7" firstAttribute="trailing" secondItem="vGt-b8-dyy" secondAttribute="trailing" constant="20" id="S1w-DM-QGj"/>
                             <constraint firstItem="p8d-mg-lI4" firstAttribute="top" secondItem="vGt-b8-dyy" secondAttribute="bottom" constant="5" id="SVl-Yi-CvN"/>
+                            <constraint firstItem="GzW-9M-Gk7" firstAttribute="bottom" secondItem="ifP-rh-heN" secondAttribute="bottom" id="TM5-qJ-JCp"/>
                             <constraint firstItem="vGt-b8-dyy" firstAttribute="leading" secondItem="GzW-9M-Gk7" secondAttribute="leading" constant="20" id="TdZ-S7-cSK"/>
                             <constraint firstItem="GzW-9M-Gk7" firstAttribute="bottom" secondItem="Gk2-O1-oZY" secondAttribute="bottom" id="VWX-u4-i9e"/>
                             <constraint firstItem="WyE-5e-UOQ" firstAttribute="centerY" secondItem="iXo-jN-iyU" secondAttribute="centerY" id="X4A-KF-AQx"/>
+                            <constraint firstItem="N6S-ik-4xr" firstAttribute="leading" secondItem="gvV-re-rHN" secondAttribute="trailing" constant="5" id="c3R-Wq-hgc"/>
                             <constraint firstItem="vGt-b8-dyy" firstAttribute="top" secondItem="iXo-jN-iyU" secondAttribute="bottom" constant="10" id="e4o-sI-Wef"/>
                             <constraint firstItem="GzW-9M-Gk7" firstAttribute="trailing" secondItem="Gk2-O1-oZY" secondAttribute="trailing" constant="20" id="eLc-2E-0LF"/>
                             <constraint firstItem="Gk2-O1-oZY" firstAttribute="top" secondItem="p8d-mg-lI4" secondAttribute="bottom" constant="10" id="fo8-9X-ytN"/>
+                            <constraint firstItem="ifP-rh-heN" firstAttribute="leading" secondItem="GzW-9M-Gk7" secondAttribute="leading" id="njU-8M-lFs"/>
+                            <constraint firstItem="gvV-re-rHN" firstAttribute="centerY" secondItem="GOh-uU-1gW" secondAttribute="centerY" id="rRt-Wo-Y0S"/>
                             <constraint firstItem="iXo-jN-iyU" firstAttribute="top" secondItem="GzW-9M-Gk7" secondAttribute="top" constant="10" id="sqq-PC-Any"/>
+                            <constraint firstItem="ifP-rh-heN" firstAttribute="top" secondItem="p8d-mg-lI4" secondAttribute="bottom" constant="6" id="wFf-7U-pYK"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Third" image="star.fill" catalog="system" id="H1C-Vp-rmy"/>
@@ -1136,6 +1159,8 @@
                     <navigationItem key="navigationItem" title="백신 현황" id="9Ee-Pk-tcO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="NMFMap" destination="ifP-rh-heN" id="OMt-rZ-dyC"/>
+                        <outlet property="SwitchButton" destination="N6S-ik-4xr" id="IrU-lO-LzP"/>
                         <outlet property="VaccineCollection" destination="Gk2-O1-oZY" id="O9K-wU-JlU"/>
                         <outlet property="add_inoculation" destination="bsa-81-gfB" id="Oyo-F6-ewe"/>
                         <outlet property="background_view" destination="8xi-RA-4kt" id="hkF-FW-Zh4"/>
@@ -1155,7 +1180,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MHR-Mj-lIf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1920.5607476635512" y="309.71922246220305"/>
+            <point key="canvasLocation" x="1920.289855072464" y="309.375"/>
         </scene>
         <!--Four-->
         <scene sceneID="ycH-od-Klp">

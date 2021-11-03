@@ -9,6 +9,7 @@ import UIKit
 import KeychainSwift
 import Alamofire
 import CoreLocation
+import NMapsMap
 
 class VaccineViewController: UIViewController {
     @IBOutlet var gubun: UILabel!
@@ -26,6 +27,8 @@ class VaccineViewController: UIViewController {
     @IBOutlet var yesterday_add: UILabel!
     @IBOutlet var background_view: UIView!
     @IBOutlet var VaccineCollection: UICollectionView!
+    @IBOutlet var NMFMap: NMFMapView!
+    @IBOutlet var SwitchButton: SwitchButton!
     
     var locationManager = CLLocationManager() // location1
     var currentLocation: CLLocation! // 내 위치 저장
@@ -35,10 +38,18 @@ class VaccineViewController: UIViewController {
     
     var city = "대구광역시"
     
+    let infoWindow = NMFInfoWindow()
+    let dataSource = NMFInfoWindowDefaultTextSource.data()
+    let defaultDataSource = NMFInfoWindowDefaultTextSource.data()
     override func viewDidLoad() {
         super.viewDidLoad()
+//        NMFMap.isHidden = true
+        
         VaccineCollection.delegate = self
         VaccineCollection.dataSource = self
+        
+        SwitchButton.delegate = self
+        SwitchButton.isOn = true
         
         locationManager.delegate = self // location3
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -57,6 +68,42 @@ class VaccineViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem?.title = "백신 현황"
+    }
+    
+    func naverMapSetting(){
+        print(NMFMap.mapWidth)
+        print(NMFMap.mapHeight)
+        infoWindow.dataSource = defaultDataSource
+        for vaccine in vaccineCenter{
+            let marker = NMFMarker()
+            marker.position = NMGLatLng(lat: Double(vaccine.lat)!, lng: Double(vaccine.lng)!)
+            marker.mapView = NMFMap
+            
+            let handler = { [weak self] (overlay: NMFOverlay) -> Bool in
+                if let marker = overlay as? NMFMarker {
+                    // 정보 창이 열린 마커의 tag를 텍스트로 노출하도록 반환
+                    self?.defaultDataSource.title = marker.userInfo["tag"] as! String
+                    // 마커를 터치할 때 정보창을 엶
+                    self?.infoWindow.open(with: marker)
+                }
+                return true
+            };
+            marker.touchHandler = handler
+            
+            marker.userInfo = ["tag": "\(vaccine.centerName)"]
+        }
+        naverMapCamera()
+    }
+    
+    func naverMapCamera(){
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: (locationManager.location?.coordinate.latitude)!, lng: (locationManager.location?.coordinate.longitude)!))
+        cameraUpdate.animation = .fly
+        cameraUpdate.animationDuration = 2
+        NMFMap.moveCamera(cameraUpdate)
+    }
+    
+    func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
+        infoWindow.close()
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -134,41 +181,42 @@ class VaccineViewController: UIViewController {
         VaccineCenterHttp(){
             center in
             if let center = center{
-                let geocoder = CLGeocoder()
-                let locale = Locale(identifier: "Ko-kr")
-                //원하는 언어의 나라 코드를 넣어주시면 됩니다.
-                geocoder.reverseGeocodeLocation(self.currentLocation ?? self.Locationset, preferredLocale: locale, completionHandler:{
-                    (placemarks, error) in
-                    if let address: [CLPlacemark] = placemarks {
-                        if let name: String = address.last?.administrativeArea {
-                            self.city = name
-                            print(name)
-                        } //도시 확인
-                    }
-                    for sido in center.data{
-                        let first = CLLocationCoordinate2D(latitude: Double(sido.lat)! , longitude: Double(sido.lng)!)
-                        let base = CLLocationCoordinate2D(latitude: (self.locationManager.location?.coordinate.latitude) ?? self.Locationset.coordinate.latitude, longitude: (self.locationManager.location?.coordinate.longitude) ?? self.Locationset.coordinate.longitude)
-                        let one = first.distance(from: base)
-                        
-                        if one < 15000{
-                            self.vaccineCenter.append(sido)
-                        }
-                    }
+                for sido in center.data{
+                    let first = CLLocationCoordinate2D(latitude: Double(sido.lat)! , longitude: Double(sido.lng)!)
+                    let base = CLLocationCoordinate2D(latitude: (self.locationManager.location?.coordinate.latitude) ?? self.Locationset.coordinate.latitude, longitude: (self.locationManager.location?.coordinate.longitude) ?? self.Locationset.coordinate.longitude)
+                    let one = first.distance(from: base)
                     
-                    self.vaccineCenter.sort{
-                        (first , second) -> Bool in
-                        let first = CLLocationCoordinate2D(latitude: Double(first.lat)! , longitude: Double(first.lng)!)
-                        let second = CLLocationCoordinate2D(latitude: Double(second.lat)!, longitude: Double(second.lng)!)
-                        let base = CLLocationCoordinate2D(latitude: (self.locationManager.location?.coordinate.latitude) ?? self.Locationset.coordinate.latitude, longitude: (self.locationManager.location?.coordinate.longitude) ?? self.Locationset.coordinate.longitude)
-                        let one = first.distance(from: base)
-                        let two = second.distance(from: base)
-                        return one < two
+                    if one < 15000{
+                        self.vaccineCenter.append(sido)
                     }
-                    DispatchQueue.main.async {
-                        self.VaccineCollection.reloadData()
-                    }
-                    
-                })
+                }
+                
+                self.vaccineCenter.sort{
+                    (first , second) -> Bool in
+                    let first = CLLocationCoordinate2D(latitude: Double(first.lat)! , longitude: Double(first.lng)!)
+                    let second = CLLocationCoordinate2D(latitude: Double(second.lat)!, longitude: Double(second.lng)!)
+                    let base = CLLocationCoordinate2D(latitude: (self.locationManager.location?.coordinate.latitude) ?? self.Locationset.coordinate.latitude, longitude: (self.locationManager.location?.coordinate.longitude) ?? self.Locationset.coordinate.longitude)
+                    let one = first.distance(from: base)
+                    let two = second.distance(from: base)
+                    return one < two
+                }
+                DispatchQueue.main.async {
+                    self.VaccineCollection.reloadData()
+                }
+//                let geocoder = CLGeocoder()
+//                let locale = Locale(identifier: "Ko-kr")
+//                //원하는 언어의 나라 코드를 넣어주시면 됩니다.
+//                geocoder.reverseGeocodeLocation(self.currentLocation ?? self.Locationset, preferredLocale: locale, completionHandler:{
+//                    (placemarks, error) in
+//                    if let address: [CLPlacemark] = placemarks {
+//                        if let name: String = address.last?.administrativeArea {
+//                            self.city = name
+//                            print(name)
+//                        } //도시 확인
+//                    }
+//                  도시명 필요시 여기에 삽입
+//                })
+                self.naverMapSetting()
             }
         }
         
@@ -360,6 +408,17 @@ extension CLLocationCoordinate2D {
         let to = CLLocation(latitude: self.latitude, longitude: self.longitude)
         return from.distance(from: to)
     }
+}
+
+extension VaccineViewController: SwitchButtonDelegate {
+  func isOnValueChange(isOn: Bool) {
+      if isOn == true{
+          NMFMap.isHidden = false
+      }else{
+          NMFMap.isHidden = true
+      }
+      
+  }
 }
 
 
