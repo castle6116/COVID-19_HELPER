@@ -30,7 +30,7 @@ class VaccineViewController: UIViewController, NMFMapViewDelegate , NMFMapViewTo
     @IBOutlet var NMFMap: NMFNaverMapView!
     @IBOutlet var SwitchButton: SwitchButton!
     
-    var locationManager = CLLocationManager() // location1
+    var locationManager = CLLocationManager()
     var currentLocation: CLLocation! // 내 위치 저장
     var vaccineCenter = [Address]()
     
@@ -40,6 +40,8 @@ class VaccineViewController: UIViewController, NMFMapViewDelegate , NMFMapViewTo
     
     let infoWindow = NMFInfoWindow()
     let dataSource = NMFInfoWindowDefaultTextSource.data()
+    
+    var makerALL = [NMFMarker]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +59,7 @@ class VaccineViewController: UIViewController, NMFMapViewDelegate , NMFMapViewTo
         SwitchButton.delegate = self
         SwitchButton.isOn = true
         
-        locationManager.delegate = self // location3
+        locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestAlwaysAuthorization()
@@ -79,10 +81,14 @@ class VaccineViewController: UIViewController, NMFMapViewDelegate , NMFMapViewTo
     
     func naverMapSetting(){
         infoWindow.dataSource = dataSource
-        for vaccine in vaccineCenter{
+        for makerAll in makerALL {
+            makerAll.mapView = nil
+        }
+        makerALL = []
+        for (index, vaccine) in vaccineCenter.enumerated(){
             let marker = NMFMarker()
             marker.position = NMGLatLng(lat: Double(vaccine.lat)!, lng: Double(vaccine.lng)!)
-            marker.mapView = NMFMap.mapView
+//            marker.mapView = NMFMap.mapView
             
             let handler = { [weak self] (overlay: NMFOverlay) -> Bool in
                 if let marker = overlay as? NMFMarker {
@@ -110,8 +116,9 @@ class VaccineViewController: UIViewController, NMFMapViewDelegate , NMFMapViewTo
             Location.longitude = (locationManager.location?.coordinate.longitude) ?? 126.97689768711622
             
             marker.userInfo = ["tag": "거리 : \(String(format : "%.3f",centerLocation.distance(from: Location)/1000))km / 전화번호 : \(vaccine.phoneNumber)"]
+            makerALL.append(marker)
+            makerALL[index].mapView = NMFMap.mapView
         }
-        naverMapCamera()
     }
     
     func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
@@ -236,6 +243,7 @@ class VaccineViewController: UIViewController, NMFMapViewDelegate , NMFMapViewTo
 //                  도시명 필요시 여기에 삽입
 //                })
                 self.naverMapSetting()
+                self.naverMapCamera()
             }
         }
         
@@ -385,7 +393,7 @@ extension VaccineViewController: CLLocationManagerDelegate {
     
     func getLocationUsagePermission() {
         //location4
-        let alter = UIAlertController(title: "위치권한 설정이 '허용안함' 혹은 \n'한번만 사용'으로 되어있습니다.", message: "'아니오'를 선택하시면 정확한 정보를 표출할 수 없습니다.\n앱 설정 화면으로 가시겠습니까?", preferredStyle: UIAlertController.Style.alert)
+        let alter = UIAlertController(title: "위치권한 설정이 '허용안함'으로 되어있습니다.", message: "'아니오'를 선택하시면 정확한 정보를 표출할 수 없습니다.\n앱 설정 화면으로 가시겠습니까?", preferredStyle: UIAlertController.Style.alert)
         let logOkAction = UIAlertAction(title: "네", style: UIAlertAction.Style.default){
             (action: UIAlertAction) in
             if #available(iOS 10.0, *) {
@@ -406,6 +414,8 @@ extension VaccineViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLocation = locationManager.location
+        print("마커 새로 박음")
+        naverMapSetting()
         
         DispatchQueue.main.async {
             self.VaccineCollection.reloadData()
@@ -439,7 +449,6 @@ extension VaccineViewController: SwitchButtonDelegate {
       
   }
 }
-
 
 class HospitalCollection: UICollectionViewCell{
     @IBOutlet var HospitalName: UILabel!
