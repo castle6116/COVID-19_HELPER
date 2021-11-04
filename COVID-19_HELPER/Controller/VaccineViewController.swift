@@ -11,7 +11,7 @@ import Alamofire
 import CoreLocation
 import NMapsMap
 
-class VaccineViewController: UIViewController {
+class VaccineViewController: UIViewController, NMFMapViewDelegate , NMFMapViewTouchDelegate {
     @IBOutlet var gubun: UILabel!
     @IBOutlet var first_inoculation: UILabel!
     @IBOutlet var complete_inoculation: UILabel!
@@ -27,7 +27,7 @@ class VaccineViewController: UIViewController {
     @IBOutlet var yesterday_add: UILabel!
     @IBOutlet var background_view: UIView!
     @IBOutlet var VaccineCollection: UICollectionView!
-    @IBOutlet var NMFMap: NMFMapView!
+    @IBOutlet var NMFMap: NMFNaverMapView!
     @IBOutlet var SwitchButton: SwitchButton!
     
     var locationManager = CLLocationManager() // location1
@@ -40,10 +40,16 @@ class VaccineViewController: UIViewController {
     
     let infoWindow = NMFInfoWindow()
     let dataSource = NMFInfoWindowDefaultTextSource.data()
-    let defaultDataSource = NMFInfoWindowDefaultTextSource.data()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        NMFMap.isHidden = true
+        NMFMap.mapView.delegate = self
+        NMFMap.mapView.touchDelegate = self
+        NMFMap.showLocationButton = true
+        NMFMap.showZoomControls = true
+
+        NMFMap.mapView.positionMode = .normal
         
         VaccineCollection.delegate = self
         VaccineCollection.dataSource = self
@@ -55,13 +61,14 @@ class VaccineViewController: UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestAlwaysAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
+        textSet()
+        if locationManager.authorizationStatus == .notDetermined || locationManager.authorizationStatus == .restricted || locationManager.authorizationStatus == .denied {
+            locationManagerDidChangeAuthorization(locationManager)
+            print("위치 서비스 Off 상태")
+        } else {
             print("위치 서비스 On 상태")
             locationManager.startUpdatingLocation() //위치 정보 받아오기 시작
             currentLocation = locationManager.location
-            textSet()
-        } else {
-            print("위치 서비스 Off 상태")
         }
         // Do any additional setup after loading the view.
     }
@@ -71,18 +78,16 @@ class VaccineViewController: UIViewController {
     }
     
     func naverMapSetting(){
-        print(NMFMap.mapWidth)
-        print(NMFMap.mapHeight)
-        infoWindow.dataSource = defaultDataSource
+        infoWindow.dataSource = dataSource
         for vaccine in vaccineCenter{
             let marker = NMFMarker()
             marker.position = NMGLatLng(lat: Double(vaccine.lat)!, lng: Double(vaccine.lng)!)
-            marker.mapView = NMFMap
+            marker.mapView = NMFMap.mapView
             
             let handler = { [weak self] (overlay: NMFOverlay) -> Bool in
                 if let marker = overlay as? NMFMarker {
                     // 정보 창이 열린 마커의 tag를 텍스트로 노출하도록 반환
-                    self?.defaultDataSource.title = marker.userInfo["tag"] as! String
+                    self?.dataSource.title = marker.userInfo["tag"] as! String
                     // 마커를 터치할 때 정보창을 엶
                     self?.infoWindow.open(with: marker)
                 }
@@ -90,20 +95,34 @@ class VaccineViewController: UIViewController {
             };
             marker.touchHandler = handler
             
-            marker.userInfo = ["tag": "\(vaccine.centerName)"]
+            marker.captionText = vaccine.centerName
+            marker.subCaptionText = vaccine.facilityName
+            marker.subCaptionColor = UIColor.blue
+            marker.subCaptionHaloColor = UIColor(red: 200.0/255.0, green: 1, blue: 200.0/255.0, alpha: 1)
+            marker.subCaptionTextSize = CGFloat(10)
+            
+            var centerLocation = CLLocationCoordinate2D()
+            centerLocation.latitude = Double(vaccine.lat)!
+            centerLocation.longitude = Double(vaccine.lng)!
+            
+            var Location = CLLocationCoordinate2D()
+            Location.latitude = (locationManager.location?.coordinate.latitude) ?? 37.5780117795279
+            Location.longitude = (locationManager.location?.coordinate.longitude) ?? 126.97689768711622
+            
+            marker.userInfo = ["tag": "거리 : \(String(format : "%.3f",centerLocation.distance(from: Location)/1000))km / 전화번호 : \(vaccine.phoneNumber)"]
         }
         naverMapCamera()
     }
     
-    func naverMapCamera(){
-        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: (locationManager.location?.coordinate.latitude)!, lng: (locationManager.location?.coordinate.longitude)!))
-        cameraUpdate.animation = .fly
-        cameraUpdate.animationDuration = 2
-        NMFMap.moveCamera(cameraUpdate)
-    }
-    
     func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
         infoWindow.close()
+    }
+    
+    func naverMapCamera(){
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: (locationManager.location?.coordinate.latitude) ?? 37.5780117795279, lng: (locationManager.location?.coordinate.longitude) ?? 126.97689768711622))
+        cameraUpdate.animation = .fly
+        cameraUpdate.animationDuration = 2
+        NMFMap.mapView.moveCamera(cameraUpdate)
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
