@@ -8,7 +8,7 @@
 import UIKit
 import Alamofire
 
-class MainViewController: UIViewController, XMLParserDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+class MainViewController: LoadingView, XMLParserDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     @IBOutlet var rlwns: UILabel! //기준일
     @IBOutlet var ghkrwls: UILabel! // 일일 확진자
@@ -40,7 +40,7 @@ class MainViewController: UIViewController, XMLParserDelegate, UICollectionViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("DidLoad")
+        showLoading()
         COVID_CONNECT(day: Covid_day)
         Covid_day = 0
         COVID_Desult_CONNECT(day : Covid_day)
@@ -196,12 +196,12 @@ class MainViewController: UIViewController, XMLParserDelegate, UICollectionViewD
                 Coviddesult = []
                 Covid_day -= 1
                 COVID_Desult_CONNECT(day: Covid_day)
-                print(Covid_day)
             }
             city_daily.text = "\(Coviddesult[0].stdDay!) 업데이트"
         }else{
             print("파싱 실패")
         }
+        hideLoading()
     }
     
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {

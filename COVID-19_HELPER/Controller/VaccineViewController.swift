@@ -11,7 +11,7 @@ import Alamofire
 import CoreLocation
 import NMapsMap
 
-class VaccineViewController: UIViewController, NMFMapViewDelegate , NMFMapViewTouchDelegate {
+class VaccineViewController: LoadingView, NMFMapViewDelegate , NMFMapViewTouchDelegate {
     @IBOutlet var gubun: UILabel!
     @IBOutlet var first_inoculation: UILabel!
     @IBOutlet var complete_inoculation: UILabel!
@@ -46,6 +46,7 @@ class VaccineViewController: UIViewController, NMFMapViewDelegate , NMFMapViewTo
     override func viewDidLoad() {
         super.viewDidLoad()
 //        NMFMap.isHidden = true
+        showLoading()
         NMFMap.mapView.delegate = self
         NMFMap.mapView.touchDelegate = self
         NMFMap.showLocationButton = true
@@ -130,6 +131,7 @@ class VaccineViewController: UIViewController, NMFMapViewDelegate , NMFMapViewTo
         cameraUpdate.animation = .fly
         cameraUpdate.animationDuration = 2
         NMFMap.mapView.moveCamera(cameraUpdate)
+        hideLoading()
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -258,16 +260,6 @@ class VaccineViewController: UIViewController, NMFMapViewDelegate , NMFMapViewTo
         return result
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 func VaccineHttp(day: Int ,complation : ((Vaccine?) -> ())?){

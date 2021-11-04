@@ -9,7 +9,7 @@ import UIKit
 import Alamofire
 import KeychainSwift
 
-class NewsViewController: UIViewController, UIScrollViewDelegate {
+class NewsViewController: LoadingView, UIScrollViewDelegate {
     @IBOutlet var tableview_Custom: UITableView!
     var refreshControl = UIRefreshControl()
     var display = 20
@@ -17,7 +17,7 @@ class NewsViewController: UIViewController, UIScrollViewDelegate {
     var test = [Items]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        showLoading()
         tableview_Custom.delegate = self
         tableview_Custom.dataSource = self
         tableview_Custom.rowHeight = 120
@@ -31,6 +31,7 @@ class NewsViewController: UIViewController, UIScrollViewDelegate {
             DispatchQueue.main.async {
                 self.tableview_Custom.reloadData()
             }
+            self.hideLoading()
         }
         // Do any additional setup after loading the view.
     }
@@ -67,15 +68,7 @@ class NewsViewController: UIViewController, UIScrollViewDelegate {
         print(test.count)
         
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
     func naverNewsRequest(Query : String, Display : Int , Start : Int, complation : ((News?) -> ())?){
         let url = "https://openapi.naver.com/v1/search/news.json"
 //        let param : Parameters = ["query" : Query, "display" : String(Display), "start" : String(Start) , "sort" : "sim"]// JSON 객체로 변환할 딕셔너리 준비

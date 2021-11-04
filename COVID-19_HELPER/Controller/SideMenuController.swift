@@ -8,21 +8,33 @@
 import UIKit
 
 class SideMenuController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-    
-    var items = ["어플 버전"]
     @IBOutlet var tableView: UITableView!
+    
+    var items = ["사용방법","공지사항","라이센스","어플 버전"]
+    
     let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.items.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "SideMenuTableViewCell", for: indexPath) as! SideMenuTableViewCell
-        cell.versionLabel?.text = version
-        cell
+        cell.menuLabel.text = items[indexPath.row]
+        if items[indexPath.row] == "사용방법"{
+            
+        }else if items[indexPath.row] == "공지사항"{
+            
+        }else if items[indexPath.row] == "라이센스"{
+            
+        }else if items[indexPath.row] == "어플 버전"{
+            cell.versionLabel?.text = version
+        }
         return cell
     }
 }
