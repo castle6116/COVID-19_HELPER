@@ -8,11 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		38D30A0F37D7683AA40E300B /* Pods_COVID_19_HELPER.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83497513EA8C5E82FD0B0D33 /* Pods_COVID_19_HELPER.framework */; };
+		DE3A25882733C210003CB743 /* NoticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3A25872733C210003CB743 /* NoticeViewController.swift */; };
+		DE3A258A2733C235003CB743 /* HowToUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3A25892733C235003CB743 /* HowToUseViewController.swift */; };
+		DE3A258C2733C253003CB743 /* LicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3A258B2733C253003CB743 /* LicenseViewController.swift */; };
 		DE3B57642716A3B100378BDC /* campaign in Resources */ = {isa = PBXBuildFile; fileRef = DE3B57632716A3B100378BDC /* campaign */; };
 		DE3B57662716A3D000378BDC /* menu in Resources */ = {isa = PBXBuildFile; fileRef = DE3B57652716A3D000378BDC /* menu */; };
 		DE3B57682716A3D800378BDC /* help_outline in Resources */ = {isa = PBXBuildFile; fileRef = DE3B57672716A3D800378BDC /* help_outline */; };
 		DE46BE5E271D845F005EA932 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE46BE5D271D845F005EA932 /* NewsViewController.swift */; };
 		DE46BE60271D84CF005EA932 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE46BE5F271D84CF005EA932 /* NewsTableViewCell.swift */; };
+		DE503D9E2733D4030093E9A6 /* notmy.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DE503D9D2733D4030093E9A6 /* notmy.mp4 */; };
+		DE503DA02734F5230093E9A6 /* EasterEggViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE503D9F2734F5230093E9A6 /* EasterEggViewController.swift */; };
 		DE6B92D8271406D4004B94D3 /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6B92D7271406D4004B94D3 /* SideMenuTableViewCell.swift */; };
 		DE6B92DA271407A3004B94D3 /* SideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6B92D9271407A3004B94D3 /* SideMenuController.swift */; };
 		DE6B92DC271417A3004B94D3 /* Covid.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6B92DB271417A3004B94D3 /* Covid.swift */; };
@@ -35,12 +40,17 @@
 		36075972A01DB1DA3EA675AE /* Pods-COVID-19_HELPER.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-COVID-19_HELPER.release.xcconfig"; path = "Target Support Files/Pods-COVID-19_HELPER/Pods-COVID-19_HELPER.release.xcconfig"; sourceTree = "<group>"; };
 		83497513EA8C5E82FD0B0D33 /* Pods_COVID_19_HELPER.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_COVID_19_HELPER.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEF412341FC8EEA00AB155D7 /* Pods-COVID-19_HELPER.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-COVID-19_HELPER.debug.xcconfig"; path = "Target Support Files/Pods-COVID-19_HELPER/Pods-COVID-19_HELPER.debug.xcconfig"; sourceTree = "<group>"; };
+		DE3A25872733C210003CB743 /* NoticeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewController.swift; sourceTree = "<group>"; };
+		DE3A25892733C235003CB743 /* HowToUseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToUseViewController.swift; sourceTree = "<group>"; };
+		DE3A258B2733C253003CB743 /* LicenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseViewController.swift; sourceTree = "<group>"; };
 		DE3B57632716A3B100378BDC /* campaign */ = {isa = PBXFileReference; lastKnownFileType = folder; path = campaign; sourceTree = "<group>"; };
 		DE3B57652716A3D000378BDC /* menu */ = {isa = PBXFileReference; lastKnownFileType = folder; path = menu; sourceTree = "<group>"; };
 		DE3B57672716A3D800378BDC /* help_outline */ = {isa = PBXFileReference; lastKnownFileType = folder; path = help_outline; sourceTree = "<group>"; };
 		DE3B57692716A5D900378BDC /* help_outline */ = {isa = PBXFileReference; lastKnownFileType = folder; name = help_outline; path = "COVID-19_HELPER/help_outline"; sourceTree = "<group>"; };
 		DE46BE5D271D845F005EA932 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		DE46BE5F271D84CF005EA932 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
+		DE503D9D2733D4030093E9A6 /* notmy.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = notmy.mp4; sourceTree = "<group>"; };
+		DE503D9F2734F5230093E9A6 /* EasterEggViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasterEggViewController.swift; sourceTree = "<group>"; };
 		DE6B92D7271406D4004B94D3 /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
 		DE6B92D9271407A3004B94D3 /* SideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuController.swift; sourceTree = "<group>"; };
 		DE6B92DB271417A3004B94D3 /* Covid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Covid.swift; sourceTree = "<group>"; };
@@ -150,6 +160,7 @@
 				DE6B92D527140691004B94D3 /* View */,
 				DEFCF2F627118A6D00CBD6A7 /* Controller */,
 				DED1E5AE27118742006EA09D /* AppDelegate.swift */,
+				DE503D9D2733D4030093E9A6 /* notmy.mp4 */,
 				DED1E5B027118742006EA09D /* SceneDelegate.swift */,
 				DED1E5B427118742006EA09D /* Main.storyboard */,
 				DED1E5B727118743006EA09D /* Assets.xcassets */,
@@ -166,6 +177,10 @@
 				DE6B92D9271407A3004B94D3 /* SideMenuController.swift */,
 				DE46BE5D271D845F005EA932 /* NewsViewController.swift */,
 				DE7C0E5F2727F45900DE0401 /* VaccineViewController.swift */,
+				DE3A25872733C210003CB743 /* NoticeViewController.swift */,
+				DE3A25892733C235003CB743 /* HowToUseViewController.swift */,
+				DE3A258B2733C253003CB743 /* LicenseViewController.swift */,
+				DE503D9F2734F5230093E9A6 /* EasterEggViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -230,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE3B57682716A3D800378BDC /* help_outline in Resources */,
+				DE503D9E2733D4030093E9A6 /* notmy.mp4 in Resources */,
 				DE3B57662716A3D000378BDC /* menu in Resources */,
 				DED1E5BB27118743006EA09D /* LaunchScreen.storyboard in Resources */,
 				DED1E5B827118743006EA09D /* Assets.xcassets in Resources */,
@@ -291,9 +307,13 @@
 				DE6B92DC271417A3004B94D3 /* Covid.swift in Sources */,
 				DED1E5B327118742006EA09D /* MainViewController.swift in Sources */,
 				DE6B92D8271406D4004B94D3 /* SideMenuTableViewCell.swift in Sources */,
+				DE3A258C2733C253003CB743 /* LicenseViewController.swift in Sources */,
 				DED1E5AF27118742006EA09D /* AppDelegate.swift in Sources */,
 				DED1E5B127118742006EA09D /* SceneDelegate.swift in Sources */,
+				DE3A258A2733C235003CB743 /* HowToUseViewController.swift in Sources */,
+				DE3A25882733C210003CB743 /* NoticeViewController.swift in Sources */,
 				DEA2F4C5271C28C200261A19 /* City.swift in Sources */,
+				DE503DA02734F5230093E9A6 /* EasterEggViewController.swift in Sources */,
 				DE7C0E602727F45900DE0401 /* VaccineViewController.swift in Sources */,
 				DE7422E62733B1F7007567FD /* LoadingView.swift in Sources */,
 				DE46BE5E271D845F005EA932 /* NewsViewController.swift in Sources */,
