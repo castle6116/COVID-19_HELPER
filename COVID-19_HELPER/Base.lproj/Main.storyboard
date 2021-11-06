@@ -93,7 +93,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kx8-Ya-jFy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2609" y="-899"/>
+            <point key="canvasLocation" x="2848" y="-895"/>
         </scene>
         <!--Easter Egg View Controller-->
         <scene sceneID="u89-ji-bAi">
@@ -123,7 +123,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zwr-6O-G5D" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3349" y="-2054"/>
+            <point key="canvasLocation" x="4719" y="-1962"/>
         </scene>
         <!--Notice View Controller-->
         <scene sceneID="2em-aC-g9F">
@@ -148,7 +148,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iqK-cS-X9U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4728" y="-1651"/>
+            <point key="canvasLocation" x="4719" y="-1263"/>
         </scene>
         <!--How To Use View Controller-->
         <scene sceneID="8pg-Ys-vWQ">
@@ -176,28 +176,65 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IgM-cj-s5H">
-                                                    <rect key="frame" x="82" y="40" width="250" height="250"/>
+                                                    <rect key="frame" x="82" y="66" width="250" height="250"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="250" id="7xA-6W-d5k"/>
                                                         <constraint firstAttribute="height" constant="250" id="Jyw-7e-Ps8"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="테스트중" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAQ-kc-2SD">
-                                                    <rect key="frame" x="177.5" y="320" width="59" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사용자들과 소통이 가능한 게시판과 " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAQ-kc-2SD">
+                                                    <rect key="frame" x="82" y="395" width="250.5" height="21.5"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                     <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="안녕하세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wee-Tj-sAS">
+                                                    <rect key="frame" x="137" y="0.0" width="140" height="36"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="코로나 19에 대한 다양한 정보를 한곳에서" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SO0-Pe-hyM">
+                                                    <rect key="frame" x="61.5" y="421.5" width="291" height="21.5"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="확인할 수 있는 멀티 플랫폼 앱입니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kBk-4L-Duf">
+                                                    <rect key="frame" x="76.5" y="448" width="261" height="21.5"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QNs-Wy-1ko">
+                                                    <rect key="frame" x="188.5" y="474.5" width="37" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="fAQ-kc-2SD" firstAttribute="top" secondItem="IgM-cj-s5H" secondAttribute="bottom" constant="30" id="95B-jI-3gS"/>
+                                                <constraint firstItem="fAQ-kc-2SD" firstAttribute="top" secondItem="IgM-cj-s5H" secondAttribute="bottom" multiplier="1.25" id="95B-jI-3gS"/>
                                                 <constraint firstItem="IgM-cj-s5H" firstAttribute="centerX" secondItem="iqX-Jg-ELK" secondAttribute="centerX" id="COe-4h-kyd"/>
-                                                <constraint firstItem="IgM-cj-s5H" firstAttribute="centerY" secondItem="iqX-Jg-ELK" secondAttribute="centerY" multiplier="0.55" id="Zy0-4g-2BK"/>
+                                                <constraint firstItem="SO0-Pe-hyM" firstAttribute="centerX" secondItem="iqX-Jg-ELK" secondAttribute="centerX" id="EsK-8I-Gjy"/>
+                                                <constraint firstItem="kBk-4L-Duf" firstAttribute="top" secondItem="SO0-Pe-hyM" secondAttribute="bottom" constant="5" id="GtZ-eM-J4p"/>
+                                                <constraint firstItem="wee-Tj-sAS" firstAttribute="centerX" secondItem="iqX-Jg-ELK" secondAttribute="centerX" id="cUM-sf-O55"/>
+                                                <constraint firstItem="wee-Tj-sAS" firstAttribute="top" secondItem="iqX-Jg-ELK" secondAttribute="top" id="eEg-yC-ts7"/>
+                                                <constraint firstItem="QNs-Wy-1ko" firstAttribute="top" secondItem="kBk-4L-Duf" secondAttribute="bottom" constant="5" id="efP-na-46c"/>
                                                 <constraint firstItem="fAQ-kc-2SD" firstAttribute="centerX" secondItem="iqX-Jg-ELK" secondAttribute="centerX" id="fCN-0s-hjG"/>
+                                                <constraint firstItem="IgM-cj-s5H" firstAttribute="top" secondItem="wee-Tj-sAS" secondAttribute="bottom" constant="30" id="gt1-cV-1pK"/>
+                                                <constraint firstItem="kBk-4L-Duf" firstAttribute="centerX" secondItem="iqX-Jg-ELK" secondAttribute="centerX" id="jWK-7O-J2w"/>
+                                                <constraint firstItem="SO0-Pe-hyM" firstAttribute="top" secondItem="fAQ-kc-2SD" secondAttribute="bottom" constant="5" id="v58-9Y-eez"/>
+                                                <constraint firstItem="QNs-Wy-1ko" firstAttribute="centerX" secondItem="iqX-Jg-ELK" secondAttribute="centerX" id="xaV-zy-FdP"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="CellImage" destination="IgM-cj-s5H" id="QGk-4f-heZ"/>
+                                            <outlet property="ContentFour" destination="QNs-Wy-1ko" id="Rdz-yr-4QO"/>
+                                            <outlet property="ContentOne" destination="fAQ-kc-2SD" id="ynW-AM-4Dm"/>
+                                            <outlet property="ContentThree" destination="kBk-4L-Duf" id="pPr-IX-EgW"/>
+                                            <outlet property="ContentTwo" destination="SO0-Pe-hyM" id="l4S-cN-SKc"/>
+                                            <outlet property="TitleLabel" destination="wee-Tj-sAS" id="LrD-Yn-klg"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -229,7 +266,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jyq-b6-AGD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4726.0869565217399" y="-894.64285714285711"/>
+            <point key="canvasLocation" x="4719" y="-557"/>
         </scene>
         <!--License View Controller-->
         <scene sceneID="Lqp-am-PSw">
@@ -254,7 +291,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lea-b1-FiE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4728" y="-146"/>
+            <point key="canvasLocation" x="4719" y="157"/>
         </scene>
         <!--코로나19 상황판-->
         <scene sceneID="84K-Uk-ZDB">
@@ -851,7 +888,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L1c-GD-NHS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="0.0" y="310.71428571428572"/>
+            <point key="canvasLocation" x="-439" y="21"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zb9-sj-gBi">
@@ -976,7 +1013,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z31-ha-98t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="982.60869565217399" y="310.71428571428572"/>
+            <point key="canvasLocation" x="542" y="21"/>
         </scene>
         <!--백신 현황-->
         <scene sceneID="1nG-L7-RS7">
@@ -1346,7 +1383,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MHR-Mj-lIf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1920.289855072464" y="309.375"/>
+            <point key="canvasLocation" x="1480" y="20"/>
         </scene>
         <!--Four-->
         <scene sceneID="ycH-od-Klp">
@@ -1362,7 +1399,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GUi-Au-t3i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2848" y="311"/>
+            <point key="canvasLocation" x="2409" y="21"/>
         </scene>
     </scenes>
     <color key="tintColor" name="AccentColor"/>

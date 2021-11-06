@@ -74,6 +74,11 @@ class HowToUseViewController: UIViewController {
 
 class UseCollection: UICollectionViewCell{
     @IBOutlet weak var CellImage: UIImageView!
+    @IBOutlet weak var TitleLabel: UILabel!
+    @IBOutlet weak var ContentOne: UILabel!
+    @IBOutlet weak var ContentTwo: UILabel!
+    @IBOutlet weak var ContentThree: UILabel!
+    @IBOutlet weak var ContentFour: UILabel!
 }
 
 extension HowToUseViewController: UICollectionViewDataSource {
@@ -87,6 +92,44 @@ extension HowToUseViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.CellImage.image = UIImage(named: "\(imgName[indexPath.row])")
+        if indexPath.row == 0{
+            cell.TitleLabel.text = "안녕하세요!"
+            cell.ContentOne.text = "사용자들과 소통이 가능한 게시판과"
+            cell.ContentTwo.text = "코로나 19에 대한 다양한 정보를 한곳에서"
+            cell.ContentThree.text = "확인할 수 있는 멀티 플랫폼 앱입니다."
+            cell.ContentFour.text = ""
+            cell.ContentOne.font = UIFont.boldSystemFont(ofSize: 18)
+            cell.ContentTwo.font = UIFont.boldSystemFont(ofSize: 18)
+            cell.ContentThree.font = UIFont.boldSystemFont(ofSize: 18)
+        }else if indexPath.row == 1{
+            cell.TitleLabel.text = "상황판"
+            cell.ContentOne.text = "일일, 전체 감염 현황과 현 위치 기반"
+            cell.ContentTwo.text = "시/도 별 감염 현황을 볼 수 있습니다."
+            cell.ContentThree.text = "(위치 기능이 비 활성화 인 경우, 서울로 고정됩니다.)"
+            cell.ContentFour.text = ""
+            cell.ContentThree.font = UIFont.systemFont(ofSize: 14)
+        }else if indexPath.row == 2{
+            cell.TitleLabel.text = "백신/진료소"
+            cell.ContentOne.text = "접종 현황 및 주변 15km 이내에 있는"
+            cell.ContentTwo.text = "코로나19 선별진료소를 리스트 및"
+            cell.ContentThree.text = "지도 형태로 볼 수 있습니다."
+            cell.ContentFour.text = "(위치 기능이 비 활성화 인 경우, 서울로 고정됩니다.)"
+            cell.ContentThree.font = UIFont.boldSystemFont(ofSize: 18)
+        }else if indexPath.row == 3{
+            cell.TitleLabel.text = "실시간뉴스"
+            cell.ContentOne.text = "코로나19에 관련된 최신 뉴스를 표시하며"
+            cell.ContentTwo.text = "각 뉴스를 터치하면 브라우저와 링크됩니다."
+            cell.ContentThree.text = "(최상단에서 위로 스크롤하면 새로고침됩니다)"
+            cell.ContentFour.text = ""
+            cell.ContentThree.font = UIFont.systemFont(ofSize: 14)
+        }else if indexPath.row == 4{
+            cell.TitleLabel.text = "자유게시판"
+            cell.ContentOne.text = "코로나19 관련 정보를 나눌 수 있는"
+            cell.ContentTwo.text = "자유 게시판이 있습니다."
+            cell.ContentThree.text = "최상단에서 위로 스크롤하면 새로고침됩니다."
+            cell.ContentFour.text = ""
+            cell.ContentThree.font = UIFont.systemFont(ofSize: 14)
+        }
 //        DispatchQueue.main.async { [weak self] in
 //            self?.playVideo(with: "notmy",cell: cell.CellImage)
 //        }
