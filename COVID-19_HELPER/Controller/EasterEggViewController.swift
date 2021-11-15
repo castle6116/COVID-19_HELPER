@@ -10,7 +10,7 @@ import AVFoundation
 
 class EasterEggViewController: UIViewController {
     @IBOutlet weak var Easter: UIImageView!
-    
+    var videoLooper : AVPlayerLooper?
     override func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.main.async { [weak self] in
@@ -23,12 +23,18 @@ class EasterEggViewController: UIViewController {
         guard let path = Bundle.main.path(forResource: resourceName, ofType: "mp4") else {
             return
         }
-        let player = AVPlayer(url: URL(fileURLWithPath: path))
+        let asset = AVAsset(url: URL(fileURLWithPath: path))
+        let item = AVPlayerItem(asset: asset)
+        let player = AVQueuePlayer(playerItem: item)
+        
+        self.videoLooper = AVPlayerLooper(player: player, templateItem: item)
+//        let player = AVPlayer(url: URL(fileURLWithPath: path))
         let playerLayer = AVPlayerLayer(player: player)
         playerLayer.frame = cell.bounds
         cell.layer.addSublayer(playerLayer)
         playerLayer.videoGravity = .resizeAspect
         player.play()
+        
     }
 
     /*

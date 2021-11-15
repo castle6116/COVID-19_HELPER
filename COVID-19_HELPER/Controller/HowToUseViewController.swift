@@ -72,15 +72,6 @@ class HowToUseViewController: UIViewController {
 
 }
 
-class UseCollection: UICollectionViewCell{
-    @IBOutlet weak var CellImage: UIImageView!
-    @IBOutlet weak var TitleLabel: UILabel!
-    @IBOutlet weak var ContentOne: UILabel!
-    @IBOutlet weak var ContentTwo: UILabel!
-    @IBOutlet weak var ContentThree: UILabel!
-    @IBOutlet weak var ContentFour: UILabel!
-}
-
 extension HowToUseViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

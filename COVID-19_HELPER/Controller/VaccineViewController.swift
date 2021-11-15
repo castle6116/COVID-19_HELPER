@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import CoreLocation
+
 import KeychainSwift
 import Alamofire
-import CoreLocation
 import NMapsMap
 
 class VaccineViewController: LoadingView, NMFMapViewDelegate , NMFMapViewTouchDelegate {
@@ -36,7 +37,7 @@ class VaccineViewController: LoadingView, NMFMapViewDelegate , NMFMapViewTouchDe
     
     var Locationset = CLLocation(latitude: 37.576029, longitude: 126.976920)
     
-    var city = "대구광역시"
+//    var city = "대구광역시"
     
     let infoWindow = NMFInfoWindow()
     let dataSource = NMFInfoWindowDefaultTextSource.data()
