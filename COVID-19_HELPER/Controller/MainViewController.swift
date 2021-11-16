@@ -6,9 +6,10 @@
 //
 
 import UIKit
+
 import Alamofire
 
-class MainViewController: LoadingView, XMLParserDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+class MainViewController: LoadingView, XMLParserDelegate {
     
     @IBOutlet var rlwns: UILabel! //기준일
     @IBOutlet var ghkrwls: UILabel! // 일일 확진자
@@ -300,6 +301,9 @@ class MainViewController: LoadingView, XMLParserDelegate, UICollectionViewDataSo
             }
             elementValue = nil
         }
+}
+
+extension MainViewController : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let itemSpacing: CGFloat = 10 // 가로에서 cell과 cell 사이의 거리
@@ -333,8 +337,6 @@ class MainViewController: LoadingView, XMLParserDelegate, UICollectionViewDataSo
         cell.layer.cornerRadius = 10
         return cell
     }
-    
-    
 }
 
 class CollectionViewCell: UICollectionViewCell{

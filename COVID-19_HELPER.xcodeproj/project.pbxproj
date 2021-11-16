@@ -23,6 +23,8 @@
 		DE503D9E2733D4030093E9A6 /* notmy.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DE503D9D2733D4030093E9A6 /* notmy.mp4 */; };
 		DE503DA02734F5230093E9A6 /* EasterEggViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE503D9F2734F5230093E9A6 /* EasterEggViewController.swift */; };
 		DE5CE672274243CB00AFB6AC /* GeneralForumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5CE671274243CB00AFB6AC /* GeneralForumViewController.swift */; };
+		DE5CE67427432DE400AFB6AC /* GeneralForumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5CE67327432DE400AFB6AC /* GeneralForumTableViewCell.swift */; };
+		DE5CE6762743303400AFB6AC /* GeneralForum.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE5CE6752743303400AFB6AC /* GeneralForum.swift */; };
 		DE6B92D8271406D4004B94D3 /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6B92D7271406D4004B94D3 /* SideMenuTableViewCell.swift */; };
 		DE6B92DA271407A3004B94D3 /* SideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6B92D9271407A3004B94D3 /* SideMenuController.swift */; };
 		DE6B92DC271417A3004B94D3 /* Covid.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6B92DB271417A3004B94D3 /* Covid.swift */; };
@@ -30,6 +32,9 @@
 		DE7ABA0327292DD300AC4F83 /* Vaccine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7ABA0227292DD300AC4F83 /* Vaccine.swift */; };
 		DE7C0E602727F45900DE0401 /* VaccineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7C0E5F2727F45900DE0401 /* VaccineViewController.swift */; };
 		DE8B756E2730DB5D004ACED8 /* SwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8B756D2730DB5D004ACED8 /* SwitchButton.swift */; };
+		DE934DA7274399A2002EA761 /* DetailForumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE934DA6274399A2002EA761 /* DetailForumViewController.swift */; };
+		DE934DA927439FE1002EA761 /* DetailBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE934DA827439FE1002EA761 /* DetailBoard.swift */; };
+		DE934DAB2743A678002EA761 /* BoardHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE934DAA2743A678002EA761 /* BoardHeader.swift */; };
 		DEA2F4C5271C28C200261A19 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA2F4C4271C28C200261A19 /* City.swift */; };
 		DED1E5AF27118742006EA09D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED1E5AE27118742006EA09D /* AppDelegate.swift */; };
 		DED1E5B127118742006EA09D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED1E5B027118742006EA09D /* SceneDelegate.swift */; };
@@ -61,6 +66,8 @@
 		DE503D9D2733D4030093E9A6 /* notmy.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = notmy.mp4; sourceTree = "<group>"; };
 		DE503D9F2734F5230093E9A6 /* EasterEggViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasterEggViewController.swift; sourceTree = "<group>"; };
 		DE5CE671274243CB00AFB6AC /* GeneralForumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GeneralForumViewController.swift; path = "COVID-19_HELPER/Assets.xcassets/GeneralForumViewController.swift"; sourceTree = SOURCE_ROOT; };
+		DE5CE67327432DE400AFB6AC /* GeneralForumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralForumTableViewCell.swift; sourceTree = "<group>"; };
+		DE5CE6752743303400AFB6AC /* GeneralForum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralForum.swift; sourceTree = "<group>"; };
 		DE6B92D7271406D4004B94D3 /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
 		DE6B92D9271407A3004B94D3 /* SideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuController.swift; sourceTree = "<group>"; };
 		DE6B92DB271417A3004B94D3 /* Covid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Covid.swift; sourceTree = "<group>"; };
@@ -68,6 +75,9 @@
 		DE7ABA0227292DD300AC4F83 /* Vaccine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vaccine.swift; sourceTree = "<group>"; };
 		DE7C0E5F2727F45900DE0401 /* VaccineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccineViewController.swift; sourceTree = "<group>"; };
 		DE8B756D2730DB5D004ACED8 /* SwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchButton.swift; sourceTree = "<group>"; };
+		DE934DA6274399A2002EA761 /* DetailForumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailForumViewController.swift; sourceTree = "<group>"; };
+		DE934DA827439FE1002EA761 /* DetailBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBoard.swift; sourceTree = "<group>"; };
+		DE934DAA2743A678002EA761 /* BoardHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardHeader.swift; sourceTree = "<group>"; };
 		DEA2F4C4271C28C200261A19 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		DED1E5AB27118742006EA09D /* COVID-19_HELPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "COVID-19_HELPER.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DED1E5AE27118742006EA09D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +140,8 @@
 				DE21EA9A273CD888004420ED /* UseCollection.swift */,
 				DE21EA9E273CD90F004420ED /* NoticeTableTitleCell.swift */,
 				DE21EAA0273CDC95004420ED /* NoticeTableContentCell.swift */,
+				DE5CE67327432DE400AFB6AC /* GeneralForumTableViewCell.swift */,
+				DE934DAA2743A678002EA761 /* BoardHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -143,6 +155,8 @@
 				DE7ABA0227292DD300AC4F83 /* Vaccine.swift */,
 				DEFA3641272A73D80050478C /* Center.swift */,
 				DE21EAA2273CE2C5004420ED /* Notice.swift */,
+				DE5CE6752743303400AFB6AC /* GeneralForum.swift */,
+				DE934DA827439FE1002EA761 /* DetailBoard.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -196,6 +210,7 @@
 				DE3A258B2733C253003CB743 /* LicenseViewController.swift */,
 				DE503D9F2734F5230093E9A6 /* EasterEggViewController.swift */,
 				DE5CE671274243CB00AFB6AC /* GeneralForumViewController.swift */,
+				DE934DA6274399A2002EA761 /* DetailForumViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -320,6 +335,7 @@
 			files = (
 				DE6B92DA271407A3004B94D3 /* SideMenuController.swift in Sources */,
 				DE6B92DC271417A3004B94D3 /* Covid.swift in Sources */,
+				DE5CE6762743303400AFB6AC /* GeneralForum.swift in Sources */,
 				DED1E5B327118742006EA09D /* MainViewController.swift in Sources */,
 				DE6B92D8271406D4004B94D3 /* SideMenuTableViewCell.swift in Sources */,
 				DE3A258C2733C253003CB743 /* LicenseViewController.swift in Sources */,
@@ -332,12 +348,16 @@
 				DE503DA02734F5230093E9A6 /* EasterEggViewController.swift in Sources */,
 				DE21EA9F273CD90F004420ED /* NoticeTableTitleCell.swift in Sources */,
 				DE21EA9B273CD888004420ED /* UseCollection.swift in Sources */,
+				DE934DAB2743A678002EA761 /* BoardHeader.swift in Sources */,
 				DE7C0E602727F45900DE0401 /* VaccineViewController.swift in Sources */,
+				DE5CE67427432DE400AFB6AC /* GeneralForumTableViewCell.swift in Sources */,
 				DE7422E62733B1F7007567FD /* LoadingView.swift in Sources */,
+				DE934DA927439FE1002EA761 /* DetailBoard.swift in Sources */,
 				DE46BE5E271D845F005EA932 /* NewsViewController.swift in Sources */,
 				DE8B756E2730DB5D004ACED8 /* SwitchButton.swift in Sources */,
 				DE5CE672274243CB00AFB6AC /* GeneralForumViewController.swift in Sources */,
 				DE7ABA0327292DD300AC4F83 /* Vaccine.swift in Sources */,
+				DE934DA7274399A2002EA761 /* DetailForumViewController.swift in Sources */,
 				DED28005271D8936001DC2E7 /* News.swift in Sources */,
 				DE46BE60271D84CF005EA932 /* NewsTableViewCell.swift in Sources */,
 				DE21EAA1273CDC95004420ED /* NoticeTableContentCell.swift in Sources */,
