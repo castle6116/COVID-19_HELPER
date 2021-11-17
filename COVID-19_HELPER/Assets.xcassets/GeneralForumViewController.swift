@@ -23,7 +23,6 @@ class GeneralForumViewController: UIViewController, UITableViewDelegate {
             if let table = table{
                 for a in table.result_data.data{
                     self.tableContent.append(a)
-                    print(a)
                 }
                 DispatchQueue.main.async {
                     self.ForumTable.reloadData()
