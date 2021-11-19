@@ -80,6 +80,10 @@ class VaccineViewController: LoadingView, NMFMapViewDelegate , NMFMapViewTouchDe
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem?.title = "백신 현황"
     }
+    @IBAction func MapRefresh(_ sender: Any) {
+        print("마커 새로 박음")
+        naverMapSetting()
+    }
     
     func naverMapSetting(){
         infoWindow.dataSource = dataSource
@@ -407,12 +411,6 @@ extension VaccineViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLocation = locationManager.location
-        print("마커 새로 박음")
-        naverMapSetting()
-        
-        DispatchQueue.main.async {
-            self.VaccineCollection.reloadData()
-        }
     }
         
     // 위도 경도 받아오기 에러

@@ -1,37 +1,35 @@
 //
-//  DetailNotice.swift
+//  CommentList.swift
 //  COVID-19_HELPER
 //
-//  Created by 김진우 on 2021/11/16.
+//  Created by 김진우 on 2021/11/18.
 //
 
 import Foundation
 
-struct boardList : Codable{
+struct Comment_List : Codable{
     var code : Int
-    var result_data : account
+    var result_data : result_data
     var message : String
 }
 
-struct account : Codable{
-    var account : board
+struct result_data : Codable{
+    var data : [Comment_data]
 }
 
-struct board : Codable{
+struct Comment_data : Codable{
     /// 작성일
     var createdDate : String?
     /// 수정일
     var modifiedDate : String?
-    /// 게시글 번호 (기본키)
+    /// 댓글 번호 (기본키)
     var id : Int?
-    /// 제목
-    var title : String?
+    /// 게시글 번호
+    var board_id : Int?
     /// 작성자
     var nickname : String?
     /// 글 내용
     var content : String?
-    /// 조회수
-    var hit : Int?
     /// 추천
     var recommend : Int?
     /// 비 추천

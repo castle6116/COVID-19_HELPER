@@ -35,6 +35,10 @@
 		DE934DA7274399A2002EA761 /* DetailForumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE934DA6274399A2002EA761 /* DetailForumViewController.swift */; };
 		DE934DA927439FE1002EA761 /* DetailBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE934DA827439FE1002EA761 /* DetailBoard.swift */; };
 		DE934DAB2743A678002EA761 /* BoardHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE934DAA2743A678002EA761 /* BoardHeader.swift */; };
+		DE934DAD2745E950002EA761 /* Recommend.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE934DAC2745E950002EA761 /* Recommend.swift */; };
+		DE934DAF27462EA8002EA761 /* CommentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE934DAE27462EA8002EA761 /* CommentCollectionViewCell.swift */; };
+		DE934DB12746300F002EA761 /* CommentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE934DB02746300F002EA761 /* CommentList.swift */; };
+		DE934DB3274641F4002EA761 /* BoardFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE934DB2274641F4002EA761 /* BoardFooter.swift */; };
 		DEA2F4C5271C28C200261A19 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA2F4C4271C28C200261A19 /* City.swift */; };
 		DED1E5AF27118742006EA09D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED1E5AE27118742006EA09D /* AppDelegate.swift */; };
 		DED1E5B127118742006EA09D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED1E5B027118742006EA09D /* SceneDelegate.swift */; };
@@ -78,6 +82,10 @@
 		DE934DA6274399A2002EA761 /* DetailForumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailForumViewController.swift; sourceTree = "<group>"; };
 		DE934DA827439FE1002EA761 /* DetailBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBoard.swift; sourceTree = "<group>"; };
 		DE934DAA2743A678002EA761 /* BoardHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardHeader.swift; sourceTree = "<group>"; };
+		DE934DAC2745E950002EA761 /* Recommend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommend.swift; sourceTree = "<group>"; };
+		DE934DAE27462EA8002EA761 /* CommentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCollectionViewCell.swift; sourceTree = "<group>"; };
+		DE934DB02746300F002EA761 /* CommentList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentList.swift; sourceTree = "<group>"; };
+		DE934DB2274641F4002EA761 /* BoardFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardFooter.swift; sourceTree = "<group>"; };
 		DEA2F4C4271C28C200261A19 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		DED1E5AB27118742006EA09D /* COVID-19_HELPER.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "COVID-19_HELPER.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DED1E5AE27118742006EA09D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +150,8 @@
 				DE21EAA0273CDC95004420ED /* NoticeTableContentCell.swift */,
 				DE5CE67327432DE400AFB6AC /* GeneralForumTableViewCell.swift */,
 				DE934DAA2743A678002EA761 /* BoardHeader.swift */,
+				DE934DAE27462EA8002EA761 /* CommentCollectionViewCell.swift */,
+				DE934DB2274641F4002EA761 /* BoardFooter.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -157,6 +167,8 @@
 				DE21EAA2273CE2C5004420ED /* Notice.swift */,
 				DE5CE6752743303400AFB6AC /* GeneralForum.swift */,
 				DE934DA827439FE1002EA761 /* DetailBoard.swift */,
+				DE934DAC2745E950002EA761 /* Recommend.swift */,
+				DE934DB02746300F002EA761 /* CommentList.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -339,6 +351,7 @@
 				DED1E5B327118742006EA09D /* MainViewController.swift in Sources */,
 				DE6B92D8271406D4004B94D3 /* SideMenuTableViewCell.swift in Sources */,
 				DE3A258C2733C253003CB743 /* LicenseViewController.swift in Sources */,
+				DE934DB3274641F4002EA761 /* BoardFooter.swift in Sources */,
 				DED1E5AF27118742006EA09D /* AppDelegate.swift in Sources */,
 				DE21EAA3273CE2C5004420ED /* Notice.swift in Sources */,
 				DED1E5B127118742006EA09D /* SceneDelegate.swift in Sources */,
@@ -353,12 +366,15 @@
 				DE5CE67427432DE400AFB6AC /* GeneralForumTableViewCell.swift in Sources */,
 				DE7422E62733B1F7007567FD /* LoadingView.swift in Sources */,
 				DE934DA927439FE1002EA761 /* DetailBoard.swift in Sources */,
+				DE934DAD2745E950002EA761 /* Recommend.swift in Sources */,
 				DE46BE5E271D845F005EA932 /* NewsViewController.swift in Sources */,
 				DE8B756E2730DB5D004ACED8 /* SwitchButton.swift in Sources */,
 				DE5CE672274243CB00AFB6AC /* GeneralForumViewController.swift in Sources */,
 				DE7ABA0327292DD300AC4F83 /* Vaccine.swift in Sources */,
 				DE934DA7274399A2002EA761 /* DetailForumViewController.swift in Sources */,
 				DED28005271D8936001DC2E7 /* News.swift in Sources */,
+				DE934DB12746300F002EA761 /* CommentList.swift in Sources */,
+				DE934DAF27462EA8002EA761 /* CommentCollectionViewCell.swift in Sources */,
 				DE46BE60271D84CF005EA932 /* NewsTableViewCell.swift in Sources */,
 				DE21EAA1273CDC95004420ED /* NoticeTableContentCell.swift in Sources */,
 				DEFA3642272A73D80050478C /* Center.swift in Sources */,

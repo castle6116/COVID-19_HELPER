@@ -15,6 +15,7 @@ class GeneralForumTableViewCell: UITableViewCell {
     @IBOutlet weak var Content: UILabel!
     @IBOutlet weak var Title: UILabel!
     @IBOutlet weak var ControlView: UIView!
+    @IBOutlet weak var reviewCount: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

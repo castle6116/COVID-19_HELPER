@@ -74,9 +74,6 @@ class GeneralForumViewController: UIViewController, UITableViewDelegate {
             }
         }
     }
-    
-    
-    
 }
 
 extension GeneralForumViewController : UITableViewDataSource{
@@ -94,8 +91,9 @@ extension GeneralForumViewController : UITableViewDataSource{
         cell.Title.text = tableContent[indexPath.row].title
         cell.Content.text = tableContent[indexPath.row].content
         cell.GoodCount.text = String(tableContent[indexPath.row].recommend)
-        cell.Reword.text = String(tableContent[indexPath.row].review_count)
-        cell.ViewCount.text = String(tableContent[indexPath.row].review_count)
+        cell.Reword.text = String(tableContent[indexPath.row].deprecate)
+        cell.ViewCount.text = String(tableContent[indexPath.row].hit)
+        cell.reviewCount.text = String(tableContent[indexPath.row].review_count)
         cell.ControlView.layer.borderWidth = 2
         cell.ControlView.layer.borderColor = CGColor.init(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)
         cell.ControlView.layer.cornerRadius = 15

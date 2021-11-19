@@ -26,8 +26,6 @@ struct Forum_list : Codable{
     var id : Int
     /// 제목
     var title : String
-    /// 비밀번호 (글 삭제시 필요)
-    var password : String
     /// 작성자
     var nickname : String
     /// 글 내용
