@@ -23,6 +23,7 @@ class DetailForumViewController: UIViewController {
     var password : UITextField?
     var keyboardcount = 0
     var keyhieght :CGFloat = 0.0
+    var footer : BoardFooter?
     override func viewDidLoad() {
         super.viewDidLoad()
         Collection.delegate = self
@@ -83,10 +84,11 @@ class DetailForumViewController: UIViewController {
         // 키보드의 높이만큼 화면을 올려준다.
         if keyboardcount == 0{
             if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-                keyhieght = self.view.frame.origin.y
+                keyhieght = footer?.frame.origin.y ?? 610
                 let keyboardRectangle = keyboardFrame.cgRectValue
                 let keyboardHeight = keyboardRectangle.height
-                self.view.frame.origin.y -= keyboardHeight
+                footer?.frame.origin.y -= keyboardHeight - 30
+//                self.view.frame.origin.y -= keyboardHeight
                 
             }
             keyboardcount += 1
@@ -98,16 +100,15 @@ class DetailForumViewController: UIViewController {
         // 키보드의 높이만큼 화면을 내려준다.
         if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height
-            self.view.frame.origin.y = keyhieght
+            footer?.frame.origin.y = keyhieght
             keyboardcount = 0
         }
     }
 
     
-    // 추천 버튼 클릭
-    @objc func GoodButton() {
-        GoodButonClick(){
+    // 게시글 추천 버튼 클릭
+    @objc func GoodButton(_ sender: Any) {
+        GoodButtonClick(value: 0, commentNum: 0){
             list in
             if list?.code == 0{
                 self.ForumTableGet(boardNum: self.DabValue){
@@ -125,10 +126,9 @@ class DetailForumViewController: UIViewController {
             }
         }
     }
-    
-    // 비추천 버튼 클릭
-    @objc func NotGoodButton() {
-        NotGoodButonClick(){
+    // 게시글 비추천 버튼 클릭
+    @objc func NotGoodButton(_ sender: Any) {
+        NotGoodButtonClick(value: 0, commentNum: 0){
             list in
             if list?.code == 0{
                 self.ForumTableGet(boardNum: self.DabValue){
@@ -146,7 +146,50 @@ class DetailForumViewController: UIViewController {
             }
         }
     }
+    @objc func DeclarationButtonClick(_ sender: Any) {
+        CommentDcButtonClick(value: 0, commentNum: 0){
+            list in
+            if list?.code == 0{
+                self.CommentListGet(){
+                    list in
+                    if let list = list{
+                        self.comment = []
+                        for a in list.result_data.data{
+                            self.comment.append(a)
+                        }
+                        DispatchQueue.main.async {
+                            self.Collection.reloadData()
+                        }
+                        self.showToast(message: "신고에 성공 하셨습니다")
+                        print(list.result_data.data)
+                    }
+                }
+            }else{
+                self.showToast(message: list!.error!)
+            }
+        }
+    }
     
+    // 댓글 비추천 버튼 클릭
+    func CommentNotGoodButton() {
+        NotGoodButtonClick(value: 0, commentNum: 0){
+            list in
+            if list?.code == 0{
+                self.ForumTableGet(boardNum: self.DabValue){
+                    list in
+                    if let list = list {
+                        self.Board = list.result_data.account
+                        DispatchQueue.main.async {
+                            self.Collection.reloadData()
+                        }
+                    }
+                    self.showToast(message: "비추천에 성공 하셨습니다")
+                }
+            }else{
+                self.showToast(message: list!.error!)
+            }
+        }
+    }
     // 레이아웃 설정
     private func setupFlowLayout() {
         let flowLayout = UICollectionViewFlowLayout()
@@ -250,8 +293,13 @@ class DetailForumViewController: UIViewController {
     
     
     // 추천 버튼 클릭
-    func GoodButonClick(complation : ((recommend?) -> ())?){
-        let url = "http://test.byeonggook.shop/api/board/\(DabValue!)/recommend"
+    func GoodButtonClick(value : Int ,commentNum : Int , complation : ((recommend?) -> ())?){
+        var url = "http://test.byeonggook.shop/api/board/\(DabValue!)/recommend"
+        // value가 1 일때 댓글 추천
+        if value == 1{
+            url = "http://test.byeonggook.shop/api/chat/\(commentNum)/recommend"
+        }
+        
         AF.request(url,
                    method: .get,
                    encoding: URLEncoding.default
@@ -281,8 +329,49 @@ class DetailForumViewController: UIViewController {
     }
     
     // 비추천 버튼 클릭
-    func NotGoodButonClick(complation : ((recommend?) -> ())?){
-        let url = "http://test.byeonggook.shop/api/board/\(DabValue!)/deprecate"
+    func NotGoodButtonClick(value : Int ,commentNum : Int , complation : ((recommend?) -> ())?){
+        var url = "http://test.byeonggook.shop/api/board/\(DabValue!)/deprecate"
+        // value가 1 일때 댓글 비추천
+        if value == 1{
+            url = "http://test.byeonggook.shop/api/chat/\(commentNum)/deprecate"
+        }
+        
+        AF.request(url,
+                   method: .get,
+                   encoding: URLEncoding.default
+        )
+            .responseJSON{
+                (response) in
+            switch response.result{
+            case .success(let obj):
+                print("GET 성공")
+                if obj is NSDictionary{
+                    do{
+                        //obj를 JSON으로 변경
+                        let dataJSON = try JSONSerialization.data(withJSONObject: obj, options: .prettyPrinted)
+                        // JSON Decoder 사용
+                        let getInstanceData = try JSONDecoder().decode(recommend.self, from: dataJSON)
+                        complation!(getInstanceData)
+                        
+                    }catch{
+                        print(obj)
+                        print("비추천 에러 : ",error)
+                    }
+                }
+            case.failure(let error):
+                print("비추천 에러 : ",error.localizedDescription)
+            }
+        }
+    }
+    
+    // 신고 버튼 클릭
+    func CommentDcButtonClick(value : Int ,commentNum : Int , complation : ((recommend?) -> ())?){
+        var url = "http://test.byeonggook.shop/api/board/\(DabValue!)/declaration"
+        // value가 1 일때 댓글 비추천
+        if value == 1{
+            url = "http://test.byeonggook.shop/api/chat/\(commentNum)/declaration"
+        }
+        
         AF.request(url,
                    method: .get,
                    encoding: URLEncoding.default
@@ -379,7 +468,7 @@ extension DetailForumViewController : UICollectionViewDataSource, UICollectionVi
                 }
         cell.NickName.text = comment[indexPath.row].nickname
         cell.Content.text = comment[indexPath.row].content
-        cell.Time.text = comment[indexPath.row].modifiedDate
+        cell.Time.text = comment[indexPath.row].createdDate
         cell.GoodButton.setTitle(String(comment[indexPath.row].recommend ?? 0), for: .normal)
         cell.NotGoodButton.setTitle(String(comment[indexPath.row].deprecate ?? 0), for: .normal)
         
@@ -391,6 +480,78 @@ extension DetailForumViewController : UICollectionViewDataSource, UICollectionVi
         cell.layer.borderColor = UIColor.darkGray.cgColor
         cell.layer.cornerRadius = 15
         cell.layer.backgroundColor = .none
+        // 댓글 추천 버튼 클릭 이벤트 추가
+        cell.Good = {
+            [unowned self] in
+            GoodButtonClick(value:1,commentNum: comment[indexPath.row].id! ){
+                list in
+                if list?.code == 0{
+                    CommentListGet(){
+                        list in
+                        if let list = list{
+                            self.comment = []
+                            for a in list.result_data.data{
+                                self.comment.append(a)
+                            }
+                            DispatchQueue.main.async {
+                                self.Collection.reloadData()
+                            }
+                            self.showToast(message: "추천에 성공 하셨습니다")
+                        }
+                    }
+                }else{
+                    self.showToast(message: list!.error!)
+                }
+            }
+        }
+        // 댓글 비추천 버튼 클릭 이벤트 추가
+        cell.Bad = {
+            [unowned self] in
+            NotGoodButtonClick(value:1,commentNum: comment[indexPath.row].id! ){
+                list in
+                if list?.code == 0{
+                    CommentListGet(){
+                        list in
+                        if let list = list{
+                            self.comment = []
+                            for a in list.result_data.data{
+                                self.comment.append(a)
+                            }
+                            DispatchQueue.main.async {
+                                self.Collection.reloadData()
+                            }
+                            self.showToast(message: "비추천에 성공 하셨습니다")
+                        }
+                    }
+                }else{
+                    self.showToast(message: list!.error!)
+                }
+            }
+        }
+        
+        cell.Declara = {
+            [unowned self] in
+            CommentDcButtonClick(value: 1, commentNum: comment[indexPath.row].id!){
+                list in
+                if list?.code == 0{
+                    CommentListGet(){
+                        list in
+                        if let list = list{
+                            self.comment = []
+                            for a in list.result_data.data{
+                                self.comment.append(a)
+                            }
+                            DispatchQueue.main.async {
+                                self.Collection.reloadData()
+                            }
+                            self.showToast(message: "신고에 성공 하셨습니다")
+                        }
+                    }
+                }else{
+                    self.showToast(message: list!.error!)
+                }
+            }
+        }
         return cell
     }
     
@@ -425,6 +586,7 @@ extension DetailForumViewController : UICollectionViewDataSource, UICollectionVi
             
             headerView.GoodButton.addTarget(self, action: #selector(GoodButton), for: .touchUpInside)
             headerView.NotGoodButton.addTarget(self, action: #selector(NotGoodButton), for: .touchUpInside)
+            headerView.DeclarationButton.addTarget(self, action: #selector(DeclarationButtonClick), for: .touchUpInside)
             
             return headerView
         }else if kind == UICollectionView.elementKindSectionFooter{
@@ -434,9 +596,14 @@ extension DetailForumViewController : UICollectionViewDataSource, UICollectionVi
             footerView.layer.cornerRadius = 15
             footerView.backgroundColor = UIColor.white
             
+            footer = footerView
+            
             nickname = footerView.NickName
             password = footerView.PassWord
             content = footerView.Content
+            password?.delegate = self
+            nickname?.delegate = self
+            content?.delegate = self
             
             footerView.Submit.addTarget(self, action: #selector(submitTouch), for: .touchUpInside)
             
@@ -446,7 +613,6 @@ extension DetailForumViewController : UICollectionViewDataSource, UICollectionVi
         return UICollectionReusableView()
         
     }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
     }

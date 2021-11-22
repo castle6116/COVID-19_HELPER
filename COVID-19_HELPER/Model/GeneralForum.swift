@@ -15,6 +15,12 @@ struct GeneralForum : Codable{
 
 struct Forum_data : Codable{
     var data : [Forum_list]
+    /// 총 게시글 수
+    var totalCount :Int
+    /// 요청한 페이지
+    var requestPage : Int
+    /// 총 페이지 수 ( TotalCount / size )
+    var totalPage : Int
 }
 
 struct Forum_list : Codable{

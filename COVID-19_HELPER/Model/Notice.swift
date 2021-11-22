@@ -15,7 +15,7 @@ struct Notice : Codable{
 }
 
 struct NoticeData : Codable{
-    var data : [NoticeList]
+    var list : [NoticeList]
 }
 
 struct NoticeList : Codable{

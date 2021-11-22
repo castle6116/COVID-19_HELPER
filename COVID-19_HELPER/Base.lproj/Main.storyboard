@@ -1642,9 +1642,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" canCancelContentTouches="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="v1R-Hw-Xws">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="interactive" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="v1R-Hw-Xws">
                                 <rect key="frame" x="10" y="88" width="394" height="774"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="TaH-1J-8ea"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="VQq-wb-rp7"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="jDh-hF-mQW">
                                     <size key="itemSize" width="394" height="140"/>
                                     <size key="headerReferenceSize" width="50" height="400"/>
@@ -1690,6 +1692,9 @@
                                                         <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="11"/>
                                                         <fontDescription key="titleFontDescription" type="system" pointSize="12"/>
                                                     </buttonConfiguration>
+                                                    <connections>
+                                                        <action selector="GoodButtonClick:" destination="y5j-2f-Bhs" eventType="touchDown" id="tsN-Kg-A3d"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x8d-B9-yFg">
                                                     <rect key="frame" x="80" y="107" width="62" height="25"/>
@@ -1704,6 +1709,9 @@
                                                         <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="11"/>
                                                         <fontDescription key="titleFontDescription" type="system" pointSize="12"/>
                                                     </buttonConfiguration>
+                                                    <connections>
+                                                        <action selector="NotGoodButton:" destination="y5j-2f-Bhs" eventType="touchUpInside" id="X96-KX-HL8"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XYw-am-lN7">
                                                     <rect key="frame" x="324" y="107" width="62" height="25"/>
@@ -1714,6 +1722,9 @@
                                                     </constraints>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="신고"/>
+                                                    <connections>
+                                                        <action selector="DeclarationButtonClick:" destination="y5j-2f-Bhs" eventType="touchUpInside" id="7eK-py-B6m"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -1738,9 +1749,10 @@
                                         <connections>
                                             <outlet property="Content" destination="0YU-Hi-vnQ" id="9fJ-8l-ZoG"/>
                                             <outlet property="Declaration" destination="XYw-am-lN7" id="dc7-Fw-oSC"/>
-                                            <outlet property="GoodButton" destination="ayh-kF-ML6" id="Rzx-M3-IsE"/>
+                                            <outlet property="DeclarationButton" destination="XYw-am-lN7" id="EOr-oZ-xd8"/>
+                                            <outlet property="GoodButton" destination="ayh-kF-ML6" id="A1w-Nw-tgl"/>
                                             <outlet property="NickName" destination="6Oh-XU-89c" id="p1W-J3-E49"/>
-                                            <outlet property="NotGoodButton" destination="x8d-B9-yFg" id="dcg-hM-vRP"/>
+                                            <outlet property="NotGoodButton" destination="x8d-B9-yFg" id="YKl-0F-EMK"/>
                                             <outlet property="Time" destination="abq-D9-76e" id="uAa-Oq-Ydd"/>
                                         </connections>
                                     </collectionViewCell>
@@ -1845,6 +1857,7 @@
                                     <connections>
                                         <outlet property="Content" destination="3xo-eh-gqk" id="7Q5-uZ-Pjq"/>
                                         <outlet property="Count" destination="I90-mQ-PoT" id="E5A-l6-YmE"/>
+                                        <outlet property="DeclarationButton" destination="z8c-Px-c10" id="OUg-90-z1E"/>
                                         <outlet property="GoodButton" destination="Er3-wG-o6l" id="Mma-Re-Z2P"/>
                                         <outlet property="NickName" destination="w7G-ix-vG2" id="jqP-81-4CM"/>
                                         <outlet property="NotGoodButton" destination="PB3-sO-rh9" id="CsU-lV-NTl"/>
@@ -1856,19 +1869,19 @@
                                     <rect key="frame" x="0.0" y="550" width="394" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="닉네임" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ifc-h1-B1g">
+                                        <textField opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="닉네임" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ifc-h1-B1g">
                                             <rect key="frame" x="10" y="4" width="183" height="34"/>
                                             <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oWZ-zb-uf3">
+                                        <textField opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="비밀번호" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oWZ-zb-uf3">
                                             <rect key="frame" x="201.5" y="4" width="182.5" height="34"/>
                                             <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="내용을 입력해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IRr-rM-BSA">
+                                        <textField opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="내용을 입력해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IRr-rM-BSA">
                                             <rect key="frame" x="10" y="41" width="374" height="35"/>
                                             <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1880,7 +1893,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Us-Oz-agF">
+                                        <button opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Us-Oz-agF">
                                             <rect key="frame" x="335.5" y="41" width="48.5" height="35"/>
                                             <color key="backgroundColor" red="0.73259085420000003" green="0.83929204940000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

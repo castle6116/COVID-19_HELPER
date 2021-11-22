@@ -20,7 +20,7 @@ class NoticeViewController: UIViewController {
         NoticeAllRequest(){
             notice in
             if let notice = notice{
-                for a in notice.result_data.data{
+                for a in notice.result_data.list{
                     self.NoticeList_All.append(a)
                 }
                 DispatchQueue.main.async {

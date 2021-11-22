@@ -45,7 +45,8 @@ class GeneralForumViewController: UIViewController, UITableViewDelegate {
     func ForumTableGet(complation : ((GeneralForum?) -> ())?){
         let url = "http://test.byeonggook.shop/api/board/boardList"
         AF.request(url,
-                   method: .get,
+                   method: .post,
+                   parameters: ["page" : 0, "size" :10],
                    encoding: URLEncoding.default
         )
             .responseJSON{
