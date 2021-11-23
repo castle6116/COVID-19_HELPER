@@ -12,45 +12,17 @@ import Alamofire
 class DetailForumViewController: UIViewController {
     
     @IBOutlet weak var Collection: UICollectionView!
-    
+    @IBOutlet weak var FooterView: BoardFooter!
     /// 게시글 ID 넘어오는 값
     var DabValue : Int!
     
     var Board = board()
     var comment = [Comment_data]()
-    var content : UITextField?
-    var nickname : UITextField?
-    var password : UITextField?
     var keyboardcount = 0
     var keyhieght :CGFloat = 0.0
-    var footer : BoardFooter?
     override func viewDidLoad() {
         super.viewDidLoad()
-        Collection.delegate = self
-        Collection.dataSource = self
-        ForumTableGet(boardNum: DabValue){
-            list in
-            if let list = list {
-                self.Board = list.result_data.account
-                DispatchQueue.main.async {
-                    self.setupFlowLayout()
-                    self.Collection.reloadData()
-                }
-            }
-            
-        }
-        CommentListGet(){
-            list in
-            if let list = list{
-                for a in list.result_data.data{
-                    self.comment.append(a)
-                }
-                DispatchQueue.main.async {
-                    self.setupFlowLayout()
-                    self.Collection.reloadData()
-                }
-            }
-        }
+        StartSetting()
         // Do any additional setup after loading the view.
     }
     
@@ -58,53 +30,48 @@ class DetailForumViewController: UIViewController {
         self.addKeyboardNotifications()
         
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         self.removeKeyboardNotifications()
     }
     
-    // 노티피케이션을 추가하는 메서드
-    func addKeyboardNotifications(){
-        // 키보드가 나타날 때 앱에게 알리는 메서드 추가
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification , object: nil)
-        // 키보드가 사라질 때 앱에게 알리는 메서드 추가
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-    }
-    // 노티피케이션을 제거하는 메서드
-    func removeKeyboardNotifications(){
-        // 키보드가 나타날 때 앱에게 알리는 메서드 제거
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification , object: nil)
-        // 키보드가 사라질 때 앱에게 알리는 메서드 제거
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-    }
-    
-    // 키보드가 나타났다는 알림을 받으면 실행할 메서드
-    @objc func keyboardWillShow(_ noti: NSNotification){
-        // 키보드의 높이만큼 화면을 올려준다.
-        if keyboardcount == 0{
-            if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-                keyhieght = footer?.frame.origin.y ?? 610
-                let keyboardRectangle = keyboardFrame.cgRectValue
-                let keyboardHeight = keyboardRectangle.height
-                footer?.frame.origin.y -= keyboardHeight - 30
-//                self.view.frame.origin.y -= keyboardHeight
-                
+    func StartSetting(){
+        Collection.delegate = self
+        Collection.dataSource = self
+        FooterView.NickName.delegate = self
+        FooterView.Content.delegate = self
+        FooterView.PassWord.delegate = self
+        FooterView.layer.borderColor = UIColor.darkGray.cgColor
+        FooterView.layer.borderWidth = 1
+        FooterView.layer.cornerRadius = 15
+        FooterView.backgroundColor = UIColor.white
+        FooterView.Submit.addTarget(self, action: #selector(submitTouch), for: .touchUpInside)
+        // 게시글 세부 내용 받아오기
+        ForumTableGet(boardNum: DabValue){
+            list in
+            if let list = list {
+                self.Board = list.result_data.account
+                DispatchQueue.main.async {
+//                    self.setupFlowLayout()
+                    self.Collection.reloadData()
+                }
             }
-            keyboardcount += 1
+            
         }
-        
-    }
-    // 키보드가 사라졌다는 알림을 받으면 실행할 메서드
-    @objc func keyboardWillHide(_ noti: NSNotification){
-        // 키보드의 높이만큼 화면을 내려준다.
-        if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            footer?.frame.origin.y = keyhieght
-            keyboardcount = 0
+        // 댓글 내용 받아오기
+        CommentListGet(){
+            list in
+            if let list = list{
+                for a in list.result_data.data{
+                    self.comment.append(a)
+                }
+                DispatchQueue.main.async {
+//                    self.setupFlowLayout()
+                    self.Collection.reloadData()
+                }
+            }
         }
     }
-
     
     // 게시글 추천 버튼 클릭
     @objc func GoodButton(_ sender: Any) {
@@ -443,7 +410,7 @@ class DetailForumViewController: UIViewController {
 
 }
 
-extension DetailForumViewController : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITextFieldDelegate{
+extension DetailForumViewController : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate{
     // 바디 뷰 갯수 설정
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return comment.count
@@ -589,30 +556,80 @@ extension DetailForumViewController : UICollectionViewDataSource, UICollectionVi
             headerView.DeclarationButton.addTarget(self, action: #selector(DeclarationButtonClick), for: .touchUpInside)
             
             return headerView
-        }else if kind == UICollectionView.elementKindSectionFooter{
-            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CollectionFooter", for: indexPath) as! BoardFooter
-            footerView.layer.borderColor = UIColor.darkGray.cgColor
-            footerView.layer.borderWidth = 1
-            footerView.layer.cornerRadius = 15
-            footerView.backgroundColor = UIColor.white
-            
-            footer = footerView
-            
-            nickname = footerView.NickName
-            password = footerView.PassWord
-            content = footerView.Content
-            password?.delegate = self
-            nickname?.delegate = self
-            content?.delegate = self
-            
-            footerView.Submit.addTarget(self, action: #selector(submitTouch), for: .touchUpInside)
-            
-            return footerView
         }
+//        else if kind == UICollectionView.elementKindSectionFooter{
+//            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CollectionFooter", for: indexPath) as! BoardFooter
+//            footerView.layer.borderColor = UIColor.darkGray.cgColor
+//            footerView.layer.borderWidth = 1
+//            footerView.layer.cornerRadius = 15
+//            footerView.backgroundColor = UIColor.white
+//
+//            footer = footerView
+//
+//            nickname = footerView.NickName
+//            password = footerView.PassWord
+//            content = footerView.Content
+//            password?.delegate = self
+//            nickname?.delegate = self
+//            content?.delegate = self
+//
+//            footerView.Submit.addTarget(self, action: #selector(submitTouch), for: .touchUpInside)
+//
+//            return footerView
+//        }
         
         return UICollectionReusableView()
         
     }
+    
+}
+
+extension DetailForumViewController : UITextFieldDelegate{
+    
+    // 노티피케이션을 추가하는 메서드
+    func addKeyboardNotifications(){
+        // 키보드가 나타날 때 앱에게 알리는 메서드 추가
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification , object: nil)
+        // 키보드가 사라질 때 앱에게 알리는 메서드 추가
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+    }
+    // 노티피케이션을 제거하는 메서드
+    func removeKeyboardNotifications(){
+        // 키보드가 나타날 때 앱에게 알리는 메서드 제거
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification , object: nil)
+        // 키보드가 사라질 때 앱에게 알리는 메서드 제거
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+    }
+    
+    // 키보드가 나타났다는 알림을 받으면 실행할 메서드
+    @objc func keyboardWillShow(_ noti: NSNotification){
+        // 키보드의 높이만큼 화면을 올려준다.
+        if keyboardcount == 0{
+            if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+                keyhieght = self.view.frame.height
+                let keyboardRectangle = keyboardFrame.cgRectValue
+                let keyboardHeight = keyboardRectangle.height
+                view.frame.size.height -= keyboardHeight
+                print(keyboardHeight , FooterView.frame.origin.y , self.view.frame.origin.y)
+                
+            }
+            keyboardcount += 1
+        }
+        
+    }
+    // 키보드가 사라졌다는 알림을 받으면 실행할 메서드
+    @objc func keyboardWillHide(_ noti: NSNotification){
+        // 키보드의 높이만큼 화면을 내려준다.
+        print("사라진당")
+        print(FooterView.frame.origin.y , self.view.frame.origin.y)
+        if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            view.frame.size.height = keyhieght
+            keyboardcount = 0
+        }
+    }
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
     }
@@ -623,7 +640,7 @@ extension DetailForumViewController : UICollectionViewDataSource, UICollectionVi
     }
     
     @objc func submitTouch(){
-        submitButtonClick(nickname: self.nickname!.text!, password: self.password!.text!, content: self.content!.text!){
+        submitButtonClick(nickname: FooterView.NickName.text!, password: FooterView.PassWord.text!, content: FooterView.Content.text!){
             list in
             if list?.code == 0{
                 self.ForumTableGet(boardNum: self.DabValue){
@@ -638,7 +655,7 @@ extension DetailForumViewController : UICollectionViewDataSource, UICollectionVi
                                     self.comment.append(a)
                                 }
                                 DispatchQueue.main.async {
-                                    self.setupFlowLayout()
+//                                    self.setupFlowLayout()
                                     self.Collection.reloadData()
                                 }
                                 self.showToast(message: "댓글 작성에 성공 하셨습니다")

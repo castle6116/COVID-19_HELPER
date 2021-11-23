@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BoardFooter: UICollectionReusableView{
+class BoardFooter: UIView{
     @IBOutlet weak var NickName: UITextField!
     @IBOutlet weak var PassWord: UITextField!
     @IBOutlet weak var Content: UITextField!
