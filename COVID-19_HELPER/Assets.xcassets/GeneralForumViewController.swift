@@ -11,25 +11,41 @@ import Alamofire
 
 class GeneralForumViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var ForumTable: UITableView!
+    private let buttonPanelView = ButtonPanelView()
     
     var tableContent = [Forum_list]()
     var id : Int?
+    var pageNum = 0
+    var totalPage = 0
     override func viewDidLoad() {
         super.viewDidLoad()
+        StartSetting()
+        // Do any additional setup after loading the view.
+    }
+    
+    func StartSetting(){
+        buttonPanelView.delegate = self
+        
+        view.addSubview(buttonPanelView)
+        
+        buttonPanelView.bottomAnchor.constraint(equalTo: ForumTable.bottomAnchor, constant: -20).isActive = true
+        buttonPanelView.rightAnchor.constraint(equalTo: ForumTable.rightAnchor, constant: -20).isActive = true
+        
         ForumTable.delegate = self
         ForumTable.dataSource = self
         ForumTableGet(){
             table in
             if let table = table{
+                self.totalPage = table.result_data.totalPage
                 for a in table.result_data.data{
                     self.tableContent.append(a)
                 }
                 DispatchQueue.main.async {
                     self.ForumTable.reloadData()
+                    self.pageNum += 1
                 }
             }
         }
-        // Do any additional setup after loading the view.
     }
     
 
@@ -46,7 +62,7 @@ class GeneralForumViewController: UIViewController, UITableViewDelegate {
         let url = "http://test.byeonggook.shop/api/board/boardList"
         AF.request(url,
                    method: .post,
-                   parameters: ["page" : 0, "size" :10],
+                   parameters: ["page" : pageNum, "size" :10],
                    encoding: URLEncoding.default
         )
             .responseJSON{
@@ -126,4 +142,40 @@ extension GeneralForumViewController : UITableViewDataSource{
     }
     
     
+}
+
+extension GeneralForumViewController : ButtonPanelDelegate {
+    func didTapButtonWithText(_ text: String) {
+        print(text)
+    }
+}
+
+extension GeneralForumViewController : UIScrollViewDelegate{
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        // 마지막 셀일때 다시 통신 해서 값 받아와야한다.
+        let height = scrollView.frame.size.height
+        let contentYoffset = scrollView.contentOffset.y
+        let distanceFromBottom = scrollView.contentSize.height - contentYoffset
+        if distanceFromBottom < height {
+            //업데이트하고싶은 action 구현
+            if (totalPage - 1) >= pageNum{
+                ForumTableGet(){
+                    table in
+                    if let table = table{
+                        for a in table.result_data.data{
+                            self.tableContent.append(a)
+                        }
+                        self.tableContent.sort(by: {
+                            $0.createdDate > $1.createdDate
+                        })
+                        DispatchQueue.main.async {
+                            self.ForumTable.reloadData()
+                            self.pageNum += 1
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
 }
