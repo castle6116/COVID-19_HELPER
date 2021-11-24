@@ -20,7 +20,7 @@ class NoticeViewController: UIViewController {
         NoticeAllRequest(){
             notice in
             if let notice = notice{
-                for a in notice.result_data.list{
+                for a in notice.result_data.data{
                     self.NoticeList_All.append(a)
                 }
                 DispatchQueue.main.async {
@@ -115,6 +115,7 @@ extension NoticeViewController : UITableViewDataSource, UITableViewDelegate{
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "NoticeContent", for: indexPath) as? NoticeTableContentCell else {return UITableViewCell()}
             cell.Title.text = NoticeList_All[indexPath.section].title
             cell.Content.text = NoticeList_All[indexPath.section].content
+            cell.backgroundColor = .systemGray5
             if #available(iOS 14.0, *) {
                 cell.Title.lineBreakStrategy = .hangulWordPriority
                 cell.Content.lineBreakStrategy = .hangulWordPriority
