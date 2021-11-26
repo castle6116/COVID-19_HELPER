@@ -13,6 +13,7 @@ class DetailForumViewController: UIViewController {
     
     @IBOutlet weak var Collection: UICollectionView!
     @IBOutlet weak var FooterView: BoardFooter!
+    private let buttonPanelView = ButtonPanelView()
     /// 게시글 ID 넘어오는 값
     var DabValue : Int!
     
@@ -71,6 +72,7 @@ class DetailForumViewController: UIViewController {
                 }
             }
         }
+
     }
     
     // 게시글 추천 버튼 클릭
@@ -495,30 +497,42 @@ extension DetailForumViewController : UICollectionViewDataSource, UICollectionVi
                 }
             }
         }
+        cell.buttonView.delegate = self
         
-        cell.Declara = {
+        cell.buttonView.bottomAnchor.constraint(equalTo: cell.bottomAnchor, constant: -5).isActive = true
+        cell.buttonView.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -10).isActive = true
+        
+        cell.buttonView.First = {
             [unowned self] in
             CommentDcButtonClick(value: 1, commentNum: comment[indexPath.row].id!){
                 list in
                 if list?.code == 0{
-                    CommentListGet(){
-                        list in
-                        if let list = list{
-                            self.comment = []
-                            for a in list.result_data.data{
-                                self.comment.append(a)
-                            }
-                            DispatchQueue.main.async {
-                                self.Collection.reloadData()
-                            }
-                            self.showToast(message: "신고에 성공 하셨습니다")
-                        }
-                    }
+                    self.showToast(message: "신고에 성공 하셨습니다")
                 }else{
                     self.showToast(message: list!.error!)
                 }
             }
         }
+        cell.buttonView.Second = {
+            [unowned self] in
+            self.showToast(message: "수정 눌림 \(comment[indexPath.row].id!)")
+        }
+        
+//        buttonPanelView.delegate = self
+//
+//        cell.addSubview(buttonPanelView)
+//
+//        buttonPanelView.bottomAnchor.constraint(equalTo: cell.bottomAnchor, constant: -10).isActive = true
+//        buttonPanelView.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -10).isActive = true
+//
+//        buttonPanelView.First = {
+//            [unowned self] in
+//
+//        }
+//        buttonPanelView.Second = {
+//            [unowned self] in
+//
+//        }
         return cell
     }
     
@@ -669,6 +683,13 @@ extension DetailForumViewController : UITextFieldDelegate{
                 self.showToast(message: list!.error!)
             }
         }
+    }
+}
+
+
+extension DetailForumViewController : ButtonPanelDelegate {
+    func didTapButtonWithText(_ text: String) {
+        print(text)
     }
 }
 

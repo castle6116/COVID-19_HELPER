@@ -11,10 +11,9 @@ class CommentCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var NickName: UILabel!
     @IBOutlet weak var Time: UILabel!
     @IBOutlet weak var Content: UILabel!
-    @IBOutlet weak var Declaration: UIButton!
     @IBOutlet weak var GoodButton: UIButton!
     @IBOutlet weak var NotGoodButton: UIButton!
-    @IBOutlet weak var DeclarationButton: UIButton!
+    @IBOutlet weak var buttonView: ButtonPanelView!
     
     @IBAction func GoodButtonClick(_ sender: Any){
         Good()
@@ -22,12 +21,8 @@ class CommentCollectionViewCell: UICollectionViewCell {
     @IBAction func NotGoodButton(_ sender: Any) {
         Bad()
     }
-    @IBAction func DeclarationButtonClick(_ sender: Any) {
-        Declara()
-    }
     
     var Good : (() -> ()) = {}
     var Bad : (() -> ()) = {}
-    var Declara : (() -> ()) = {}
     
 }

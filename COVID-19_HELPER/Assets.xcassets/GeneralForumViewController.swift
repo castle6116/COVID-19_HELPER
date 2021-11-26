@@ -11,7 +11,6 @@ import Alamofire
 
 class GeneralForumViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var ForumTable: UITableView!
-    private let buttonPanelView = ButtonPanelView()
     
     var tableContent = [Forum_list]()
     var id : Int?
@@ -24,12 +23,7 @@ class GeneralForumViewController: UIViewController, UITableViewDelegate {
     }
     
     func StartSetting(){
-        buttonPanelView.delegate = self
-        
-        view.addSubview(buttonPanelView)
-        
-        buttonPanelView.bottomAnchor.constraint(equalTo: ForumTable.bottomAnchor, constant: -20).isActive = true
-        buttonPanelView.rightAnchor.constraint(equalTo: ForumTable.rightAnchor, constant: -20).isActive = true
+
         
         ForumTable.delegate = self
         ForumTable.dataSource = self
@@ -142,12 +136,6 @@ extension GeneralForumViewController : UITableViewDataSource{
     }
     
     
-}
-
-extension GeneralForumViewController : ButtonPanelDelegate {
-    func didTapButtonWithText(_ text: String) {
-        print(text)
-    }
 }
 
 extension GeneralForumViewController : UIScrollViewDelegate{
