@@ -57,18 +57,6 @@ class HowToUseViewController: UIViewController {
         collectionView.decelerationRate = .fast
         collectionView.isPagingEnabled = false
     }
-    
-    private func playVideo(with resourceName: String, cell : UIImageView) {
-        guard let path = Bundle.main.path(forResource: resourceName, ofType: "mp4") else {
-            return
-        }
-        let player = AVPlayer(url: URL(fileURLWithPath: path))
-        let playerLayer = AVPlayerLayer(player: player)
-        playerLayer.frame = cell.bounds
-        cell.layer.addSublayer(playerLayer)
-        playerLayer.videoGravity = .resizeAspect
-        player.play()
-    }
 
 }
 

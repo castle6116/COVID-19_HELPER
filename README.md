@@ -37,9 +37,78 @@
 ----
 
 ## 2. Controller 설명
+- MainViewController
+    + 공공데이터 포털데이터를 받아와 사용자들에게 정보를 뿌려줌   
+     코로나19 예방접종 통계 데이터 조회 API , 코로나19 시/도별 발생 현황을 받아옵니다.
+     CollectionView를 사용하여 제작 하였으며 인원 수 1000명 단위로 , 를 찍어주는 기능,
+     XML파싱 기능 , 위로 당겼을 때 새로고침 되는 기능 제작 하였음.
+     CollectionView 안에 ScrollView를 넣어 드래그가 가능하게 만듦 
+     (ScrollView를 굳이 안넣어도 되었지만 초반에 만들어서 후에 수정할 예정)
+     시/도별 API에서 받아온 객체를 기준으로 지역 갯수를 체크 한 뒤 cell 갯수 반환 하여 각 지역별로 뿌려주게 제작함  
+- SideMenuController
+    + 어플의 왼쪽 상단에 메뉴바를 만들어 누르면 나오게 만든 사이드바 메뉴
+    크게 사용방법 , 공지사항 , 라이센스 , 어플 버전을 표출 하게 하였음.
+    사용방법을 누를 시 HowToUseViewController로 연결 됨.
+    공지사항을 누를 시 NoticeViewController로 연결 됨.
+    라인센스를 누를 시 LicenseViewController로 연결 됨.
+    - HowToUseViewController
+        + 이용자들이 간단하게 볼 수 있게 드래그 형식으로 옆으로 넘기면 이미지와 셀이 변경 되는 형식으로 제작
+        CollectionView와 Pager를 사용 layout은 flowLayout으로 배치 하였음.  
+        
+    - NoticeViewController
+        + 어플의 공지사항을 표출 하기 위해서 제작하였으며 TableView를 사용하여 클릭시 펴지는 형식으로 사용
+        Alamofire 사용됨   API통신으로 팀원이 제작한 BackEnd에 통신 
+        통신에 성공하면 tableView를 reload하여 이용자에게 표출 될 수 있도록 만듦
+        API에서 받아온 객체 기준으로 count 하여 tableCell 갯수 지정
+        
+    - LicenseViewController
+        + 어플에 사용된 오픈소스 라이브러리들을 표출 하기 위해서 제작할 예정 TableView로 제작하여
+        클릭 시 화면이 넘어가는 형식으로 만들려고 예정 중
+    
+- NewsViewController
+    + 네이버 검색 API를 사용하여 검색 없이 뉴스를 표출 하기 위해 제작
+    간단하게 해당 뉴스 내용을 보여주고 클릭 시 사이트로 넘어가는 형식
+    Alamofire 사용 하였음 (네이버 검색 api 시간 반환 형식을 잘 몰라서 엄청 헤맸던 기억이 남)
+    API에서 받아온 객체 기준으로 count 하여 tableCell 갯수 지정 
+    
+- VaccineViewController
+    + 공공데이터 API를 사용하여 예방접종 통계 데이터 조회 서비스 , 예방접종센터 조회서비스를 가져와
+    API에서 받아온 객체 기준으로 자료 입력 예방접종센터 정보를받아와 X,Y 좌표를 기준으로 반경 15km 내의
+    접종센터를 거리 계산 하여 출력, 지도로 보면 가독성이 떨어질 수 있음으로 tableView 형식으로
+    리스트로 출력 하였습니다. 사용자가 정보를 새로고침 할 수 있도록 새로고침 버튼도 넣었습니다.
 
+- GeneralForumViewController
+    + TableView를 사용하여 제작 하였습니다. BackEnd에 API요청을 하여 값을 가져와 글이 만들어진 시간을
+    토대로 정렬 하였습니다. 게시글의 제일 아래로 내리면 자동으로 10개의 게시글을 요청합니다.
+    게시글을 누르면 DetailForumViewController로 이동하여 세부 페이지를 출력 합니다.
+    
+- DetailForumViewController
+    + CollectionView를 사용하여 만들었고 글 내용 (Header) 댓글 (Content) 글쓰기 (View) 형식으로
+    제작 하였습니다. Header은 글 내용에 따라 가변적으로 사이즈가 변하도록 만들었습니다. 추천 , 비추천 버튼을
+    추가하여 사용자들이 한눈에 알아볼 수 있도록 제작 하였습니다. 게시글 그리고 댓글에 대해서 더보기 버튼을 누르면
+    StackView를 사용 하여 펴지며 그 안에 신고, 수정 기능을 넣었습니다. 그리고 신고와 추천, 비추천은 IP당 한번만 
+    가능하게 제작하였습니다. 하단에는 글쓰기가 있으며 텍스트 필드를 누르면 키보드가 같이 올라가 이용자가 사용할 때
+    불편함이 없도록 제작 하였습니다.
+    
 ### 2.1 function 설명
-
+- MainViewController
+    + 
+- SideMenuController
+    + 
+- NewsViewController
+    + 
+- VaccineViewController
+    + 
+- NoticeViewController
+    + 
+- HowToUseViewController
+    + 
+- LicenseViewController
+    + 
+- GeneralForumViewController
+    + 
+- DetailForumViewController
+    + 
 ----
 
 ## 3. 기술 및 라이센스
