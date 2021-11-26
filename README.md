@@ -32,11 +32,11 @@
 게시판은 이용자들이 코로나 나 혹은 다른 질병에 대해서 소통할 수 있는 장을 만들었습니다.
 공지사항은 어플의 공지 사항을 출력하며 탭 했을 때 밑으로 펴지는 형식으로 제작 하였습니다.
 
-<img width:"20%" src="https://user-images.githubusercontent.com/46862400/143527515-b579004c-f7c0-434e-a9bb-527deac8c35e.PNG"/>
-<img width:"20%" src="https://user-images.githubusercontent.com/46862400/143527534-b31bcf82-cb53-4cd9-85d6-6f6fe21de7c3.PNG"/>
-<img width:"20%" src="https://user-images.githubusercontent.com/46862400/143527537-e9576438-a5a9-40bf-b1f3-b18316974387.PNG"/>
-<img width:"20%" src="https://user-images.githubusercontent.com/46862400/143527540-c986beef-fcc5-439b-8ab0-69241308775d.PNG"/>
-<img width:"20%" src="https://user-images.githubusercontent.com/46862400/143527543-6992eafd-2e7b-41b4-8b6d-d0b89e90fbca.PNG"/>
+<img width="20%" src="https://user-images.githubusercontent.com/46862400/143527515-b579004c-f7c0-434e-a9bb-527deac8c35e.PNG"/>
+<img width="20%" src="https://user-images.githubusercontent.com/46862400/143527534-b31bcf82-cb53-4cd9-85d6-6f6fe21de7c3.PNG"/>
+<img width="20%" src="https://user-images.githubusercontent.com/46862400/143527537-e9576438-a5a9-40bf-b1f3-b18316974387.PNG"/>
+<img width="20%" src="https://user-images.githubusercontent.com/46862400/143527540-c986beef-fcc5-439b-8ab0-69241308775d.PNG"/>
+<img width="20%" src="https://user-images.githubusercontent.com/46862400/143527543-6992eafd-2e7b-41b4-8b6d-d0b89e90fbca.PNG"/>
 
 ----
 
