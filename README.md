@@ -14,11 +14,11 @@
 - 목차
 1. [어플 소개](#어플-소개)
 2. [Controller 설명](#Controller-설명)
-   1. [function 설명](function-설명)
+   1. [function 설명](#function-설명)
 3. [기술 및 라이센스](#기술-및-라이센스)
    1. [iOS 기술 및 라이센스](#ios에서-사용된-기술-및-라이센스)
    2. [Android 기술 및 라이센스](#android에서-사용된-기술-및-라이센스)
-   3. [Web  기술 및 라이센스](#front-end-(web)-에서-사용된-기술-및-라이센스)
+   3. [Web  기술 및 라이센스](#Front-End-(Web)-에서-사용된-기술-및-라이센스)
    4. [BackEnd  기술 및 라이센스](#backend에서-사용된-기술-및-라이센스)
 
 ----
