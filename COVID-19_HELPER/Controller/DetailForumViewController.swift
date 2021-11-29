@@ -115,7 +115,8 @@ class DetailForumViewController: UIViewController {
             }
         }
     }
-    @objc func DeclarationButtonClick(_ sender: Any) {
+    // 게시글 신고 버튼 클릭
+    func DeclarationButtonClick() {
         CommentDcButtonClick(value: 0, commentNum: 0){
             list in
             if list?.code == 0{
@@ -129,30 +130,9 @@ class DetailForumViewController: UIViewController {
                         DispatchQueue.main.async {
                             self.Collection.reloadData()
                         }
-                        self.showToast(message: "신고에 성공 하셨습니다")
+                        self.showToast(message: "게시글 신고에 성공 하셨습니다")
                         print(list.result_data.data)
                     }
-                }
-            }else{
-                self.showToast(message: list!.error!)
-            }
-        }
-    }
-    
-    // 댓글 비추천 버튼 클릭
-    func CommentNotGoodButton() {
-        NotGoodButtonClick(value: 0, commentNum: 0){
-            list in
-            if list?.code == 0{
-                self.ForumTableGet(boardNum: self.DabValue){
-                    list in
-                    if let list = list {
-                        self.Board = list.result_data.account
-                        DispatchQueue.main.async {
-                            self.Collection.reloadData()
-                        }
-                    }
-                    self.showToast(message: "비추천에 성공 하셨습니다")
                 }
             }else{
                 self.showToast(message: list!.error!)
@@ -567,7 +547,20 @@ extension DetailForumViewController : UICollectionViewDataSource, UICollectionVi
             
             headerView.GoodButton.addTarget(self, action: #selector(GoodButton), for: .touchUpInside)
             headerView.NotGoodButton.addTarget(self, action: #selector(NotGoodButton), for: .touchUpInside)
-            headerView.DeclarationButton.addTarget(self, action: #selector(DeclarationButtonClick), for: .touchUpInside)
+
+            headerView.etcButtonView.delegate = self
+            
+            headerView.etcButtonView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -5).isActive = true
+            headerView.etcButtonView.rightAnchor.constraint(equalTo: headerView.rightAnchor, constant: -10).isActive = true
+            
+            headerView.etcButtonView.First = {
+                [unowned self] in
+                self.DeclarationButtonClick()
+            }
+            headerView.etcButtonView.Second = {
+                [unowned self] in
+                self.showToast(message: "수정 눌림 \(comment[indexPath.row].id!)")
+            }
             
             return headerView
         }
@@ -636,7 +629,6 @@ extension DetailForumViewController : UITextFieldDelegate{
     // 키보드가 사라졌다는 알림을 받으면 실행할 메서드
     @objc func keyboardWillHide(_ noti: NSNotification){
         // 키보드의 높이만큼 화면을 내려준다.
-        print("사라진당")
         print(FooterView.frame.origin.y , self.view.frame.origin.y)
         if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             view.frame.size.height = keyhieght

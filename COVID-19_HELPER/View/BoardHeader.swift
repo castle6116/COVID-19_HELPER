@@ -14,7 +14,7 @@ class BoardHeader: UICollectionReusableView {
     @IBOutlet weak var Count: UILabel!
     @IBOutlet weak var GoodButton: UIButton!
     @IBOutlet weak var NotGoodButton: UIButton!
-    @IBOutlet weak var etcButton: UIButton!
-    @IBOutlet weak var DeclarationButton: UIButton!
+    @IBOutlet weak var etcButtonView: ButtonPanelView!
+    
     
 }

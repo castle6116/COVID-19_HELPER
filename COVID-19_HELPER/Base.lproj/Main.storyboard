@@ -138,14 +138,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NoticeTitle" id="f9l-f5-SfY" customClass="NoticeTableTitleCell" customModule="COVID_19_HELPER" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="f9l-f5-SfY" id="buG-mC-QLy">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ES-hC-Krj">
-                                                    <rect key="frame" x="20" y="11" width="374" height="21.5"/>
+                                                    <rect key="frame" x="20" y="11" width="374" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -163,7 +163,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NoticeContent" rowHeight="150" id="sKa-d0-uqN" customClass="NoticeTableContentCell" customModule="COVID_19_HELPER" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="88" width="414" height="150"/>
+                                        <rect key="frame" x="0.0" y="87.5" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sKa-d0-uqN" id="40C-p3-C18">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
@@ -1913,25 +1913,17 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z8c-Px-c10">
-                                            <rect key="frame" x="314" y="356.5" width="67" height="31"/>
-                                            <color key="backgroundColor" red="1" green="0.60180354120000001" blue="0.60007935759999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="31" id="C93-By-Z8M"/>
-                                                <constraint firstAttribute="width" constant="67" id="uP5-Ru-cSj"/>
-                                            </constraints>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" title="신고">
-                                                <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
-                                            </buttonConfiguration>
-                                        </button>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lLv-Mh-ERi" customClass="ButtonPanelView" customModule="COVID_19_HELPER" customModuleProvider="target">
+                                            <rect key="frame" x="336" y="347" width="50" height="40"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstItem="I90-mQ-PoT" firstAttribute="top" secondItem="w7G-ix-vG2" secondAttribute="bottom" constant="10" id="Cek-fw-ExW"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="kMR-XA-8nN" secondAttribute="trailing" constant="10" id="EM9-Eu-nfk"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="Er3-wG-o6l" secondAttribute="bottom" constant="5" id="HDs-BP-qds"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="z8c-Px-c10" secondAttribute="trailing" constant="5" id="IQ7-E7-3Ec"/>
                                         <constraint firstItem="w7G-ix-vG2" firstAttribute="leading" secondItem="yHV-qC-Kwl" secondAttribute="leadingMargin" constant="10" id="LGU-x2-ZWp"/>
                                         <constraint firstItem="PB3-sO-rh9" firstAttribute="leading" secondItem="Er3-wG-o6l" secondAttribute="trailing" constant="10" id="LsY-nz-Dfh"/>
                                         <constraint firstItem="I90-mQ-PoT" firstAttribute="centerY" secondItem="3vO-cr-DJ0" secondAttribute="centerY" id="MRm-kc-5Ms"/>
@@ -1942,7 +1934,6 @@
                                         <constraint firstItem="3xo-eh-gqk" firstAttribute="top" secondItem="I90-mQ-PoT" secondAttribute="bottom" constant="10" id="dcA-di-UpZ"/>
                                         <constraint firstItem="I90-mQ-PoT" firstAttribute="leading" secondItem="3vO-cr-DJ0" secondAttribute="trailing" constant="5" id="iOI-8Q-C2i"/>
                                         <constraint firstItem="Er3-wG-o6l" firstAttribute="leading" secondItem="yHV-qC-Kwl" secondAttribute="leadingMargin" id="keJ-1z-Spg"/>
-                                        <constraint firstItem="z8c-Px-c10" firstAttribute="centerY" secondItem="Er3-wG-o6l" secondAttribute="centerY" id="kz0-UK-kVp"/>
                                         <constraint firstItem="3xo-eh-gqk" firstAttribute="leading" secondItem="yHV-qC-Kwl" secondAttribute="leading" constant="10" id="qrg-bF-l34"/>
                                         <constraint firstItem="kMR-XA-8nN" firstAttribute="top" secondItem="yHV-qC-Kwl" secondAttribute="topMargin" constant="10" id="qyc-4d-Zox"/>
                                         <constraint firstAttribute="trailing" secondItem="3xo-eh-gqk" secondAttribute="trailing" constant="10" id="r7u-l7-yrJ"/>
@@ -1951,12 +1942,11 @@
                                     <connections>
                                         <outlet property="Content" destination="3xo-eh-gqk" id="7Q5-uZ-Pjq"/>
                                         <outlet property="Count" destination="I90-mQ-PoT" id="E5A-l6-YmE"/>
-                                        <outlet property="DeclarationButton" destination="z8c-Px-c10" id="OUg-90-z1E"/>
                                         <outlet property="GoodButton" destination="Er3-wG-o6l" id="Mma-Re-Z2P"/>
                                         <outlet property="NickName" destination="w7G-ix-vG2" id="jqP-81-4CM"/>
                                         <outlet property="NotGoodButton" destination="PB3-sO-rh9" id="CsU-lV-NTl"/>
                                         <outlet property="Title" destination="kMR-XA-8nN" id="c5W-DD-yvH"/>
-                                        <outlet property="etcButton" destination="z8c-Px-c10" id="pY1-kn-gqA"/>
+                                        <outlet property="etcButtonView" destination="lLv-Mh-ERi" id="qMm-ml-DZ8"/>
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>
