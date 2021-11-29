@@ -37,7 +37,7 @@
 ----
 
 ## 2. Controller 설명
-- MainViewController
+- 메인화면(1번 페이지) / MainViewController 
     + 공공데이터 포털데이터를 받아와 사용자들에게 정보를 뿌려줌   
      코로나19 예방접종 통계 데이터 조회 API , 코로나19 시/도별 발생 현황을 받아옵니다.
      CollectionView를 사용하여 제작 하였으며 인원 수 1000명 단위로 , 를 찍어주는 기능,
@@ -92,23 +92,97 @@
     
 ### 2.1 function 설명
 - MainViewController
-    + 
+    <details markdown="1">
+    <summary>접기/펼치기</summary>
+    
+       + initRefresh ()   
+        -   
+        
+       + updateUI (refresh: UIRefreshControl)   
+        -   
+        
+       + DecimalWon (value:Int,cot:Int) , (value:String) , (value:String,cot:Int)   
+        -   
+        
+       + textinput()    
+        -   
+        
+       + COVID_CONNECT (day : Int)   
+        -   
+        
+       + COVID_Desult_CONNECT (day : Int)   
+        -   
+        
+       + parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:])   
+        -   
+        
+       + parser(_ parser: XMLParser, foundCharacters string: String)   
+        -   
+        
+       + parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?)   
+        -   
+        
+       +    
+       
+    </details>
+    
 - SideMenuController
-    + 
+    <details markdown="1">
+    <summary>접기/펼치기</summary>
+       
+    <!--summary 아래 빈칸 공백 두고 내용을 적는공간-->
+    
+    </details>
 - NewsViewController
-    + 
+    <details markdown="1">
+    <summary>접기/펼치기</summary>
+       
+    <!--summary 아래 빈칸 공백 두고 내용을 적는공간-->
+    
+    </details>
 - VaccineViewController
-    + 
+    <details markdown="1">
+    <summary>접기/펼치기</summary>
+       
+    <!--summary 아래 빈칸 공백 두고 내용을 적는공간-->
+    
+    </details>
 - NoticeViewController
-    + 
+    <details markdown="1">
+    <summary>접기/펼치기</summary>
+       
+    <!--summary 아래 빈칸 공백 두고 내용을 적는공간-->
+    
+    </details>
 - HowToUseViewController
-    + 
+    <details markdown="1">
+    <summary>접기/펼치기</summary>
+       
+    <!--summary 아래 빈칸 공백 두고 내용을 적는공간-->
+    
+    </details>
 - LicenseViewController
-    + 
+    <details markdown="1">
+    <summary>접기/펼치기</summary>
+       
+    <!--summary 아래 빈칸 공백 두고 내용을 적는공간-->
+    
+    </details>
 - GeneralForumViewController
-    + 
+    <details markdown="1">
+    <summary>접기/펼치기</summary>
+       
+    <!--summary 아래 빈칸 공백 두고 내용을 적는공간-->
+    
+    </details>
 - DetailForumViewController
-    + 
+    <details markdown="1">
+    <summary>접기/펼치기</summary>
+       
+    <!--summary 아래 빈칸 공백 두고 내용을 적는공간-->
+    
+    </details>
+    
 ----
 
 ## 3. 기술 및 라이센스

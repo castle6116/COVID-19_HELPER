@@ -11,6 +11,7 @@ import Alamofire
 
 class GeneralForumViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var ForumTable: UITableView!
+    @IBOutlet weak var WriteButton: UIButton!
     
     var tableContent = [Forum_list]()
     var id : Int?
@@ -18,19 +19,24 @@ class GeneralForumViewController: UIViewController, UITableViewDelegate {
     var totalPage = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-        StartSetting()
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.topItem?.title = "게시판"
+        print("wiilappear")
+        pageNum = 0
+        StartSetting()
+    }
+    
     func StartSetting(){
-
-        
         ForumTable.delegate = self
         ForumTable.dataSource = self
         ForumTableGet(){
             table in
             if let table = table{
                 self.totalPage = table.result_data.totalPage
+                self.tableContent = []
                 for a in table.result_data.data{
                     self.tableContent.append(a)
                 }
@@ -40,6 +46,11 @@ class GeneralForumViewController: UIViewController, UITableViewDelegate {
                 }
             }
         }
+        WriteButton.layer.borderWidth = 1
+        WriteButton.layer.borderColor = UIColor.black.cgColor
+        WriteButton.layer.cornerRadius = 10
+        WriteButton.backgroundColor = UIColor.white
+        
     }
     
 

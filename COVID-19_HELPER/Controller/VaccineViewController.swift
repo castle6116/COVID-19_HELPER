@@ -83,6 +83,9 @@ class VaccineViewController: LoadingView, NMFMapViewDelegate , NMFMapViewTouchDe
     @IBAction func MapRefresh(_ sender: Any) {
         print("마커 새로 박음")
         naverMapSetting()
+        DispatchQueue.main.async {
+            self.VaccineCollection.reloadData()
+        }
     }
     
     func naverMapSetting(){

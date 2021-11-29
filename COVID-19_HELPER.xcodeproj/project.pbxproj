@@ -28,6 +28,7 @@
 		DE6B92D8271406D4004B94D3 /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6B92D7271406D4004B94D3 /* SideMenuTableViewCell.swift */; };
 		DE6B92DA271407A3004B94D3 /* SideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6B92D9271407A3004B94D3 /* SideMenuController.swift */; };
 		DE6B92DC271417A3004B94D3 /* Covid.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6B92DB271417A3004B94D3 /* Covid.swift */; };
+		DE7236C127546D6D002DFF5A /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7236C027546D6D002DFF5A /* WriteViewController.swift */; };
 		DE7422E62733B1F7007567FD /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7422E52733B1F7007567FD /* LoadingView.swift */; };
 		DE7ABA0327292DD300AC4F83 /* Vaccine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7ABA0227292DD300AC4F83 /* Vaccine.swift */; };
 		DE7C0E602727F45900DE0401 /* VaccineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7C0E5F2727F45900DE0401 /* VaccineViewController.swift */; };
@@ -87,6 +88,7 @@
 		DE6B92D7271406D4004B94D3 /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
 		DE6B92D9271407A3004B94D3 /* SideMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuController.swift; sourceTree = "<group>"; };
 		DE6B92DB271417A3004B94D3 /* Covid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Covid.swift; sourceTree = "<group>"; };
+		DE7236C027546D6D002DFF5A /* WriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
 		DE7422E52733B1F7007567FD /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		DE7ABA0227292DD300AC4F83 /* Vaccine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vaccine.swift; sourceTree = "<group>"; };
 		DE7C0E5F2727F45900DE0401 /* VaccineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccineViewController.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 				DE503D9F2734F5230093E9A6 /* EasterEggViewController.swift */,
 				DE5CE671274243CB00AFB6AC /* GeneralForumViewController.swift */,
 				DE934DA6274399A2002EA761 /* DetailForumViewController.swift */,
+				DE7236C027546D6D002DFF5A /* WriteViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				DE3A258A2733C235003CB743 /* HowToUseViewController.swift in Sources */,
 				DE3A25882733C210003CB743 /* NoticeViewController.swift in Sources */,
 				DEA2F4C5271C28C200261A19 /* City.swift in Sources */,
+				DE7236C127546D6D002DFF5A /* WriteViewController.swift in Sources */,
 				DE503DA02734F5230093E9A6 /* EasterEggViewController.swift in Sources */,
 				DE21EA9F273CD90F004420ED /* NoticeTableTitleCell.swift in Sources */,
 				DE21EA9B273CD888004420ED /* UseCollection.swift in Sources */,
