@@ -18,11 +18,11 @@ class WriteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         inputContent.delegate = self
         inputContent.layer.borderColor = CGColor(red: 0.921, green: 0.922, blue: 0.921, alpha: 1.0)
         inputContent.layer.borderWidth = 1
         inputContent.layer.cornerRadius = 10
+        userPassword.isSecureTextEntry = true
         
         // Do any additional setup after loading the view.
     }

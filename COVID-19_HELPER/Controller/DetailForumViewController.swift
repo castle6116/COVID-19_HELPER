@@ -46,6 +46,7 @@ class DetailForumViewController: UIViewController {
         FooterView.layer.borderWidth = 1
         FooterView.layer.cornerRadius = 15
         FooterView.backgroundColor = UIColor.white
+        FooterView.PassWord.isSecureTextEntry = true
         FooterView.Submit.addTarget(self, action: #selector(submitTouch), for: .touchUpInside)
         // 게시글 세부 내용 받아오기
         ForumTableGet(boardNum: DabValue){
@@ -239,6 +240,38 @@ class DetailForumViewController: UIViewController {
             }
         }
     }
+    
+    // 게시글 삭제
+    func commentDelete(complation : ((Comment_List?) -> ())?){
+        let url = "test.byeonggook.shop/api/board/\(DabValue)/delete"
+        AF.request(url,
+                   method: .post,
+                   encoding: URLEncoding.default
+        )
+            .responseJSON{
+                (response) in
+            switch response.result{
+            case .success(let obj):
+                print("GET 성공")
+                if obj is NSDictionary{
+                    do{
+                        //obj를 JSON으로 변경
+                        let dataJSON = try JSONSerialization.data(withJSONObject: obj, options: .prettyPrinted)
+                        // JSON Decoder 사용
+                        let getInstanceData = try JSONDecoder().decode(Comment_List.self, from: dataJSON)
+                        complation!(getInstanceData)
+                        
+                    }catch{
+                        print(obj)
+                        print("게시글 가져오기 에러 : ",error)
+                    }
+                }
+            case.failure(let error):
+                print("게시글 가져오기 에러 : ",error.localizedDescription)
+            }
+        }
+    }
+    
     
     
     // 추천 버튼 클릭

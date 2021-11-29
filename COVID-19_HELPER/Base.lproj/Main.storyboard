@@ -1615,7 +1615,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ShP-I0-jXb">
-                                <rect key="frame" x="163.5" y="754.5" width="87.5" height="33.5"/>
+                                <rect key="frame" x="163.5" y="754.5" width="87" height="33.5"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" image="pencil" catalog="system" title=" 글쓰기">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
@@ -1660,7 +1660,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="kPc-he-C8l"/>
                                 </constraints>
-                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
@@ -1670,7 +1669,7 @@
                                     <constraint firstAttribute="height" constant="50" id="XIM-2Z-zUo"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="닉네임 (2글자 이상)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jWX-1T-AI5">
                                 <rect key="frame" x="15" y="143" width="185" height="50"/>
@@ -1954,7 +1953,7 @@
                                 <rect key="frame" x="10" y="782" width="394" height="80"/>
                                 <subviews>
                                     <textField opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="닉네임" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pfO-Ya-7CV">
-                                        <rect key="frame" x="10" y="4" width="183" height="34"/>
+                                        <rect key="frame" x="10" y="4" width="182.5" height="34"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -1963,7 +1962,7 @@
                                         <rect key="frame" x="201.5" y="4" width="182.5" height="34"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <textField opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="내용을 입력해주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XNc-lt-Y9Q">
                                         <rect key="frame" x="10" y="41" width="374" height="34"/>
@@ -1972,7 +1971,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BfV-2c-JHp">
-                                        <rect key="frame" x="195" y="4" width="4.5" height="34"/>
+                                        <rect key="frame" x="194.5" y="4" width="5" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="TZx-co-olP"/>
                                         </constraints>
