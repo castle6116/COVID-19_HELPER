@@ -16,14 +16,8 @@ class HowToUseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupCollectionView()
-        pager.addTarget(self, action: #selector(pageValueDidChanged), for: .valueChanged)
-        // 초기화 구현
-        pager?.numberOfPages = imgName.count
-        // 현재 페이지
-        pager?.currentPage = 0
-        
+
         // Do any additional setup after loading the view.
     }
     
@@ -39,6 +33,12 @@ class HowToUseViewController: UIViewController {
     }
     
     func setupCollectionView() {
+        pager.addTarget(self, action: #selector(pageValueDidChanged), for: .valueChanged)
+        // 초기화 구현
+        pager?.numberOfPages = imgName.count
+        // 현재 페이지
+        pager?.currentPage = 0
+        
         collectionView.dataSource = self
         collectionView.delegate = self
             

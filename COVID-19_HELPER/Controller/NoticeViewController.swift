@@ -15,6 +15,11 @@ class NoticeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        startUI()
+        // Do any additional setup after loading the view.
+    }
+    
+    func startUI(){
         tableView.delegate = self
         tableView.dataSource = self
         NoticeAllRequest(){
@@ -29,7 +34,6 @@ class NoticeViewController: UIViewController {
                 
             }
         }
-        // Do any additional setup after loading the view.
     }
     
     func NoticeAllRequest(complation : ((Notice?) -> ())?){

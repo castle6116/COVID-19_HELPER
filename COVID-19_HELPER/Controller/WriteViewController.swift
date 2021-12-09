@@ -18,13 +18,7 @@ class WriteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        inputContent.delegate = self
-        inputContent.layer.borderColor = CGColor(red: 0.921, green: 0.922, blue: 0.921, alpha: 1.0)
-        inputContent.layer.borderWidth = 1
-        inputContent.layer.cornerRadius = 10
-        userPassword.isSecureTextEntry = true
         
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,6 +26,14 @@ class WriteViewController: UIViewController {
             title: "글쓰기",
             style: UIBarButtonItem.Style.plain,
             target: self, action: #selector(forumWrite))
+    }
+    
+    func startUI(){
+        inputContent.delegate = self
+        inputContent.layer.borderColor = CGColor(red: 0.921, green: 0.922, blue: 0.921, alpha: 1.0)
+        inputContent.layer.borderWidth = 1
+        inputContent.layer.cornerRadius = 10
+        userPassword.isSecureTextEntry = true
     }
     // 토스트 바 출력
     func showToast(message : String, font: UIFont = UIFont.systemFont(ofSize: 17)) {

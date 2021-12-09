@@ -243,7 +243,7 @@ class DetailForumViewController: UIViewController {
     
     // 게시글 삭제
     func commentDelete(complation : ((Comment_List?) -> ())?){
-        let url = "test.byeonggook.shop/api/board/\(DabValue)/delete"
+        let url = "test.byeonggook.shop/api/board/\(DabValue!)/delete"
         AF.request(url,
                    method: .post,
                    encoding: URLEncoding.default
@@ -648,10 +648,11 @@ extension DetailForumViewController : UITextFieldDelegate{
         // 키보드의 높이만큼 화면을 올려준다.
         if keyboardcount == 0{
             if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-                keyhieght = self.view.frame.height
                 let keyboardRectangle = keyboardFrame.cgRectValue
                 let keyboardHeight = keyboardRectangle.height
-                view.frame.size.height -= keyboardHeight
+                keyhieght = keyboardHeight - view.safeAreaInsets.bottom + 5
+                FooterView.layer.position.y -= keyhieght
+//                view.frame.size.height -= keyboardHeight
                 print(keyboardHeight , FooterView.frame.origin.y , self.view.frame.origin.y)
                 
             }
@@ -664,7 +665,7 @@ extension DetailForumViewController : UITextFieldDelegate{
         // 키보드의 높이만큼 화면을 내려준다.
         print(FooterView.frame.origin.y , self.view.frame.origin.y)
         if let keyboardFrame: NSValue = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            view.frame.size.height = keyhieght
+            FooterView.layer.position.y += keyhieght
             keyboardcount = 0
         }
     }
@@ -698,6 +699,9 @@ extension DetailForumViewController : UITextFieldDelegate{
                                     self.Collection.reloadData()
                                 }
                                 self.showToast(message: "댓글 작성에 성공 하셨습니다")
+                                self.FooterView.PassWord.text = ""
+                                self.FooterView.Content.text = ""
+                                self.FooterView.NickName.text = ""
                             }
                         }
                         

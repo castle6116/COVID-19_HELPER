@@ -19,6 +19,10 @@ class NewsViewController: LoadingView, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         showLoading()
+        startUI()
+        // Do any additional setup after loading the view.
+    }
+    func startUI(){
         tableview_Custom.delegate = self
         tableview_Custom.dataSource = self
         tableview_Custom.rowHeight = 120
@@ -34,11 +38,12 @@ class NewsViewController: LoadingView, UIScrollViewDelegate {
             }
             self.hideLoading()
         }
-        // Do any additional setup after loading the view.
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem?.title = "뉴스 상황판"
     }
+    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let offset = scrollView.contentOffset
         let bounds = scrollView.bounds

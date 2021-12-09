@@ -16,6 +16,9 @@ class SideMenuController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    func startUI(){
         self.tableView.dataSource = self
         self.tableView.delegate = self
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none

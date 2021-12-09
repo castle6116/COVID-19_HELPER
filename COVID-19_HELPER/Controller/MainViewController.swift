@@ -42,14 +42,17 @@ class MainViewController: LoadingView, XMLParserDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         showLoading()
-        COVID_CONNECT(day: Covid_day)
-        Covid_day = 0
-        COVID_Desult_CONNECT(day : Covid_day)
-        
+        startUI()
         initRefresh()
     }
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem?.title = "코로나19 상황판"
+    }
+    
+    func startUI(){
+        COVID_CONNECT(day: Covid_day)
+        Covid_day = 0
+        COVID_Desult_CONNECT(day : Covid_day)
     }
             
     // UIRefreshControl 초기 설정
@@ -127,24 +130,24 @@ class MainViewController: LoadingView, XMLParserDelegate {
             let end = Covidresult[0].createDt.index(result.createDt.startIndex, offsetBy: 10)
             let sub = Covidresult[0].createDt[start...end]
             rlwns.text = "( \(String(sub)) 기준 )" // 기준일
-            clfy.text = "(\(DecimalWon(value: Int(Covidresult[0].careCnt!)!, cot: 0)))" //치료
+//            clfy.text = "(\(DecimalWon(value: Int(Covidresult[0].careCnt!)!, cot: 0)))" //치료
             ghkrwls.text = "(\(DecimalWon(value: (Int(Covidresult[0].decideCnt)! - Int(Covidresult[1].decideCnt)!), cot: 0)))" //일일 확진
-            today_cure.text = "(\(DecimalWon(value: (Int(Covidresult[0].clearCnt)! - Int(Covidresult[1].clearCnt)!), cot: 0)))" //일일 완치
+//            today_cure.text = "(\(DecimalWon(value: (Int(Covidresult[0].clearCnt)! - Int(Covidresult[1].clearCnt)!), cot: 0)))" //일일 완치
             
-            rurflout.text = DecimalWon(value: Int(Covidresult[0].clearCnt)!) //격리 해제
-            rjatk.text = DecimalWon(value: Int(Covidresult[0].examCnt)!) //검사
+//            rurflout.text = DecimalWon(value: Int(Covidresult[0].clearCnt)!) //격리 해제
+//            rjatk.text = DecimalWon(value: Int(Covidresult[0].examCnt)!) //검사
             tkakd.text = DecimalWon(value: Int(Covidresult[0].deathCnt)!) //사망
             snwjrrjatk.text = DecimalWon(value: Int(Covidresult[0].accExamCnt)!) //누적검사
-            snwjrdhksfy.text = DecimalWon(value: Int(Covidresult[0].resutlNegCnt)!) //결과 음성
+//            snwjrdhksfy.text = DecimalWon(value: Int(Covidresult[0].resutlNegCnt)!) //결과 음성
             snwjrghkrwls.text = DecimalWon(value: Int(Covidresult[0].decideCnt)!) // 누적확진
             
             
             ghkrwls_today.text = "(\(DecimalWon(value: (Int(Covidresult[0].decideCnt)! - Int(Covidresult[1].decideCnt)!), cot: 0)))"   // 확진환자 금일 증가수
-            rurflgowp_today.text = "(\(DecimalWon(value: (Int(Covidresult[0].clearCnt)! - Int(Covidresult[1].clearCnt)!), cot: 0)))"// 격리해제 금일 증가수
+//            rurflgowp_today.text = "(\(DecimalWon(value: (Int(Covidresult[0].clearCnt)! - Int(Covidresult[1].clearCnt)!), cot: 0)))"// 격리해제 금일 증가수
             dead_today.text = "(\(DecimalWon(value: (Int(Covidresult[0].deathCnt)! - Int(Covidresult[1].deathCnt)!), cot: 0)))"     // 사망자 금일 증가수
             snwjrrjatk_today.text = "(\(DecimalWon(value: (Int(Covidresult[0].accExamCnt)! - Int(Covidresult[1].accExamCnt)!), cot: 0)))"// 누적 검사 수 금일 증가수
-            rjatkwnd_today!.text = "(\(DecimalWon(value: (Int(Covidresult[0].examCnt)! - Int(Covidresult[1].examCnt)!), cot: 0)))" // 검사중 금일 증가수
-            rufrhkdmatjd_today.text =  "(\(DecimalWon(value: (Int(Covidresult[0].resutlNegCnt)! - Int(Covidresult[1].resutlNegCnt)!), cot: 0)))"  // 결과음성 금일 증가수
+//            rjatkwnd_today!.text = "(\(DecimalWon(value: (Int(Covidresult[0].examCnt)! - Int(Covidresult[1].examCnt)!), cot: 0)))" // 검사중 금일 증가수
+//            rufrhkdmatjd_today.text =  "(\(DecimalWon(value: (Int(Covidresult[0].resutlNegCnt)! - Int(Covidresult[1].resutlNegCnt)!), cot: 0)))"  // 결과음성 금일 증가수
         }
     }
     
@@ -162,14 +165,11 @@ class MainViewController: LoadingView, XMLParserDelegate {
         request!.delegate = self
         let success = request!.parse()
         if success == true{
-            print("대한민국 감염현황 파싱 성공")
-            print(Covidresult.count)
-            print(Covid_day)
+            print("대한민국 감염현황 파싱 성공",yesterday,today)
             if Covidresult.count < 2{
                 Covidresult = []
                 Covid_day -= 1
                 COVID_CONNECT(day: Covid_day)
-                print(Covid_day)
             }
             textinput()
         }else{
@@ -185,7 +185,6 @@ class MainViewController: LoadingView, XMLParserDelegate {
         let today = fomat_today.string(from: today_data)
         let test = Calendar.current.date(byAdding: .day, value: day, to: today_data)!
         let yesterday = fomat_today.string(from: test)
-        
         let url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19SidoInfStateJson?serviceKey=2ruJcuSknJSbxInurJjb5i2sTGvCPW8QkHSBqOMUWvGyim3ASZFwWUGssNAQ8Ga9qCtqJQgX2Hnlwgz%2F1j863w%3D%3D&startCreateDt=\(yesterday)&endCreateDt=\(today)"
         let request = XMLParser(contentsOf: URL(string: url)!)
         request!.delegate = self
@@ -193,7 +192,7 @@ class MainViewController: LoadingView, XMLParserDelegate {
         if success == true{
             print("지역 감염현황 파싱 성공")
             Coviddesult.sort{Int($0.defCnt!)! > Int($1.defCnt!)!}
-            if Coviddesult.count != 19{
+            if Coviddesult.count <= 1{
                 Coviddesult = []
                 Covid_day -= 1
                 COVID_Desult_CONNECT(day: Covid_day)
@@ -207,9 +206,12 @@ class MainViewController: LoadingView, XMLParserDelegate {
     
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
             if elementName == "item"{
+                // HTTP 통신을 통해 얻은 값을 dic 변수에 저장한다
                 let dic = attributeDict as Dictionary
+                // HTTP 통신을 통해 받아온 XML을 파싱하기 위해 동일한 구조로 제작된 구조체인 Covid와 City를 선언한다.
                 result = Covid()
                 desult = City()
+                // dic의 구분이 null (nil)인 경우 대한민국 코로나19 감염현황임을 확인한다. (코로나19 감염현황은 구분이 없음)
                 if dic["gubun"] == nil{
                     result.accDefRate = dic["accDefRate"]
                     result.accExamCnt = dic["accExamCnt"]
@@ -222,7 +224,8 @@ class MainViewController: LoadingView, XMLParserDelegate {
                     result.examCnt = dic["examCnt"]
                     result.stateDt = dic["stateDt"]
                     result.resutlNegCnt = dic["resutlNegCnt"]
-                }else{
+                }// 아닌 경우 시/도별 감염현황임을 확인 하고 파싱하여 준다
+                else{
                     desult.deathCnt = dic["deathCnt"]
                     desult.defCnt = dic["defCnt"]
                     desult.gubun = dic["gubun"]
@@ -245,6 +248,8 @@ class MainViewController: LoadingView, XMLParserDelegate {
         
         // XML 파서가 종료 테그를 만나면 호출됨
         func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+            // XML 파서에 들어온 변수 이름이 item 이면 result 구조체와 비교하여 구조가 같다면 파싱 성공으로 판단
+            // 배열에 추가 하여 준다
             if elementName == "item"{
                 guard let result = result else {
                     return
@@ -324,7 +329,7 @@ extension MainViewController : UICollectionViewDataSource, UICollectionViewDeleg
                 }
         cell.backgroundColor = .white
         cell.collection_subject?.text = Coviddesult[indexPath.row].gubun
-        cell.iso_ingCnt.text = DecimalWon(value: Coviddesult[indexPath.row].isoIngCnt, cot: 0) // 격리중
+//        cell.iso_ingCnt.text = DecimalWon(value: Coviddesult[indexPath.row].isoIngCnt, cot: 0) // 격리중
         cell.Def_cnt.text = DecimalWon(value: Coviddesult[indexPath.row].defCnt, cot: 0) // 확진 환자
         if Coviddesult[indexPath.row].incDec != nil{
             cell.Inc_dec.text = "\(DecimalWon(value: Coviddesult[indexPath.row].incDec!))" // 전일 대비

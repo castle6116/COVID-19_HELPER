@@ -46,8 +46,16 @@ class VaccineViewController: LoadingView, NMFMapViewDelegate , NMFMapViewTouchDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        NMFMap.isHidden = true
         showLoading()
+        startUI()
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.topItem?.title = "백신 현황"
+    }
+    
+    func startUI(){
         NMFMap.mapView.delegate = self
         NMFMap.mapView.touchDelegate = self
         NMFMap.showLocationButton = true
@@ -74,12 +82,8 @@ class VaccineViewController: LoadingView, NMFMapViewDelegate , NMFMapViewTouchDe
             locationManager.startUpdatingLocation() //위치 정보 받아오기 시작
             currentLocation = locationManager.location
         }
-        // Do any additional setup after loading the view.
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.topItem?.title = "백신 현황"
-    }
     @IBAction func MapRefresh(_ sender: Any) {
         print("마커 새로 박음")
         naverMapSetting()
@@ -94,6 +98,9 @@ class VaccineViewController: LoadingView, NMFMapViewDelegate , NMFMapViewTouchDe
             makerAll.mapView = nil
         }
         makerALL = []
+        let locationOverlay = NMFMap.mapView.locationOverlay
+        locationOverlay.hidden = false
+        locationOverlay.icon = NMFOverlayImage(name: "ic_marker_mylocation")
         for (index, vaccine) in vaccineCenter.enumerated(){
             let marker = NMFMarker()
             marker.position = NMGLatLng(lat: Double(vaccine.lat)!, lng: Double(vaccine.lng)!)
@@ -123,6 +130,10 @@ class VaccineViewController: LoadingView, NMFMapViewDelegate , NMFMapViewTouchDe
             var Location = CLLocationCoordinate2D()
             Location.latitude = (locationManager.location?.coordinate.latitude) ?? 37.5780117795279
             Location.longitude = (locationManager.location?.coordinate.longitude) ?? 126.97689768711622
+            let image = NMFOverlayImage(name: "ic_marker_hospital")
+            marker.iconImage = image
+            marker.width = 42.5
+            marker.height = 40
             
             marker.userInfo = ["tag": "거리 : \(String(format : "%.3f",centerLocation.distance(from: Location)/1000))km / 전화번호 : \(vaccine.phoneNumber)"]
             makerALL.append(marker)

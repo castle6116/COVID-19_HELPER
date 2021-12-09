@@ -353,16 +353,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="라이센스" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fmr-LL-zw1">
-                                <rect key="frame" x="186" y="220" width="59" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ylt-XW-qkR">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="v4d-hN-ng1">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="v4d-hN-ng1" id="Eku-0a-xrR">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="RTQ-uv-rud"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="RTQ-uv-rud" firstAttribute="bottom" secondItem="ylt-XW-qkR" secondAttribute="bottom" id="2u8-qK-ZGa"/>
+                            <constraint firstItem="ylt-XW-qkR" firstAttribute="top" secondItem="RTQ-uv-rud" secondAttribute="top" id="8H4-F4-fPY"/>
+                            <constraint firstItem="ylt-XW-qkR" firstAttribute="leading" secondItem="RTQ-uv-rud" secondAttribute="leading" id="Y5E-W5-v7H"/>
+                            <constraint firstItem="RTQ-uv-rud" firstAttribute="trailing" secondItem="ylt-XW-qkR" secondAttribute="trailing" id="bsL-BH-i1L"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rx4-H7-cLp"/>
                 </viewController>
@@ -1615,7 +1628,11 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ShP-I0-jXb">
-                                <rect key="frame" x="163.5" y="754.5" width="87" height="33.5"/>
+                                <rect key="frame" x="157" y="753" width="100" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="4d9-mR-Gnq"/>
+                                    <constraint firstAttribute="width" constant="100" id="6Y7-mR-Ghe"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" image="pencil" catalog="system" title=" 글쓰기">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="16"/>

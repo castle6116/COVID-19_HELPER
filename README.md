@@ -122,63 +122,216 @@
        + parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?)   
         -   
         
-       +    
+       + collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
+        - 
        
+       + collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+        -
+        
+       + collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+        -
+
     </details>
     
 - SideMenuController
     <details markdown="1">
     <summary>접기/펼치기</summary>
        
-    <!--summary 아래 빈칸 공백 두고 내용을 적는공간-->
+       + tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int 
+        -   
+        
+       + tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell   
+        -   
+        
+       + tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)   
+        -   
     
     </details>
 - NewsViewController
     <details markdown="1">
     <summary>접기/펼치기</summary>
-       
-    <!--summary 아래 빈칸 공백 두고 내용을 적는공간-->
+       + scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+        -   
+        
+       + naverNewsRequest(Query : String, Display : Int , Start : Int, complation : ((News?) -> ())?)
+        -   
+        
+       + tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int 
+        -   
+        
+       + tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell    
+        -   
+        
+       + tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+        -   
+        
+       + htmlEscaped(font: UIFont, colorHex: String, lineSpacing: CGFloat) -> NSAttributedString   
+        -   
     
     </details>
 - VaccineViewController
     <details markdown="1">
     <summary>접기/펼치기</summary>
+       + MapRefresh(_ sender: Any)   
+        -   
+        
+       + naverMapSetting()   
+        -   
+        
+       + mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint)   
+        -   
+        
+       + naverMapCamera()    
+        -   
+        
+       + locationManagerDidChangeAuthorization(_ manager: CLLocationManager) 
+        -   
+        
+       + textSet()
+        -   
+        
+       + DecimalWon(value: Int) -> String
+        -   
+        
+       + VaccineHttp(day: Int ,complation : ((Vaccine?) -> ())?)   
+        -   
+        
+       + VaccineCenterHttp(complation : ((Center?) -> ())?)
+        -   
+        
+       + collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int 
+        - 
        
-    <!--summary 아래 빈칸 공백 두고 내용을 적는공간-->
+       + collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+        -
+        
+       + getLocationUsagePermission()
+        -
+        
+       + locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+        -
+        
+       + distance(from: CLLocationCoordinate2D) -> CLLocationDistance
+        -
+        
+       + isOnValueChange(isOn: Bool)
+        -
     
     </details>
 - NoticeViewController
     <details markdown="1">
     <summary>접기/펼치기</summary>
-       
-    <!--summary 아래 빈칸 공백 두고 내용을 적는공간-->
-    
+       + NoticeAllRequest(complation : ((Notice?) -> ())?)
+        -   
+        
+       + numberOfSections(in tableView: UITableView) -> Int   
+        -   
+        
+       + tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int   
+        -   
+        
+       + tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat    
+        -   
+        
+       + tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell   
+        -   
+        
+       + tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)   
+        -   
+        
     </details>
 - HowToUseViewController
     <details markdown="1">
     <summary>접기/펼치기</summary>
-       
-    <!--summary 아래 빈칸 공백 두고 내용을 적는공간-->
-    
+       + pageValueDidChanged()
+        -   
+        
+       + setupCollectionView()
+        -   
+        
+       + collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int   
+        -   
+        
+       + collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+        -   
+        
+       + scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>)
+        -   
+        
     </details>
 - LicenseViewController
     <details markdown="1">
     <summary>접기/펼치기</summary>
-       
+
     <!--summary 아래 빈칸 공백 두고 내용을 적는공간-->
     
     </details>
 - GeneralForumViewController
     <details markdown="1">
     <summary>접기/펼치기</summary>
-       
-    <!--summary 아래 빈칸 공백 두고 내용을 적는공간-->
-    
+       + StartSetting()
+        -   
+        
+       + ForumTableGet(complation : ((GeneralForum?) -> ())?)
+        -   
+        
+       + tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+        -   
+        
+       + tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell   
+        -   
+        
+       + tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+        -   
+        
+       + tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+        -   
+        
+       + prepare(for segue: UIStoryboardSegue, sender: Any?)
+        -   
+        
+       + scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
+        -   
+        
     </details>
 - DetailForumViewController
     <details markdown="1">
     <summary>접기/펼치기</summary>
+       + initRefresh ()   
+        -   
+        
+       + updateUI (refresh: UIRefreshControl)   
+        -   
+        
+       + DecimalWon (value:Int,cot:Int) , (value:String) , (value:String,cot:Int)   
+        -   
+        
+       + textinput()    
+        -   
+        
+       + COVID_CONNECT (day : Int)   
+        -   
+        
+       + COVID_Desult_CONNECT (day : Int)   
+        -   
+        
+       + parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:])   
+        -   
+        
+       + parser(_ parser: XMLParser, foundCharacters string: String)   
+        -   
+        
+       + parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?)   
+        -   
+        
+       + collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
+        - 
        
+       + collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+        -
+        
+       + collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+        -
     <!--summary 아래 빈칸 공백 두고 내용을 적는공간-->
     
     </details>
