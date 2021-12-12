@@ -96,105 +96,153 @@
     <summary>접기/펼치기</summary>
     
        + initRefresh ()   
-        -   
+        -   refreshControl 추가 , refresh 이벤트 추가 (updateUI로 추가)
         
        + updateUI (refresh: UIRefreshControl)   
-        -   
+        -   코로나19 예방접종 api에서 받아온 값을 저장한 Covidresult , 코로나19 지역별 감염현황 api에서 받아온 값을 저장하는 Coviddesult
+            배열을 초기화 진행 후 예방접종 api를 불러오는 함수인 COVID_CONNECT에 며칠전 기준으로 요청할지 값을 포함해서 보낸다
+            Covid_day를 초기화 한 뒤 COVID_Desult_CONNECT를 요청 위와 같이 값을 포함해서 요청, CollectionView 리로드 해준다
+            refreshControl 종료    
         
        + DecimalWon (value:Int,cot:Int) , (value:String) , (value:String,cot:Int)   
-        -   
+        -   세자리 수 마다 ,를 찍어 String으로 반환하는 함수이다.
+            numberFormatter을 정의 numberStyle을 .decimal로 하여 세자리 수 마다 콤마를 넣어준다. String으로 변환하여 반환 
         
        + textinput()    
-        -   
+        -   스토리보드에 정의되어있는 코로나19 상황판에 API 반환값을 기준으로 기준일 , 일일 확진 , 사망 , 누적검사 , 누적확진 ,
+        확진환자 금일 증가수 , 사망자 금일 증가수 , 누적 검사 수 금일 증가수의 값을 업데이트 해준다
         
        + COVID_CONNECT (day : Int)   
-        -   
+        -   fomat_today 라는 DateFormatter를 선언 dateFormat을 yyyyMMdd 로 변경 test변수에 day만큼 날짜를 빼서 저장
+        ex) 20211202 - day(1) = 20211201 yesterday 변수에 test를 문자열로 변경해서 저장
+        yesterday와 today를 기반으로 감염현황 api 요청 만약 2일치가 들어오지않으면 전날로 요청, api 요청 값을 기반으로 textinput 함수 실행
         
        + COVID_Desult_CONNECT (day : Int)   
-        -   
+        -   fomat_today 라는 DateFormatter를 선언 dateFormat을 yyyyMMdd 로 변경 test변수에 day만큼 날짜를 빼서 저장
+        ex) 20211202 - day(1) = 20211201 yesterday 변수에 test를 문자열로 변경해서 저장
+        yesterday와 today를 기반으로 시/도별 감염 현황 api 요청 만약 2일치가 들어오지않으면 전날로 요청, api 요청 값을 기반으로 textinput 함수 실행
+        로딩 화면 숨기는 hideLoading() 실행
         
        + parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:])   
-        -   
+        -   HTTP통신으로 돌아오는 XML값 파싱, 각 값으로 파싱 gubun이 비었으면 감염현황 api , gubun이 존재 하면 시/도별 감염 현황 api로 판별하여 파싱 진행
         
        + parser(_ parser: XMLParser, foundCharacters string: String)   
-        -   
+        -   XML값 각 태그에 담겨있는 문자열을 전달한다
         
        + parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?)   
-        -   
+        -   태그가 nil인지 확인 후 nil이 아니라면 XML파서가 각 태그 값을 기준으로 배열에 값을 넣는다. elementValue를 nil로 변경
         
        + collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
-        - 
+        -   셀의 크기를 지정 해주는 함수 
        
        + collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
-        -
+        -   Covidedesult 배열의 개수를 반환
         
        + collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
-        -
+        -   Covidedesult 배열을 기반 시/도별 상환판의 내용을 지정해준다. CollectionView 안에 View에 border값을 넣어 회색으로 지정하고 굵기 1로 지정 코너값을 넣어 동그랗게 만들어줌
+            Cell도 코너 값을 넣어 동그랗게 만들어줌.
 
     </details>
     
 - SideMenuController
     <details markdown="1">
     <summary>접기/펼치기</summary>
-       
+       + startUI()
+        -   tableView의 dataSource, delegate를 self로 지정 separatorStyle을 지정하여 선을 표시하지 않음.
+        
        + tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int 
-        -   
+        -   items 배열을 개수를 반환
         
        + tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell   
-        -   
+        -   item 배열에 indexPath.row를 참조하여 값이 어플버전이 아니라면 versionLabel의 text를 nil로 설정 cell을 반환한다.
         
        + tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)   
-        -   
+        -   item 배열에 indexPath.row를 참조하여 HowToUse , NoticeView , LicenseView으로 Segue로 연결하여 셀을 클릭한 경우 화면을 이동 시켜줌
     
     </details>
 - NewsViewController
     <details markdown="1">
     <summary>접기/펼치기</summary>
+       + startUI()
+        -   tableview_Custom의 delegate , dataSource를 self로 지정 , rowHeight를 120으로 지정 naverNewsRequest 함수를 호출하여 
+            값이 정상적으로 반환되면 news 배열에 각 값을 넣고 TableView를 reload하고 hideLoading 함수를 호출
+        
        + scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool)
-        -   
+        -   size = scrollView의 콘텐츠 전체의 높이 값 , offset = 현재 콘텐츠의 y좌표 값 , bounds = scrollView에 크기 값 , 
+        inset = 스크롤뷰 모서리나 safe area에 사용자가 추가한 컨텐츠 크기 만약 ScrollView의 콘텐츠 y좌표 값이 바닥에 닿았을 때
+        start의 값이 100 이하라면 naverNewsRequest 함수를 호출하고 news배열에 추가하고 TableView를 reload 하고 refresh를 멈춰준다.  
         
        + naverNewsRequest(Query : String, Display : Int , Start : Int, complation : ((News?) -> ())?)
-        -   
-        
+        -   Display는 20개씩 받아오기 위해 지정 , Start는 1부터 시작하여 naverNewsRequest를 호출할 때 마다 20씩 증가
+            헤더에 X-Naver-Client-Id 와 X-Naver-Client-Secret 의 값을 KeyChainSwift 라이브러리를 사용하여 암호화 하여 저장
+            header에 추가 하여 Naver 뉴스 검색 api에 코로나로 검색하여 값을 받아오게 하여줌.
+            
        + tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int 
-        -   
+        -   news 배열 개수를 반환
         
        + tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell    
-        -   
+        -   cell 세부 내용 구현 Content의 라인을 3개로 지정 , 한글 줄바꿈 적용 네이버 뉴스 검색 api로 들어오는 date를 yyyy년 MM월 dd일 HH시 mm분으로 변경
+            api에서 들어오는 타이틀 , 콘텐츠 부분 html 태그를 적용 시켜 글자 굵기 등 적용 후 cell을 리턴
         
        + tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-        -   
+        -   cell을 클릭한 경우 news 배열에 있는 link로 이동하게 만듬
         
        + htmlEscaped(font: UIFont, colorHex: String, lineSpacing: CGFloat) -> NSAttributedString   
-        -   
+        -   swift에 구현되어 있는 NSAttributedString으로 변환하여 반환하여줌 
     
     </details>
 - VaccineViewController
     <details markdown="1">
     <summary>접기/펼치기</summary>
+       + startUI()
+        -   네이버 지도 객체의 delegate, touchDelegate 를 self로 지정 해주고 gps 버튼 활성화 , 줌 컨트롤러 활성화 를 해준 뒤
+            VaccineCollection(CollectionView_의 delegate , datasource도 self로 지정 해준다.
+            SwitchButton의 delegate , isOn 을 각 self 와 true로 지정 하여 준다.
+            현재 위치를 받아오기 위해 locationManger의 delegate를 self로 변경 하여 위치 권한 확인 및 현재 위치를 받아온다.
+            그 후 textSet() 함수를 실행 하고 만약 위치서비스가 허용되지 않음 , 한번만 허용함 , 다음번에 묻기로 설정 되어 있으면
+            locationManagerDidChangeAuthorization() 함수를 실행 하여 위치 권한이 허용되지 않음인 경우 
+            기능이 제대로 작동하지 않음을 고지하기 위해 getLocationUsagePermission() 함수를 불러온다.
+            만약 위치권한이 제대로 받아왔을 경우 locationManger.startUpdatingLocation() 하여 위치를 받아온다.
+        
        + MapRefresh(_ sender: Any)   
-        -   
+        -   ViewController에 있는 RefreshButton을 클릭 한 경우 발생하는 함수로 naverMapSetting() 함수를 호출 하고
+            VaccineCollection을 reload 한다.
         
        + naverMapSetting()   
-        -   
-        
+        -   네이버 지도의 infoWindow(클릭 시 나오는 네모 객체)의 dataSource를 infoWindow의 defaultSource로 지정 후
+            현재 만들어져 있는 마커를 모두 nil로 초기화를 진행 후 vaccinCenter 배열을 기준으로 for문 실행 marker를 생성하여 배열에 저장 되어 있는
+            lat , lng을 기반으로 마커의 위치를 지정하여 준 뒤 클릭 시 데이타 소스는 marker에 tag를 달아 infoWindow를 열게끔 이벤트를 생성
+            marker의 touchHandler를 위에서 만든 이벤트로 설정하여 준다. marker의 텍스트, 컬러 , 텍스트 사이즈 설정 후 현재 위치를 기반으로
+            진료소의 위치와 거리를 계산 만약 현재 위치 값이 없는 경우 서울 시청으로 기본값을 지정 하였음. 마커 이미지 , 크기를 설정한 뒤 makerAll 배열에 추가
+            marker의 mapView를 연동 시켜준 뒤 함수를 종료 한다
+            
        + mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint)   
-        -   
+        -   지도를 클릭 시 infoWindow를 닫아준다.
         
        + naverMapCamera()    
-        -   
+        -   지도의 현재 화면을 자신의 위치 기준으로 옮겨준다. 만약 값이 없다면 서울 시청으로 이동한다. 그리고 로딩 화면을 없애주는 hideLoading() 함수를 실행한다.
         
        + locationManagerDidChangeAuthorization(_ manager: CLLocationManager) 
-        -   
+        -   LocationManger로 현재 권한을 확인하여 허용되지 않음 인 경우 getLocationUsagePermission() 함수를 실행한다.
         
        + textSet()
-        -   
+        -   백신 현황 페이지에서 상단에 있는 예방 접종 현황 , 내 주변 진료소 현황 리스트 화면의 텍스트를 설정하는 함수이다.
+            예방 접종 현황 view에 Radius , View안에 있는 Label에 각 Radius를 준다.
+            VaccineHttp() 함수를 불러와 예방 접종 현황 api를 호출 vaccine의 값이 nil이 아니고 currentCount(api에서 반환한 객체 개수)가 0개인 경우
+            전날로 요청하여 예방 접종 현황의 라벨에 문자를 입력해 준다.
+            VaccineCenterHttp 함수를 불러와 진료소 현황 api를 호출 center의 값이 nil이 아닌 경우 center에 lat , lng을 기준으로 거리를 계산 하여
+            15km 이내의 진료소만 vaccineCenter 배열에 삽입 하고 난 후 vaccineCenter의 lat , lng으로 현재의 거리와 계산하여 가장 가까운 순으로
+            정렬 합니다. vaccineCollection을 reload하고 naverMapSetting(), naverMapCamera 함수를 호출 한 뒤 종료 한다. 
         
        + DecimalWon(value: Int) -> String
-        -   
+        -   세자리 수 마다 ,를 찍어 String으로 반환하는 함수이다.
+            numberFormatter을 정의 numberStyle을 .decimal로 하여 세자리 수 마다 콤마를 넣어준다. String으로 변환하여 반환
         
        + VaccineHttp(day: Int ,complation : ((Vaccine?) -> ())?)   
-        -   
+        -   예방 접종 현황 api를 호출하는 함수이다.
+            DateFormatter로 오늘 날짜를 yyyy-MM-dd 형식으로 변환 한 뒤 day 만큼 날짜를 뺀 뒤 today로 저장 parameter로 serviceKey와 perPage baseDate를 설정하여
+            요청한다. get에 성공하면 obj로 반환된 객체를 JSON으로 변경하여 JSONDecoder를 사용하여 Vaccine 객체 형태로 변환하여 디코딩을 진행한 뒤 클로저로 전송한다.
+            통신에 실패하거나 문제가 발생한 경우 콘솔에 출력해준다.
         
        + VaccineCenterHttp(complation : ((Center?) -> ())?)
         -   
@@ -350,8 +398,10 @@
 - CollectionView / FlowLayout / TableView / ScrollView (레이아웃 표출 객체)
 - RefreshControl (드래그시 새로고침)
 - Naver Search API (뉴스 검색 API)
-- SideMenu (라이브러리 사이드 메뉴)
 - XML Parser (XML 파싱)
+- NMapsMap (Naver 지도 라이브러리)
+- SideMenu (사이드 메뉴 라이브러리)
+- KeychainSwift (헤더 암호화 라이브러리)
 
 ### 라이센스
 - MIT License (KeyChainSwift)

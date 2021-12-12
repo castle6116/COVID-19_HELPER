@@ -98,9 +98,9 @@ class VaccineViewController: LoadingView, NMFMapViewDelegate , NMFMapViewTouchDe
             makerAll.mapView = nil
         }
         makerALL = []
-        let locationOverlay = NMFMap.mapView.locationOverlay
-        locationOverlay.hidden = false
-        locationOverlay.icon = NMFOverlayImage(name: "ic_marker_mylocation")
+//        let locationOverlay = NMFMap.mapView.locationOverlay
+//        locationOverlay.hidden = false
+//        locationOverlay.icon = NMFOverlayImage(name: "ic_marker_mylocation")
         for (index, vaccine) in vaccineCenter.enumerated(){
             let marker = NMFMarker()
             marker.position = NMGLatLng(lat: Double(vaccine.lat)!, lng: Double(vaccine.lng)!)
@@ -289,8 +289,8 @@ func VaccineHttp(day: Int ,complation : ((Vaccine?) -> ())?){
     let fomat_today_days = DateFormatter()
     fomat_today_days.dateFormat = "yyyy-MM-dd"
 //    let today = fomat_today_days.string(from: today_nomal)
-    let test = Calendar.current.date(byAdding: .day, value: day, to: today_nomal)!
-    let today = fomat_today_days.string(from: test)
+    let yesterday = Calendar.current.date(byAdding: .day, value: day, to: today_nomal)!
+    let today = fomat_today_days.string(from: yesterday)
     
     
     print("오늘날짜 : ",today)
@@ -403,8 +403,9 @@ extension VaccineViewController : UICollectionViewDataSource, UICollectionViewDe
 extension VaccineViewController: CLLocationManagerDelegate {
     
     func getLocationUsagePermission() {
-        //location4
+        // 위치 권한이 없을 경우 사용자에게 alter 바를 만들어서 보여줍니다.
         let alter = UIAlertController(title: "위치권한 설정이 '허용안함'으로 되어있습니다.", message: "'아니오'를 선택하시면 정확한 정보를 표출할 수 없습니다.\n앱 설정 화면으로 가시겠습니까?", preferredStyle: UIAlertController.Style.alert)
+        // 네 버튼을 눌렀을 때 액션
         let logOkAction = UIAlertAction(title: "네", style: UIAlertAction.Style.default){
             (action: UIAlertAction) in
             if #available(iOS 10.0, *) {
@@ -413,10 +414,12 @@ extension VaccineViewController: CLLocationManagerDelegate {
                 UIApplication.shared.openURL(NSURL(string: UIApplication.openSettingsURLString)! as URL)
             }
         }
+        // 아니요 버튼을 눌렀을 때 액션
         let logNoAction = UIAlertAction(title: "아니오", style: UIAlertAction.Style.destructive){
             (action: UIAlertAction) in
             
         }
+        // alter바에 버튼들을 추가하고 보내준다
         alter.addAction(logNoAction)
         alter.addAction(logOkAction)
         self.present(alter, animated: true, completion: nil)

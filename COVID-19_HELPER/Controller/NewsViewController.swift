@@ -15,7 +15,7 @@ class NewsViewController: LoadingView, UIScrollViewDelegate {
     var refreshControl = UIRefreshControl()
     var display = 20
     var start = 1
-    var test = [Items]()
+    var news = [Items]()
     override func viewDidLoad() {
         super.viewDidLoad()
         showLoading()
@@ -30,7 +30,7 @@ class NewsViewController: LoadingView, UIScrollViewDelegate {
             news in
             if let news = news{
                 for a in 0..<news.items.count{
-                    self.test.append(news.items[a])
+                    self.news.append(news.items[a])
                 }
             }
             DispatchQueue.main.async {
@@ -49,7 +49,8 @@ class NewsViewController: LoadingView, UIScrollViewDelegate {
         let bounds = scrollView.bounds
         let size = scrollView.contentSize
         let inset = scrollView.contentInset
-
+        print(offset.y,bounds.size.height,inset.bottom)
+        print(size.height)
         let y = offset.y + bounds.size.height - inset.bottom
         let h = size.height
 
@@ -61,7 +62,7 @@ class NewsViewController: LoadingView, UIScrollViewDelegate {
                     news in
                     if let news = news{
                         for a in 0..<news.items.count{
-                            self.test.append(news.items[a])
+                            self.news.append(news.items[a])
                         }
                     }
                     DispatchQueue.main.async {
@@ -71,7 +72,6 @@ class NewsViewController: LoadingView, UIScrollViewDelegate {
                 }
             }
         }
-        print(test.count)
         
     }
     
@@ -119,7 +119,7 @@ class NewsViewController: LoadingView, UIScrollViewDelegate {
 
 extension NewsViewController : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return test.count
+        return news.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -134,13 +134,13 @@ extension NewsViewController : UITableViewDelegate, UITableViewDataSource{
         fomat_today.dateFormat = "E, dd MMM yyyy HH:mm:ss Z"
         fomat_today.locale = Locale(identifier: "en_US")
         fomat_today.timeZone = TimeZone(abbreviation: "UTC")
-        var text = fomat_today.date(from: test[indexPath.row].pubDate)!
+        var text = fomat_today.date(from: news[indexPath.row].pubDate)!
         
         let fomat_today_days = DateFormatter()
         fomat_today_days.dateFormat = "yyyy년 MM월 dd일 HH시 mm분"
         fomat_today_days.locale = Locale(identifier: "ko_KR")
-        cell.Title.attributedText = test[indexPath.row].title.htmlEscaped(font: titlefont, colorHex: "#000000", lineSpacing: 1)
-        cell.Content.attributedText = test[indexPath.row].description.htmlEscaped(font: font, colorHex: "#999A9A", lineSpacing: 1)
+        cell.Title.attributedText = news[indexPath.row].title.htmlEscaped(font: titlefont, colorHex: "#000000", lineSpacing: 1)
+        cell.Content.attributedText = news[indexPath.row].description.htmlEscaped(font: font, colorHex: "#999A9A", lineSpacing: 1)
         cell.Day.text = fomat_today_days.string(from: text)
         
         return cell
@@ -148,7 +148,7 @@ extension NewsViewController : UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        UIApplication.shared.open(URL(string: test[indexPath.row].link)!, options: [:])
+        UIApplication.shared.open(URL(string: news[indexPath.row].link)!, options: [:])
     }
     
 }

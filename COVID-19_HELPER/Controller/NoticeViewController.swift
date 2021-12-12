@@ -82,12 +82,12 @@ class NoticeViewController: UIViewController {
 }
 
 extension NoticeViewController : UITableViewDataSource, UITableViewDelegate{
-    //section 수
+    // cell 수
     func numberOfSections(in tableView: UITableView) -> Int {
         return NoticeList_All.count
         
     }
-    //cell 수
+    //클릭 시 section의 수 를 늘려 펼쳐지는 식으로 진행
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if NoticeList_All[section].open == true {
             return 1 + 1
@@ -108,19 +108,26 @@ extension NoticeViewController : UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // 제목만 나오는 타이틀 부분 셀 구현 내용
         if indexPath.row == 0{
+            // 셀을 스토리보드에 있는 NoticeTitle로 연결한다 , 구조는 NoticeTableTitleCell 이다
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "NoticeTitle", for: indexPath) as? NoticeTableTitleCell else {return UITableViewCell()}
             cell.Title.text = NoticeList_All[indexPath.section].title
             if #available(iOS 14.0, *) {
+                // 줄 바꿈 규칙을 한글로 설정
                 cell.Title.lineBreakStrategy = .hangulWordPriority
             }
             return cell
-        }else{
+        }
+        // 콘텐츠 부분 셀 구현 내용
+        else{
+            // 셀을 스토리보드에 있는 NoticeContent로 연결한다 , 구조는 NoticeTableContentCell 이다
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "NoticeContent", for: indexPath) as? NoticeTableContentCell else {return UITableViewCell()}
             cell.Title.text = NoticeList_All[indexPath.section].title
             cell.Content.text = NoticeList_All[indexPath.section].content
             cell.backgroundColor = .systemGray5
             if #available(iOS 14.0, *) {
+                // 줄 바꿈 규칙을 한글로 설정
                 cell.Title.lineBreakStrategy = .hangulWordPriority
                 cell.Content.lineBreakStrategy = .hangulWordPriority
             }
@@ -129,6 +136,7 @@ extension NoticeViewController : UITableViewDataSource, UITableViewDelegate{
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // 셀을 클릭 시 발생하는 이벤트이며 선택된 셀의 구조는 NoticeTableTitleCell 이다
         guard let cell = tableView.cellForRow(at: indexPath) as? NoticeTableTitleCell else {return}
         guard let index = tableView.indexPath(for: cell) else { return }
         if index.row == indexPath.row {
