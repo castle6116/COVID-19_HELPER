@@ -592,7 +592,7 @@ extension DetailForumViewController : UICollectionViewDataSource, UICollectionVi
             }
             headerView.etcButtonView.Second = {
                 [unowned self] in
-                self.showToast(message: "수정 눌림 \(comment[indexPath.row].id!)")
+                self.showToast(message: "수정 눌림 \(DabValue)")
             }
             
             return headerView

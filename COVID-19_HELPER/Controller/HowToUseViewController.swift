@@ -31,7 +31,7 @@ class HowToUseViewController: UIViewController {
         collectionView.scrollToItem(at: indexPath, at: .left, animated: animated)
         
     }
-    
+     
     func setupCollectionView() {
         pager.addTarget(self, action: #selector(pageValueDidChanged), for: .valueChanged)
         // 초기화 구현

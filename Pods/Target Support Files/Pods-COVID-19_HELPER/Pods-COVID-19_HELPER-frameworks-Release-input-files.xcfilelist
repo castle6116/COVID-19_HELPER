@@ -1,5 +1,7 @@
 ${PODS_ROOT}/Target Support Files/Pods-COVID-19_HELPER/Pods-COVID-19_HELPER-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/Charts/Charts.framework
+${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework
 ${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework
 ${PODS_ROOT}/NMapsMap/framework/NMapsMap.framework
 ${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework

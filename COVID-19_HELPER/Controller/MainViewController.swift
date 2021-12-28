@@ -197,7 +197,6 @@ class MainViewController: LoadingView, XMLParserDelegate {
                 Covid_day -= 1
                 COVID_Desult_CONNECT(day: Covid_day)
             }
-            city_daily.text = "\(Coviddesult[0].stdDay!) 업데이트"
         }else{
             print("파싱 실패")
         }
@@ -226,6 +225,7 @@ class MainViewController: LoadingView, XMLParserDelegate {
                     result.resutlNegCnt = dic["resutlNegCnt"]
                 }// 아닌 경우 시/도별 감염현황임을 확인 하고 파싱하여 준다
                 else{
+                    desult.createDt = dic["createDt"]
                     desult.deathCnt = dic["deathCnt"]
                     desult.defCnt = dic["defCnt"]
                     desult.gubun = dic["gubun"]
@@ -273,6 +273,7 @@ class MainViewController: LoadingView, XMLParserDelegate {
                 result.clearCnt = elementValue!
             }else if elementName == "createDt"{
                 result.createDt = elementValue!
+                desult.createDt = elementValue!
             }else if elementName == "deathCnt"{
                 result.deathCnt = elementValue!
                 desult.deathCnt = elementValue!
@@ -311,11 +312,8 @@ class MainViewController: LoadingView, XMLParserDelegate {
 extension MainViewController : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let itemSpacing: CGFloat = 10 // 가로에서 cell과 cell 사이의 거리
-        let width: CGFloat = (collectionView.frame.width - itemSpacing) / 2 // 셀 하나의 너비
-        let height: CGFloat = width + 20 //셀 하나의 높이
-        print(width)
-
+        let width: CGFloat = CGFloat(Int((collectionView.frame.width / 2) - 15) / 10) * 10 // 셀 하나의 너비
+        let height: CGFloat = width - 20 //셀 하나의 높이
         return CGSize(width: width, height: height)
     }
     
@@ -336,12 +334,25 @@ extension MainViewController : UICollectionViewDataSource, UICollectionViewDeleg
         }
         cell.iso_ClearCnt.text = DecimalWon(value: Coviddesult[indexPath.row].isoClearCnt, cot: 0) //격리 해제
         cell.death_cnt.text = DecimalWon(value: Coviddesult[indexPath.row].deathCnt, cot: 0) // 사망자
+        city_daily.text = "\(Coviddesult[0].stdDay!) 업데이트"
         cell.collection_view.layer.borderWidth = 1
         cell.collection_view.layer.borderColor = CGColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 1.0)
         cell.collection_view.layer.cornerRadius = 15
         cell.layer.cornerRadius = 10
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        performSegue(withIdentifier: "SidoSelect", sender: Coviddesult[indexPath.row].gubun)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let Viewcont = segue.destination as? ChartsViewController, let HolyValue = sender as? String else {return}
+        Viewcont.location = HolyValue
+        print(Viewcont.location)
+    }
+    
 }
 
 class CollectionViewCell: UICollectionViewCell{
@@ -352,4 +363,16 @@ class CollectionViewCell: UICollectionViewCell{
     @IBOutlet var Inc_dec: UILabel!
     @IBOutlet var iso_ClearCnt: UILabel!
     @IBOutlet var death_cnt: UILabel!
+    
+    override var isSelected: Bool{
+        didSet{
+            if isSelected{
+                backgroundColor = .gray
+                collection_view.backgroundColor = .gray
+            }else{
+                backgroundColor = .white
+                collection_view.backgroundColor = .white
+            }
+        }
+    }
 }

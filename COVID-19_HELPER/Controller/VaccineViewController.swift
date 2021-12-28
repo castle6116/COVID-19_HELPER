@@ -135,7 +135,7 @@ class VaccineViewController: LoadingView, NMFMapViewDelegate , NMFMapViewTouchDe
             marker.width = 42.5
             marker.height = 40
             
-            marker.userInfo = ["tag": "거리 : \(String(format : "%.3f",centerLocation.distance(from: Location)/1000))km / 전화번호 : \(vaccine.phoneNumber)"]
+            marker.userInfo = ["tag": "거리 : \(String(format : "%.2f",centerLocation.distance(from: Location)/1000))km / 전화번호 : \(vaccine.phoneNumber)"]
             makerALL.append(marker)
             makerALL[index].mapView = NMFMap.mapView
         }
@@ -385,7 +385,7 @@ extension VaccineViewController : UICollectionViewDataSource, UICollectionViewDe
         cell.HospitalName.text = vaccineCenter[indexPath.row].facilityName
         cell.HospitalNum.text = vaccineCenter[indexPath.row].phoneNumber
         cell.HospitalAddress.text = vaccineCenter[indexPath.row].address
-        cell.HospitalDistance.text = "\(String(format : "%.3f",centerLocation.distance(from: Location)/1000))km"
+        cell.HospitalDistance.text = "\(String(format : "%.2f",centerLocation.distance(from: Location)/1000))km"
         cell.layer.borderWidth = 1
         cell.layer.borderColor = UIColor.black.cgColor
         return cell
