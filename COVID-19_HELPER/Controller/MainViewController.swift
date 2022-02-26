@@ -12,32 +12,24 @@ import Alamofire
 class MainViewController: LoadingView, XMLParserDelegate {
     
     @IBOutlet var rlwns: UILabel! //기준일
-    @IBOutlet var ghkrwls: UILabel! // 일일 확진자
-    @IBOutlet var clfy: UILabel! // 격리중 ( 치료자 )
-    @IBOutlet var today_cure: UILabel! // 일일 완치
-    @IBOutlet var rurflout: UILabel! //격리 해제
-    @IBOutlet var rjatk: UILabel! //검사중
     @IBOutlet var tkakd: UILabel! //사망자
     @IBOutlet var snwjrrjatk: UILabel! // 누적검사수
-    @IBOutlet var snwjrdhksfy: UILabel! // 결과음성
     @IBOutlet var snwjrghkrwls: UILabel! // 확진환자
-    
     @IBOutlet var ghkrwls_today: UILabel!   // 확진환자 금일 증가수
-    @IBOutlet var rurflgowp_today: UILabel! // 격리해제 금일 증가수
     @IBOutlet var dead_today: UILabel!      // 사망자 금일 증가수
     @IBOutlet var snwjrrjatk_today: UILabel!// 누적 검사 수 금일 증가수
-    @IBOutlet var rjatkwnd_today: UILabel!  // 검사중 금일 증가수
-    @IBOutlet var rufrhkdmatjd_today: UILabel!  // 결과음성 금일 증가수
     @IBOutlet var city_daily: UILabel!
     @IBOutlet var MainScroll: UIScrollView!
     @IBOutlet var City_Collection: UICollectionView!
+    @IBOutlet weak var daily_corona: UILabel!
+    @IBOutlet weak var daily_corona_gap: UILabel!
     
     var result : Covid!
     var desult : City!
     var Covidresult : [Covid] = []
     var Coviddesult : [City] = []
     var elementValue:String!
-    var Covid_day = -1
+    var Covid_day = -2
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +63,7 @@ class MainViewController: LoadingView, XMLParserDelegate {
         print("새로고침")
         Covidresult = []
         Coviddesult = []
+        Covid_day = -2
         COVID_CONNECT(day: Covid_day)
         Covid_day = 0
         COVID_Desult_CONNECT(day : Covid_day)
@@ -130,24 +123,16 @@ class MainViewController: LoadingView, XMLParserDelegate {
             let end = Covidresult[0].createDt.index(result.createDt.startIndex, offsetBy: 10)
             let sub = Covidresult[0].createDt[start...end]
             rlwns.text = "( \(String(sub)) 기준 )" // 기준일
-//            clfy.text = "(\(DecimalWon(value: Int(Covidresult[0].careCnt!)!, cot: 0)))" //치료
-            ghkrwls.text = "(\(DecimalWon(value: (Int(Covidresult[0].decideCnt)! - Int(Covidresult[1].decideCnt)!), cot: 0)))" //일일 확진
-//            today_cure.text = "(\(DecimalWon(value: (Int(Covidresult[0].clearCnt)! - Int(Covidresult[1].clearCnt)!), cot: 0)))" //일일 완치
-            
-//            rurflout.text = DecimalWon(value: Int(Covidresult[0].clearCnt)!) //격리 해제
-//            rjatk.text = DecimalWon(value: Int(Covidresult[0].examCnt)!) //검사
-            tkakd.text = DecimalWon(value: Int(Covidresult[0].deathCnt)!) //사망
-            snwjrrjatk.text = DecimalWon(value: Int(Covidresult[0].accExamCnt)!) //누적검사
-//            snwjrdhksfy.text = DecimalWon(value: Int(Covidresult[0].resutlNegCnt)!) //결과 음성
-            snwjrghkrwls.text = DecimalWon(value: Int(Covidresult[0].decideCnt)!) // 누적확진
-            
+            tkakd.text = DecimalWon(value: Int(Covidresult[0].deathCnt)!) //사망자
+//            snwjrrjatk.text = DecimalWon(value: Int(Covidresult[0].accExamCnt)!) //누적검사
+            snwjrghkrwls.text = DecimalWon(value: Int(Covidresult[0].decideCnt)!) // 확진환자
             
             ghkrwls_today.text = "(\(DecimalWon(value: (Int(Covidresult[0].decideCnt)! - Int(Covidresult[1].decideCnt)!), cot: 0)))"   // 확진환자 금일 증가수
-//            rurflgowp_today.text = "(\(DecimalWon(value: (Int(Covidresult[0].clearCnt)! - Int(Covidresult[1].clearCnt)!), cot: 0)))"// 격리해제 금일 증가수
             dead_today.text = "(\(DecimalWon(value: (Int(Covidresult[0].deathCnt)! - Int(Covidresult[1].deathCnt)!), cot: 0)))"     // 사망자 금일 증가수
-            snwjrrjatk_today.text = "(\(DecimalWon(value: (Int(Covidresult[0].accExamCnt)! - Int(Covidresult[1].accExamCnt)!), cot: 0)))"// 누적 검사 수 금일 증가수
-//            rjatkwnd_today!.text = "(\(DecimalWon(value: (Int(Covidresult[0].examCnt)! - Int(Covidresult[1].examCnt)!), cot: 0)))" // 검사중 금일 증가수
-//            rufrhkdmatjd_today.text =  "(\(DecimalWon(value: (Int(Covidresult[0].resutlNegCnt)! - Int(Covidresult[1].resutlNegCnt)!), cot: 0)))"  // 결과음성 금일 증가수
+//            snwjrrjatk_today.text = "(\(DecimalWon(value: (Int(Covidresult[0].accExamCnt)! - Int(Covidresult[1].accExamCnt)!), cot: 0)))"// 누적 검사 수 금일 증가수
+            daily_corona.text = "\(DecimalWon(value: (Int(Covidresult[0].decideCnt)! - Int(Covidresult[1].decideCnt)!)))" // 일일 확진자
+            daily_corona_gap.text = "(\(DecimalWon(value: ((Int(Covidresult[0].decideCnt)! - Int(Covidresult[1].decideCnt)!) - (Int(Covidresult[1].decideCnt)! - Int(Covidresult[2].decideCnt)!)), cot: 0)))" // 일일 확진자
+            
         }
     }
     
@@ -166,7 +151,7 @@ class MainViewController: LoadingView, XMLParserDelegate {
         let success = request!.parse()
         if success == true{
             print("대한민국 감염현황 파싱 성공",yesterday,today)
-            if Covidresult.count < 2{
+            if Covidresult.count <= 3{
                 Covidresult = []
                 Covid_day -= 1
                 COVID_CONNECT(day: Covid_day)
@@ -212,15 +197,8 @@ class MainViewController: LoadingView, XMLParserDelegate {
                 desult = City()
                 // dic의 구분이 null (nil)인 경우 대한민국 코로나19 감염현황임을 확인한다. (코로나19 감염현황은 구분이 없음)
                 if dic["gubun"] == nil{
-                    result.accDefRate = dic["accDefRate"]
-                    result.accExamCnt = dic["accExamCnt"]
-                    result.accExamCompCnt = dic["accExamCompCnt"]
-                    result.careCnt = dic["careCnt"]
-                    result.clearCnt = dic["clearCnt"]
-                    result.createDt = dic["createDt"]
                     result.deathCnt = dic["deathCnt"]
                     result.decideCnt = dic["decideCnt"]
-                    result.examCnt = dic["examCnt"]
                     result.stateDt = dic["stateDt"]
                     result.resutlNegCnt = dic["resutlNegCnt"]
                 }// 아닌 경우 시/도별 감염현황임을 확인 하고 파싱하여 준다
@@ -313,7 +291,7 @@ extension MainViewController : UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let width: CGFloat = CGFloat(Int((collectionView.frame.width / 2) - 15) / 10) * 10 // 셀 하나의 너비
-        let height: CGFloat = width - 20 //셀 하나의 높이
+        let height: CGFloat = width - 50 //셀 하나의 높이
         return CGSize(width: width, height: height)
     }
     
@@ -332,12 +310,9 @@ extension MainViewController : UICollectionViewDataSource, UICollectionViewDeleg
         if Coviddesult[indexPath.row].incDec != nil{
             cell.Inc_dec.text = "\(DecimalWon(value: Coviddesult[indexPath.row].incDec!))" // 전일 대비
         }
-        cell.iso_ClearCnt.text = DecimalWon(value: Coviddesult[indexPath.row].isoClearCnt, cot: 0) //격리 해제
+//        cell.iso_ClearCnt.text = DecimalWon(value: Coviddesult[indexPath.row].isoClearCnt, cot: 0) //격리 해제
         cell.death_cnt.text = DecimalWon(value: Coviddesult[indexPath.row].deathCnt, cot: 0) // 사망자
         city_daily.text = "\(Coviddesult[0].stdDay!) 업데이트"
-        cell.collection_view.layer.borderWidth = 1
-        cell.collection_view.layer.borderColor = CGColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 1.0)
-        cell.collection_view.layer.cornerRadius = 15
         cell.layer.cornerRadius = 10
         return cell
     }
@@ -357,22 +332,8 @@ extension MainViewController : UICollectionViewDataSource, UICollectionViewDeleg
 
 class CollectionViewCell: UICollectionViewCell{
     @IBOutlet var collection_subject: UILabel!
-    @IBOutlet var collection_view: UIView!
-    @IBOutlet var iso_ingCnt: UILabel!
     @IBOutlet var Def_cnt: UILabel!
     @IBOutlet var Inc_dec: UILabel!
-    @IBOutlet var iso_ClearCnt: UILabel!
     @IBOutlet var death_cnt: UILabel!
-    
-    override var isSelected: Bool{
-        didSet{
-            if isSelected{
-                backgroundColor = .gray
-                collection_view.backgroundColor = .gray
-            }else{
-                backgroundColor = .white
-                collection_view.backgroundColor = .white
-            }
-        }
-    }
+
 }

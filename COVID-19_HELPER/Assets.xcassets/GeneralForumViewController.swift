@@ -116,11 +116,11 @@ extension GeneralForumViewController : UITableViewDataSource{
         cell.Reword.text = String(tableContent[indexPath.row].deprecate)
         cell.ViewCount.text = String(tableContent[indexPath.row].hit)
         cell.reviewCount.text = String(tableContent[indexPath.row].review_count)
-        cell.ControlView.layer.borderWidth = 2
-        cell.ControlView.layer.borderColor = CGColor.init(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)
-        cell.ControlView.layer.cornerRadius = 15
+        cell.contentView.layer.borderWidth = 2
+        cell.contentView.layer.borderColor = CGColor.init(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)
+        cell.contentView.layer.cornerRadius = 15
         cell.selectionStyle = .none
-        cell.ControlView.backgroundColor = .white
+        cell.contentView.backgroundColor = .white
         
         cell.contentView.layer.shadowColor = UIColor.black.cgColor // 검정색 사용
         cell.contentView.layer.masksToBounds = false
