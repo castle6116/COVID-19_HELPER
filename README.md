@@ -2,7 +2,7 @@
 이 어플의 목적은 코로나 19 에 대한 정보 (지역별 확진자 , 뉴스 기사 , 근처 진료소 , 접종 현황 ) 
 사용자 간 소통이 가능한 게시판을 만들어 정보 공유를 목표로 만들었습니다.
    
-<video src='https://user-images.githubusercontent.com/46862400/151135430-6dfd9f55-9c1e-4a03-8fe0-c49d48c4dd47.mp4'/>
+<video src='https://user-images.githubusercontent.com/46862400/151135430-6dfd9f55-9c1e-4a03-8fe0-c49d48c4dd47.mp4'></video>
    
 ## 제작된 플랫폼
 > iOS : 김진우 / [iOS](https://github.com/castle6116/COVID-19_HELPER)
